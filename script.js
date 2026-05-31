@@ -8,7 +8,10 @@ const SHELF_LABELS = {
   D: "D - Techline, programadores y solenoides",
   E: "E - Aspersores y electroválvulas",
   F: "F - Enlaces, codos, reducciones, T, tapones",
-  G: "G - Almacén 2"
+  G: "G - Almacén de stock",
+  A2: "Almacén 2 - Estantería A",
+  B2: "Almacén 2 - Estantería B",
+  C2: "Almacén 2 - Estantería C"
 };
 
 const state = {
