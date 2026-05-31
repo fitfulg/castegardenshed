@@ -1,5 +1,4 @@
 const STORAGE_KEY = "almacen_materiales_v3";
-const DEFAULT_MATERIALS = [];
 
 const SHELF_LABELS = {
   A: "A - EPI",
@@ -34,7 +33,6 @@ const els = {
   exportCsvButton: document.querySelector("#exportCsvButton"),
   copyNotice: document.querySelector("#copyNotice"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
-  resetDataButton: document.querySelector("#resetDataButton"),
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
   openNewMaterialButton: document.querySelector("#openNewMaterialButton"),
   materialDialog: document.querySelector("#materialDialog"),
@@ -88,7 +86,7 @@ async function loadMaterials() {
     console.warn("No se pudo cargar data.json. Se usan datos internos de ejemplo.", error);
   }
 
-  return DEFAULT_MATERIALS.map(normalizeMaterial);
+  return [];
 }
 
 function bindEvents() {
@@ -130,7 +128,6 @@ function bindEvents() {
   els.closeDialogButton.addEventListener("click", () => els.materialDialog.close());
   els.materialForm.addEventListener("submit", saveMaterialFromForm);
   els.deleteMaterialButton.addEventListener("click", deleteCurrentMaterial);
-  els.resetDataButton.addEventListener("click", resetExampleData);
 }
 
 function render() {
@@ -485,14 +482,6 @@ function exportCsv() {
 function csvCell(value) {
   const text = value === true ? "si" : value === false ? "no" : String(value ?? "");
   return `"${text.replaceAll('"', '""')}"`;
-}
-
-function resetExampleData() {
-  if (!confirm("¿Restaurar los datos de ejemplo? Se perderán los cambios guardados en este navegador.")) return;
-  localStorage.removeItem(STORAGE_KEY);
-  state.materials = DEFAULT_MATERIALS.map(normalizeMaterial);
-  state.summaryTypeFilter = "todos";
-  persistAndRender();
 }
 
 function persistAndRender() {
