@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gestor de material de almacén</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Almacén</p>
+        <h1>Material de almacén</h1>
+      </div>
+      <div class="header-actions">
+        <button class="secondary-button" id="resetDataButton" type="button">Restaurar ejemplo</button>
+        <button class="primary-button" id="openNewMaterialButton" type="button">Añadir material</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="control-panel" aria-label="Búsqueda y filtros">
+        <label class="search-label" for="searchInput">Buscar material</label>
+        <input
+          id="searchInput"
+          type="search"
+          autocomplete="off"
+          placeholder="Código, nombre o tipo de material"
+        >
+
+        <div class="filters" aria-label="Filtros por estado">
+          <button class="filter-button active" type="button" data-stock-filter="todos">Todos</button>
+          <button class="filter-button" type="button" data-stock-filter="verde">Verdes</button>
+          <button class="filter-button" type="button" data-stock-filter="amarillo">Amarillos</button>
+          <button class="filter-button" type="button" data-stock-filter="rojo">Rojos</button>
+          <button class="filter-button" type="button" data-stock-filter="incidencias">Incidencias</button>
+          <button class="filter-button" type="button" data-stock-filter="pedido">Pedido hecho</button>
+        </div>
+
+        <div class="type-filter-row">
+          <label for="typeFilter">Tipo</label>
+          <select id="typeFilter">
+            <option value="todos">Todos los tipos</option>
+          </select>
+          <label for="shelfFilter">Estantería</label>
+          <select id="shelfFilter">
+            <option value="todos">Todas</option>
+          </select>
+          <button class="text-button" id="clearFiltersButton" type="button">Limpiar filtros</button>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Contadores">
+        <div class="stat">
+          <span class="stat-label">Total</span>
+          <strong id="totalCount">0</strong>
+        </div>
+        <div class="stat stock-ok">
+          <span class="stat-label">Verde</span>
+          <strong id="greenCount">0</strong>
+        </div>
+        <div class="stat stock-low">
+          <span class="stat-label">Amarillo</span>
+          <strong id="yellowCount">0</strong>
+        </div>
+        <div class="stat stock-critical">
+          <span class="stat-label">Rojo</span>
+          <strong id="redCount">0</strong>
+        </div>
+        <div class="stat stock-issues">
+          <span class="stat-label">Incidencias</span>
+          <strong id="issueCount">0</strong>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="materials-column">
+          <div class="section-title-row">
+            <h2>Listado</h2>
+            <div class="list-actions">
+              <span id="resultCount" class="muted"></span>
+              <button class="secondary-button compact-button" id="toggleGroupButton" type="button">Agrupar por tipo</button>
+            </div>
+          </div>
+          <div id="materialsList" class="materials-list" aria-live="polite"></div>
+          <p id="emptyState" class="empty-state" hidden>No hay materiales que coincidan con los filtros.</p>
+        </div>
+
+        <aside class="summary-panel" aria-label="Resumen semanal">
+          <div class="section-title-row">
+            <h2>Resumen semanal</h2>
+            <select id="summaryTypeFilter" aria-label="Filtrar resumen por tipo">
+              <option value="todos">Todos</option>
+            </select>
+          </div>
+          <pre id="weeklySummary" class="weekly-summary"></pre>
+          <div class="summary-actions">
+            <button class="primary-button" id="copySummaryButton" type="button">Copiar resumen</button>
+            <button class="secondary-button" id="exportCsvButton" type="button">Exportar CSV</button>
+          </div>
+          <p id="copyNotice" class="copy-notice" role="status" hidden>Resumen copiado.</p>
+        </aside>
+      </section>
+
+      <section class="type-counts-panel" aria-label="Contador por tipo de material">
+        <h2>Materiales por tipo</h2>
+        <div id="typeCounts" class="type-counts"></div>
+      </section>
+    </main>
+
+    <dialog id="materialDialog" class="material-dialog">
+      <form id="materialForm" method="dialog">
+        <div class="dialog-header">
+          <h2 id="dialogTitle">Editar material</h2>
+          <button class="icon-button" id="closeDialogButton" type="button" aria-label="Cerrar">×</button>
+        </div>
+
+        <input type="hidden" id="materialId">
+
+        <div class="form-grid">
+          <label>
+            Código
+            <input id="codigoInput" name="codigo" type="text" autocomplete="off">
+          </label>
+          <label>
+            Nombre
+            <input id="nombreInput" name="nombre" type="text" autocomplete="off" required>
+          </label>
+          <label>
+            Tipo de material
+            <input id="tipoInput" name="tipo_material" type="text" autocomplete="off">
+          </label>
+          <label>
+            Estantería
+            <select id="estanteriaInput" name="estanteria">
+              <option value="">Sin asignar</option>
+              <option value="A">A - EPI</option>
+              <option value="B">B - Herramientas</option>
+              <option value="C">C - Desbroce y poda</option>
+              <option value="D">D - Techline, programadores y solenoides</option>
+              <option value="E">E - Aspersores y electroválvulas</option>
+              <option value="F">F - Enlaces, codos, reducciones, T, tapones</option>
+              <option value="G">G - Almacén 2</option>
+            </select>
+          </label>
+          <label>
+            Cantidad
+            <input id="cantidadInput" name="cantidad" type="number" step="0.01" min="0">
+          </label>
+          <label>
+            Unidad
+            <input id="unidadInput" name="unidad" type="text" autocomplete="off">
+          </label>
+          <label>
+            Estado stock
+            <select id="estadoInput" name="estado_stock">
+              <option value="pendiente">Pendiente</option>
+              <option value="verde">Verde</option>
+              <option value="amarillo">Amarillo</option>
+              <option value="rojo">Rojo</option>
+            </select>
+          </label>
+          <label class="wide-field">
+            Ubicación
+            <input id="ubicacionInput" name="ubicacion" type="text" autocomplete="off">
+          </label>
+          <label class="wide-field">
+            Observaciones
+            <textarea id="observacionesInput" name="observaciones" rows="3"></textarea>
+          </label>
+          <label class="checkbox-field">
+            <input id="pedidoInput" name="pedido_hecho" type="checkbox">
+            Pedido hecho
+          </label>
+        </div>
+
+        <div class="dialog-actions">
+          <button class="secondary-button" id="deleteMaterialButton" type="button">Eliminar</button>
+          <button class="primary-button" type="submit">Guardar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
