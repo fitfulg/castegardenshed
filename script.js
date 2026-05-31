@@ -231,8 +231,7 @@ function createMaterialCard(material) {
     element("span", "shelf-badge", material.estanteria || "-"),
     element("span", "material-code", highlight(material.codigo || "Sin código")),
     element("span", "material-name", highlight(material.nombre || "Sin nombre")),
-    element("span", "tag type-tag", highlight(material.tipo_material || "Sin tipo")),
-    element("span", `tag stock-tag ${material.estado_stock}`, material.estado_stock)
+    element("span", "tag type-tag", highlight(material.tipo_material || "Sin tipo"))
   );
 
   if (material.pedido_hecho) {
