@@ -41,6 +41,31 @@ button {
   cursor: pointer;
 }
 
+.construction-notice {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  color: #7c2d12;
+  font-weight: 700;
+  left: 50%;
+  max-width: min(720px, calc(100vw - 32px));
+  padding: 10px 14px;
+  position: fixed;
+  text-align: center;
+  top: 12px;
+  transform: translateX(-50%);
+  transition: opacity 220ms ease, visibility 220ms ease, transform 220ms ease;
+  width: max-content;
+  z-index: 30;
+}
+
+.construction-notice.is-hidden {
+  opacity: 0;
+  transform: translate(-50%, -8px);
+  visibility: hidden;
+}
+
 .app-header {
   align-items: center;
   background: var(--surface);

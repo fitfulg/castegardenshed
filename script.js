@@ -36,6 +36,7 @@ const els = {
   copySummaryButton: document.querySelector("#copySummaryButton"),
   exportCsvButton: document.querySelector("#exportCsvButton"),
   copyNotice: document.querySelector("#copyNotice"),
+  constructionNotice: document.querySelector("#constructionNotice"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
   openNewMaterialButton: document.querySelector("#openNewMaterialButton"),
@@ -67,7 +68,16 @@ init();
 async function init() {
   state.materials = await loadMaterials();
   bindEvents();
+  showConstructionNotice();
   render();
+}
+
+function showConstructionNotice() {
+  if (!els.constructionNotice) return;
+
+  setTimeout(() => {
+    els.constructionNotice.classList.add("is-hidden");
+  }, 6500);
 }
 
 async function loadMaterials() {
