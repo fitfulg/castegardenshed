@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestor de material de almacén</title>
-    <link rel="stylesheet" href="styles.css?v=20260531-3">
+    <link rel="stylesheet" href="styles.css?v=20260531-5">
   </head>
   <body>
     <header class="app-header">
@@ -32,7 +32,7 @@
           <button class="filter-button" type="button" data-stock-filter="verde"><span class="status-dot ok"></span> Correctos</button>
           <button class="filter-button" type="button" data-stock-filter="amarillo"><span class="status-dot low"></span> Revisar</button>
           <button class="filter-button" type="button" data-stock-filter="rojo"><span class="status-dot critical"></span> Faltan</button>
-          <button class="filter-button" type="button" data-stock-filter="pedido"><span class="check-icon" aria-hidden="true">✓</span> Pedido hecho</button>
+          <button class="filter-button" type="button" data-stock-filter="pedido"><span class="check-icon" aria-hidden="true">✓</span> Material pedido</button>
         </div>
 
         <div class="type-filter-row">
@@ -164,7 +164,7 @@
           </label>
           <label class="checkbox-field">
             <input id="pedidoInput" name="pedido_hecho" type="checkbox">
-            Pedido hecho
+            Material pedido
           </label>
         </div>
 
@@ -175,6 +175,6 @@
       </form>
     </dialog>
 
-    <script src="script.js?v=20260531-3"></script>
+    <script src="script.js?v=20260531-5"></script>
   </body>
 </html>

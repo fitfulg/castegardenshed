@@ -1,4 +1,5 @@
 const STORAGE_KEY = "almacen_materiales_v4";
+const LEGACY_STORAGE_KEYS = ["almacen_materiales_v3"];
 
 const SHELF_LABELS = {
   A: "A - EPI",
@@ -67,13 +68,14 @@ async function init() {
 }
 
 async function loadMaterials() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try {
-      const savedMaterials = asArray(JSON.parse(saved)).map(normalizeMaterial);
-      if (savedMaterials.length > 0) return savedMaterials;
-    } catch (error) {
-      console.warn("No se pudieron cargar los datos guardados.", error);
+  const savedMaterials = loadSavedMaterials(STORAGE_KEY);
+  if (savedMaterials.length > 0) return savedMaterials;
+
+  for (const legacyKey of LEGACY_STORAGE_KEYS) {
+    const legacyMaterials = loadSavedMaterials(legacyKey);
+    if (legacyMaterials.length > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(legacyMaterials));
+      return legacyMaterials;
     }
   }
 
@@ -88,6 +90,18 @@ async function loadMaterials() {
   }
 
   return [];
+}
+
+function loadSavedMaterials(storageKey) {
+  const saved = localStorage.getItem(storageKey);
+  if (!saved) return [];
+
+  try {
+    return asArray(JSON.parse(saved)).map(normalizeMaterial);
+  } catch (error) {
+    console.warn("No se pudieron cargar los datos guardados.", error);
+    return [];
+  }
 }
 
 function bindEvents() {
@@ -231,7 +245,7 @@ function createMaterialCard(material) {
   );
 
   if (material.pedido_hecho) {
-    titleRow.append(element("span", "tag order-tag", "✓ Pedido hecho"));
+    titleRow.append(element("span", "tag order-tag", "✓ Material pedido"));
   }
 
   const quantityClass = material.estado_stock === "verde" ? "" : material.estado_stock;
@@ -255,7 +269,7 @@ function createMaterialCard(material) {
   const toggleOrderButton = document.createElement("button");
   toggleOrderButton.className = material.pedido_hecho ? "secondary-button" : "primary-button";
   toggleOrderButton.type = "button";
-  toggleOrderButton.textContent = material.pedido_hecho ? "✓ Pedido hecho" : "Marcar pedido";
+  toggleOrderButton.textContent = material.pedido_hecho ? "✓ Material pedido" : "Marcar pedido";
   toggleOrderButton.addEventListener("click", () => togglePedido(material.id));
 
   const editButton = document.createElement("button");
@@ -440,7 +454,7 @@ function buildSummaryText(items) {
 }
 
 function formatSummaryLine(item) {
-  const orderState = item.pedido_hecho ? "Pedido hecho" : "Sin pedir";
+  const orderState = item.pedido_hecho ? "Material pedido" : "Sin pedir";
   return `- ${item.codigo || "Sin código"} | ${item.nombre || "Sin nombre"} | ${formatShelf(item.estanteria)} | ${formatQuantity(item.cantidad)} ${item.unidad || ""} | ${orderState}`;
 }
 
