@@ -410,27 +410,6 @@ textarea {
   color: var(--blue-text);
 }
 
-.stock-tag {
-  color: white;
-  text-transform: capitalize;
-}
-
-.stock-tag.verde {
-  background: var(--green);
-}
-
-.stock-tag.amarillo {
-  background: var(--yellow);
-}
-
-.stock-tag.rojo {
-  background: var(--red);
-}
-
-.stock-tag.pendiente {
-  background: #64748b;
-}
-
 .material-meta {
   color: var(--muted);
   display: grid;

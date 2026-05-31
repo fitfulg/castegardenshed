@@ -436,11 +436,11 @@ function buildSummaryText(items) {
   const yellow = items.filter((item) => item.estado_stock === "amarillo");
 
   return [
-    "MATERIALES EN ROJO",
-    red.length ? red.map(formatSummaryLine).join("\n") : "- Sin materiales en rojo",
+    "MATERIALES QUE FALTAN",
+    red.length ? red.map(formatSummaryLine).join("\n") : "- Sin materiales que falten",
     "",
-    "MATERIALES EN AMARILLO",
-    yellow.length ? yellow.map(formatSummaryLine).join("\n") : "- Sin materiales en amarillo"
+    "MATERIALES A REVISAR",
+    yellow.length ? yellow.map(formatSummaryLine).join("\n") : "- Sin materiales a revisar"
   ].join("\n");
 }
 
