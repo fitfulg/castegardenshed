@@ -253,6 +253,20 @@ textarea {
   background: var(--red);
 }
 
+.check-icon {
+  align-items: center;
+  background: var(--green);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 900;
+  height: 18px;
+  justify-content: center;
+  line-height: 1;
+  width: 18px;
+}
+
 .stat strong {
   display: block;
   font-size: 28px;

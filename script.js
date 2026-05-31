@@ -1,4 +1,4 @@
-const STORAGE_KEY = "almacen_materiales_v3";
+const STORAGE_KEY = "almacen_materiales_v4";
 
 const SHELF_LABELS = {
   A: "A - EPI",
@@ -70,7 +70,8 @@ async function loadMaterials() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
     try {
-      return JSON.parse(saved).map(normalizeMaterial);
+      const savedMaterials = asArray(JSON.parse(saved)).map(normalizeMaterial);
+      if (savedMaterials.length > 0) return savedMaterials;
     } catch (error) {
       console.warn("No se pudieron cargar los datos guardados.", error);
     }
@@ -230,7 +231,7 @@ function createMaterialCard(material) {
   );
 
   if (material.pedido_hecho) {
-    titleRow.append(element("span", "tag order-tag", "Pedido hecho"));
+    titleRow.append(element("span", "tag order-tag", "✓ Pedido hecho"));
   }
 
   const quantityClass = material.estado_stock === "verde" ? "" : material.estado_stock;
@@ -254,7 +255,7 @@ function createMaterialCard(material) {
   const toggleOrderButton = document.createElement("button");
   toggleOrderButton.className = material.pedido_hecho ? "secondary-button" : "primary-button";
   toggleOrderButton.type = "button";
-  toggleOrderButton.textContent = material.pedido_hecho ? "Quitar pedido" : "Marcar pedido";
+  toggleOrderButton.textContent = material.pedido_hecho ? "✓ Pedido hecho" : "Marcar pedido";
   toggleOrderButton.addEventListener("click", () => togglePedido(material.id));
 
   const editButton = document.createElement("button");
