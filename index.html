@@ -30,9 +30,9 @@
 
         <div class="filters" aria-label="Filtros por estado">
           <button class="filter-button active" type="button" data-stock-filter="todos">Todos</button>
-          <button class="filter-button" type="button" data-stock-filter="verde">Verdes</button>
-          <button class="filter-button" type="button" data-stock-filter="amarillo">Amarillos</button>
-          <button class="filter-button" type="button" data-stock-filter="rojo">Rojos</button>
+          <button class="filter-button" type="button" data-stock-filter="verde"><span class="status-dot ok"></span> Correctos</button>
+          <button class="filter-button" type="button" data-stock-filter="amarillo"><span class="status-dot low"></span> Revisar</button>
+          <button class="filter-button" type="button" data-stock-filter="rojo"><span class="status-dot critical"></span> Faltan</button>
           <button class="filter-button" type="button" data-stock-filter="incidencias">Incidencias</button>
           <button class="filter-button" type="button" data-stock-filter="pedido">Pedido hecho</button>
         </div>
@@ -56,15 +56,15 @@
           <strong id="totalCount">0</strong>
         </div>
         <div class="stat stock-ok">
-          <span class="stat-label">Verde</span>
+          <span class="stat-label"><span class="status-dot ok"></span> Correctos</span>
           <strong id="greenCount">0</strong>
         </div>
         <div class="stat stock-low">
-          <span class="stat-label">Amarillo</span>
+          <span class="stat-label"><span class="status-dot low"></span> Revisar</span>
           <strong id="yellowCount">0</strong>
         </div>
         <div class="stat stock-critical">
-          <span class="stat-label">Rojo</span>
+          <span class="stat-label"><span class="status-dot critical"></span> Faltan</span>
           <strong id="redCount">0</strong>
         </div>
         <div class="stat stock-issues">
