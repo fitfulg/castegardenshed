@@ -1,4 +1,4 @@
 window.CASTEGARDEN_SUPABASE = {
-  url: "TU-PROYECTO.supabase.co",
-  anonKey: "TU-CLAVE-PUBLICA-ANON"
+  url: "https://iaxrklehzeadjfchbzzi.supabase.co",
+  anonKey: "sb_publishable_NQOQtp8c6TMWIY3AfD7xLg_u1r5Kzoc"
 };
