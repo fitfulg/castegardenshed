@@ -57,7 +57,6 @@ const els = {
   greenCount: document.querySelector("#greenCount"),
   yellowCount: document.querySelector("#yellowCount"),
   redCount: document.querySelector("#redCount"),
-  issueCount: document.querySelector("#issueCount"),
   typeCounts: document.querySelector("#typeCounts")
 };
 
@@ -175,7 +174,6 @@ function renderStats() {
   els.greenCount.textContent = green;
   els.yellowCount.textContent = yellow;
   els.redCount.textContent = red;
-  els.issueCount.textContent = yellow + red;
 }
 
 function renderTypeCounts() {
@@ -295,7 +293,6 @@ function getFilteredMaterials() {
 function matchesStockFilter(material, filter) {
   if (filter === "todos") return true;
   if (filter === "pedido") return material.pedido_hecho;
-  if (filter === "incidencias") return ["amarillo", "rojo"].includes(material.estado_stock);
   return material.estado_stock === filter;
 }
 
