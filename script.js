@@ -1,5 +1,6 @@
 const STORAGE_KEY = "almacen_materiales_v4";
 const LEGACY_STORAGE_KEYS = ["almacen_materiales_v3"];
+const REMOTE_TABLE = "materiales";
 
 const SHELF_LABELS = {
   A: "A - EPI",
@@ -24,6 +25,11 @@ const state = {
   groupByType: false
 };
 
+const remote = {
+  client: null,
+  enabled: false
+};
+
 const els = {
   searchInput: document.querySelector("#searchInput"),
   materialsList: document.querySelector("#materialsList"),
@@ -37,6 +43,7 @@ const els = {
   exportCsvButton: document.querySelector("#exportCsvButton"),
   copyNotice: document.querySelector("#copyNotice"),
   constructionNotice: document.querySelector("#constructionNotice"),
+  syncStatus: document.querySelector("#syncStatus"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
   openNewMaterialButton: document.querySelector("#openNewMaterialButton"),
@@ -66,10 +73,27 @@ const els = {
 init();
 
 async function init() {
+  initRemoteDatabase();
   state.materials = await loadMaterials();
   bindEvents();
   showConstructionNotice();
   render();
+}
+
+function initRemoteDatabase() {
+  const config = window.CASTEGARDEN_SUPABASE || {};
+  const hasConfig = config.url && config.anonKey
+    && !String(config.url).includes("TU-PROYECTO")
+    && !String(config.anonKey).includes("TU-CLAVE");
+
+  if (!hasConfig || !window.supabase?.createClient) {
+    setSyncStatus("Modo local", "");
+    return;
+  }
+
+  remote.client = window.supabase.createClient(config.url, config.anonKey);
+  remote.enabled = true;
+  setSyncStatus("Conectando...", "error");
 }
 
 function showConstructionNotice() {
@@ -82,8 +106,31 @@ function showConstructionNotice() {
 
 async function loadMaterials() {
   const savedMaterials = loadSavedMaterials(STORAGE_KEY);
-  if (savedMaterials.length > 0) return savedMaterials;
+  const legacyMaterials = savedMaterials.length > 0 ? [] : loadLegacyMaterials();
+  const localMaterials = savedMaterials.length > 0 ? savedMaterials : legacyMaterials;
 
+  if (remote.enabled) {
+    const remoteMaterials = await loadRemoteMaterials();
+    if (remoteMaterials.length > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteMaterials));
+      return remoteMaterials;
+    }
+
+    const seedMaterials = localMaterials.length > 0 ? localMaterials : await loadDataFile();
+    if (seedMaterials.length > 0) {
+      await saveRemoteMaterials(seedMaterials);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(seedMaterials));
+      return seedMaterials;
+    }
+  }
+
+  if (savedMaterials.length > 0) return savedMaterials;
+  if (legacyMaterials.length > 0) return legacyMaterials;
+
+  return loadDataFile();
+}
+
+function loadLegacyMaterials() {
   for (const legacyKey of LEGACY_STORAGE_KEYS) {
     const legacyMaterials = loadSavedMaterials(legacyKey);
     if (legacyMaterials.length > 0) {
@@ -92,6 +139,10 @@ async function loadMaterials() {
     }
   }
 
+  return [];
+}
+
+async function loadDataFile() {
   try {
     const response = await fetch("data.json", { cache: "no-store" });
     if (response.ok) {
@@ -103,6 +154,63 @@ async function loadMaterials() {
   }
 
   return [];
+}
+
+async function loadRemoteMaterials() {
+  try {
+    const { data, error } = await remote.client
+      .from(REMOTE_TABLE)
+      .select("*")
+      .order("tipo_material", { ascending: true })
+      .order("nombre", { ascending: true });
+
+    if (error) throw error;
+    setSyncStatus("Sincronizado", "synced");
+    return asArray(data).map(normalizeMaterial);
+  } catch (error) {
+    console.warn("No se pudo leer la base de datos remota.", error);
+    remote.enabled = false;
+    setSyncStatus("Modo local", "error");
+    return [];
+  }
+}
+
+async function saveRemoteMaterials(materials) {
+  if (!remote.enabled) return false;
+
+  try {
+    const rows = materials.map(toRemoteRow);
+    const { error } = await remote.client
+      .from(REMOTE_TABLE)
+      .upsert(rows, { onConflict: "id" });
+
+    if (error) throw error;
+    setSyncStatus("Sincronizado", "synced");
+    return true;
+  } catch (error) {
+    console.warn("No se pudieron guardar los datos remotos.", error);
+    setSyncStatus("Guardado local", "error");
+    return false;
+  }
+}
+
+async function deleteRemoteMaterial(id) {
+  if (!remote.enabled) return false;
+
+  try {
+    const { error } = await remote.client
+      .from(REMOTE_TABLE)
+      .delete()
+      .eq("id", id);
+
+    if (error) throw error;
+    setSyncStatus("Sincronizado", "synced");
+    return true;
+  } catch (error) {
+    console.warn("No se pudo eliminar el material remoto.", error);
+    setSyncStatus("Guardado local", "error");
+    return false;
+  }
 }
 
 function loadSavedMaterials(storageKey) {
@@ -364,7 +472,7 @@ function openMaterialDialog(material = null) {
   els.nombreInput.focus();
 }
 
-function saveMaterialFromForm(event) {
+async function saveMaterialFromForm(event) {
   event.preventDefault();
 
   const id = els.materialId.value || createId();
@@ -390,11 +498,11 @@ function saveMaterialFromForm(event) {
     state.materials.push(material);
   }
 
-  persistAndRender();
+  await persistAndRender();
   els.materialDialog.close();
 }
 
-function deleteCurrentMaterial() {
+async function deleteCurrentMaterial() {
   const id = els.materialId.value;
   if (!id) return;
   const material = state.materials.find((item) => item.id === id);
@@ -402,17 +510,19 @@ function deleteCurrentMaterial() {
 
   if (confirm(`Eliminar ${name}?`)) {
     state.materials = state.materials.filter((item) => item.id !== id);
-    persistAndRender();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.materials));
+    await deleteRemoteMaterial(id);
+    render();
     els.materialDialog.close();
   }
 }
 
-function togglePedido(id) {
+async function togglePedido(id) {
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
   material.pedido_hecho = !material.pedido_hecho;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  persistAndRender();
+  await persistAndRender();
 }
 
 function toggleGroupByType() {
@@ -512,9 +622,35 @@ function csvCell(value) {
   return `"${text.replaceAll('"', '""')}"`;
 }
 
-function persistAndRender() {
+async function persistAndRender() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.materials));
+  await saveRemoteMaterials(state.materials);
   render();
+}
+
+function setSyncStatus(text, statusClass) {
+  if (!els.syncStatus) return;
+  els.syncStatus.textContent = text;
+  els.syncStatus.classList.toggle("synced", statusClass === "synced");
+  els.syncStatus.classList.toggle("error", statusClass === "error");
+}
+
+function toRemoteRow(material) {
+  const normalized = normalizeMaterial(material);
+  return {
+    id: normalized.id,
+    codigo: normalized.codigo,
+    nombre: normalized.nombre,
+    tipo_material: normalized.tipo_material,
+    estanteria: normalized.estanteria,
+    cantidad: normalized.cantidad,
+    unidad: normalized.unidad,
+    ubicacion: normalized.ubicacion,
+    estado_stock: normalized.estado_stock,
+    pedido_hecho: normalized.pedido_hecho,
+    observaciones: normalized.observaciones,
+    ultima_actualizacion: normalized.ultima_actualizacion
+  };
 }
 
 function normalizeMaterial(raw) {

@@ -108,9 +108,33 @@ h2 {
 .header-actions,
 .summary-actions,
 .dialog-actions {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.sync-status {
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 11px;
+  white-space: nowrap;
+}
+
+.sync-status.synced {
+  background: var(--green-soft);
+  border-color: #bbf7d0;
+  color: var(--green);
+}
+
+.sync-status.error {
+  background: var(--yellow-soft);
+  border-color: #fde68a;
+  color: var(--yellow);
 }
 
 .layout {

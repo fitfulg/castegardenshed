@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestor de material de almacén</title>
-    <link rel="stylesheet" href="styles.css?v=20260531-7">
+    <link rel="stylesheet" href="styles.css?v=20260531-8">
   </head>
   <body>
     <div id="constructionNotice" class="construction-notice" role="status">
-      Web en construcción. Los cambios guardados en este dispositivo no se sincronizan todavía con otros dispositivos.
+      Web en construcción. Algunas funciones todavía están en pruebas.
     </div>
 
     <header class="app-header">
@@ -17,6 +17,7 @@
         <h1>Material de almacén</h1>
       </div>
       <div class="header-actions">
+        <span id="syncStatus" class="sync-status">Modo local</span>
         <button class="primary-button" id="openNewMaterialButton" type="button">Añadir material</button>
       </div>
     </header>
@@ -182,6 +183,8 @@
       </form>
     </dialog>
 
-    <script src="script.js?v=20260531-7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js?v=20260531-8"></script>
+    <script src="script.js?v=20260531-8"></script>
   </body>
 </html>
