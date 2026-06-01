@@ -606,6 +606,8 @@ async function saveMaterialFromForm(event) {
   event.preventDefault();
 
   const id = els.materialId.value || createId();
+  const quantity = normalizeQuantity(els.cantidadInput.value);
+  const hasCheckedQuantity = cleanValue(els.cantidadInput.value) !== "";
   const material = normalizeMaterial({
     id,
     codigo: els.codigoInput.value,
@@ -614,9 +616,9 @@ async function saveMaterialFromForm(event) {
     estanteria: els.estanteriaInput.value,
     seccion: els.seccionInput.value,
     cantidad: els.cantidadInput.value,
-    cantidad_comprobada: cleanValue(els.cantidadInput.value) !== "",
+    cantidad_comprobada: hasCheckedQuantity,
     unidad: els.unidadInput.value,
-    estado_stock: els.estadoInput.value,
+    estado_stock: hasCheckedQuantity && quantity === 0 ? "rojo" : els.estadoInput.value,
     ubicacion: state.materials.find((item) => item.id === id)?.ubicacion || "",
     pedido_hecho: els.pedidoInput.checked,
     observaciones: els.observacionesInput.value,
