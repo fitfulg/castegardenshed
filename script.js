@@ -490,7 +490,6 @@ function createMaterialCard(material) {
   );
   if (material.seccion) meta.append(element("span", "", `Sección: ${material.seccion}`));
   meta.append(
-    element("span", "", `Ubicación: ${material.ubicacion || "Sin ubicación"}`),
     element("span", "", `Actualizado: ${material.ultima_actualizacion || "Sin fecha"}`),
     element("span", "", `Observaciones: ${material.observaciones || "Sin observaciones"}`)
   );
