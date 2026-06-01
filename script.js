@@ -1,6 +1,7 @@
 const STORAGE_KEY = "almacen_materiales_v5";
 const LEGACY_STORAGE_KEYS = ["almacen_materiales_v4", "almacen_materiales_v3"];
 const REMOTE_TABLE = "materiales";
+const REMOTE_OPTIONAL_FIELDS = ["seccion"];
 const MANUALLY_CHECKED_STOCK = {
   "64017": { cantidad: 0, estado_stock: "rojo", pedido_hecho: true },
   "64031": { cantidad: 1, estado_stock: "rojo", pedido_hecho: true, observaciones: "1 rollo + pico" },
@@ -188,7 +189,6 @@ async function loadRemoteMaterials() {
     return asArray(data).map(normalizeMaterial);
   } catch (error) {
     console.warn("No se pudo leer la base de datos remota.", error);
-    remote.enabled = false;
     setSyncStatus("Solo este dispositivo", "error");
     return [];
   }
@@ -225,20 +225,33 @@ async function saveRemoteMaterials(materials) {
 
   try {
     const rows = materials.map(toRemoteRow);
-    const { error } = await remote.client
-      .from(REMOTE_TABLE)
-      .upsert(rows, { onConflict: "id" });
-
-    if (error) throw error;
+    await upsertRemoteRows(rows);
     remote.hasPendingLocalChanges = false;
     setSyncStatus("Sincronizado", "synced");
     return true;
   } catch (error) {
-    console.warn("No se pudieron guardar los datos remotos.", error);
-    remote.hasPendingLocalChanges = true;
-    setSyncStatus("Solo este dispositivo", "error");
-    return false;
+    try {
+      const compatibleRows = materials.map(toRemoteCompatibleRow);
+      await upsertRemoteRows(compatibleRows);
+      remote.hasPendingLocalChanges = false;
+      setSyncStatus("Sincronizado", "synced");
+      console.warn("La base de datos remota no aceptó todos los campos. Se guardó una versión compatible.", error);
+      return true;
+    } catch (compatibleError) {
+      console.warn("No se pudieron guardar los datos remotos.", compatibleError);
+      remote.hasPendingLocalChanges = true;
+      setSyncStatus("Solo este dispositivo", "error");
+      return false;
+    }
   }
+}
+
+async function upsertRemoteRows(rows) {
+  const { error } = await remote.client
+    .from(REMOTE_TABLE)
+    .upsert(rows, { onConflict: "id" });
+
+  if (error) throw error;
 }
 
 async function deleteRemoteMaterial(id) {
@@ -733,6 +746,14 @@ function toRemoteRow(material) {
     observaciones: normalized.observaciones,
     ultima_actualizacion: normalized.ultima_actualizacion
   };
+}
+
+function toRemoteCompatibleRow(material) {
+  const row = toRemoteRow(material);
+  REMOTE_OPTIONAL_FIELDS.forEach((field) => {
+    delete row[field];
+  });
+  return row;
 }
 
 function normalizeMaterial(raw) {
