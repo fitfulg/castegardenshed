@@ -208,6 +208,23 @@ textarea:focus {
   color: white;
 }
 
+.filter-count {
+  background: rgba(24, 33, 31, 0.12);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  margin-left: 2px;
+  min-width: 26px;
+  padding: 5px 8px;
+  text-align: center;
+}
+
+.filter-button.active .filter-count {
+  background: rgba(255, 255, 255, 0.22);
+  color: white;
+}
+
 .primary-button,
 .secondary-button {
   border: 1px solid transparent;
@@ -261,27 +278,6 @@ textarea {
   resize: vertical;
 }
 
-.stats-grid {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(5, minmax(120px, 1fr));
-}
-
-.stat {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 12px;
-}
-
-.stat-label {
-  align-items: center;
-  color: var(--muted);
-  display: inline-flex;
-  font-size: 13px;
-  gap: 7px;
-}
-
 .status-dot {
   border-radius: 999px;
   display: inline-block;
@@ -314,29 +310,6 @@ textarea {
   justify-content: center;
   line-height: 1;
   width: 18px;
-}
-
-.stat strong {
-  display: block;
-  font-size: 28px;
-  line-height: 1.1;
-  margin-top: 4px;
-}
-
-.stock-ok {
-  border-left: 8px solid var(--green);
-}
-
-.stock-low {
-  border-left: 8px solid var(--yellow);
-}
-
-.stock-critical {
-  border-left: 8px solid var(--red);
-}
-
-.stock-issues {
-  border-left: 8px solid #334155;
 }
 
 .content-grid {
@@ -634,10 +607,6 @@ textarea {
     display: grid;
   }
 
-  .stats-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .material-actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     min-width: 0;
@@ -656,7 +625,6 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .stats-grid,
   .form-grid,
   .material-meta {
     grid-template-columns: 1fr;

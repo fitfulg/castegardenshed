@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestor de material de almacén</title>
-    <link rel="stylesheet" href="styles.css?v=20260601-1">
+    <link rel="stylesheet" href="styles.css?v=20260601-2">
   </head>
   <body>
     <div id="constructionNotice" class="construction-notice" role="status">
@@ -33,11 +33,11 @@
         >
 
         <div class="filters" aria-label="Filtros por estado">
-          <button class="filter-button active" type="button" data-stock-filter="todos">Todos</button>
-          <button class="filter-button" type="button" data-stock-filter="verde"><span class="status-dot ok"></span> Correctos</button>
-          <button class="filter-button" type="button" data-stock-filter="amarillo"><span class="status-dot low"></span> Revisar</button>
-          <button class="filter-button" type="button" data-stock-filter="rojo"><span class="status-dot critical"></span> Faltan</button>
-          <button class="filter-button" type="button" data-stock-filter="pedido"><span class="check-icon" aria-hidden="true">✓</span> Material pedido</button>
+          <button class="filter-button active" type="button" data-stock-filter="todos">Todos <span class="filter-count" id="totalCount">0</span></button>
+          <button class="filter-button" type="button" data-stock-filter="verde"><span class="status-dot ok"></span> Correctos <span class="filter-count" id="greenCount">0</span></button>
+          <button class="filter-button" type="button" data-stock-filter="amarillo"><span class="status-dot low"></span> Revisar <span class="filter-count" id="yellowCount">0</span></button>
+          <button class="filter-button" type="button" data-stock-filter="rojo"><span class="status-dot critical"></span> Faltan <span class="filter-count" id="redCount">0</span></button>
+          <button class="filter-button" type="button" data-stock-filter="pedido"><span class="check-icon" aria-hidden="true">✓</span> Material pedido <span class="filter-count" id="orderCount">0</span></button>
         </div>
 
         <div class="type-filter-row">
@@ -50,25 +50,6 @@
             <option value="todos">Todas</option>
           </select>
           <button class="text-button" id="clearFiltersButton" type="button">Limpiar filtros</button>
-        </div>
-      </section>
-
-      <section class="stats-grid" aria-label="Contadores">
-        <div class="stat">
-          <span class="stat-label">Total</span>
-          <strong id="totalCount">0</strong>
-        </div>
-        <div class="stat stock-ok">
-          <span class="stat-label"><span class="status-dot ok"></span> Correctos</span>
-          <strong id="greenCount">0</strong>
-        </div>
-        <div class="stat stock-low">
-          <span class="stat-label"><span class="status-dot low"></span> Revisar</span>
-          <strong id="yellowCount">0</strong>
-        </div>
-        <div class="stat stock-critical">
-          <span class="stat-label"><span class="status-dot critical"></span> Faltan</span>
-          <strong id="redCount">0</strong>
         </div>
       </section>
 
@@ -184,7 +165,7 @@
     </dialog>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js?v=20260601-1"></script>
-    <script src="script.js?v=20260601-1"></script>
+    <script src="supabase-config.js?v=20260601-2"></script>
+    <script src="script.js?v=20260601-2"></script>
   </body>
 </html>

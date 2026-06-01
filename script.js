@@ -74,6 +74,7 @@ const els = {
   greenCount: document.querySelector("#greenCount"),
   yellowCount: document.querySelector("#yellowCount"),
   redCount: document.querySelector("#redCount"),
+  orderCount: document.querySelector("#orderCount"),
   typeCounts: document.querySelector("#typeCounts")
 };
 
@@ -309,11 +310,13 @@ function renderStats() {
   const green = state.materials.filter((item) => item.estado_stock === "verde").length;
   const yellow = state.materials.filter((item) => item.estado_stock === "amarillo").length;
   const red = state.materials.filter((item) => item.estado_stock === "rojo").length;
+  const ordered = state.materials.filter((item) => item.pedido_hecho).length;
 
   els.totalCount.textContent = total;
   els.greenCount.textContent = green;
   els.yellowCount.textContent = yellow;
   els.redCount.textContent = red;
+  els.orderCount.textContent = ordered;
 }
 
 function renderTypeCounts() {
