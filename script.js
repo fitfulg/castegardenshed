@@ -22,6 +22,13 @@ const SHELF_LABELS = {
   C2: "Almacén 2 - Estantería C"
 };
 
+const SHELF_SECTIONS = {
+  C: ["Desbroce", "Plantación", "Poda"],
+  D: ["Solenoides", "Programadores", "Grifos", "Techline 16\"", "Techline 17\""],
+  E: ["Difusores", "Boquillas", "Aspersores", "Bobinas", "Reducciones", "Electroválvulas"],
+  F: ["Tapones", "Collarines", "Enlaces", "Té", "Codos"]
+};
+
 const state = {
   materials: [],
   search: "",
@@ -34,7 +41,9 @@ const state = {
 
 const remote = {
   client: null,
-  enabled: false
+  enabled: false,
+  hasPendingLocalChanges: false,
+  refreshing: false
 };
 
 const els = {
@@ -64,6 +73,7 @@ const els = {
   nombreInput: document.querySelector("#nombreInput"),
   tipoInput: document.querySelector("#tipoInput"),
   estanteriaInput: document.querySelector("#estanteriaInput"),
+  seccionInput: document.querySelector("#seccionInput"),
   cantidadInput: document.querySelector("#cantidadInput"),
   unidadInput: document.querySelector("#unidadInput"),
   estadoInput: document.querySelector("#estadoInput"),
@@ -84,6 +94,7 @@ async function init() {
   initRemoteDatabase();
   state.materials = await loadMaterials();
   bindEvents();
+  startRemoteRefresh();
   showConstructionNotice();
   render();
 }
@@ -178,8 +189,34 @@ async function loadRemoteMaterials() {
   } catch (error) {
     console.warn("No se pudo leer la base de datos remota.", error);
     remote.enabled = false;
-    setSyncStatus("Modo local", "error");
+    setSyncStatus("Solo este dispositivo", "error");
     return [];
+  }
+}
+
+function startRemoteRefresh() {
+  if (!remote.enabled) return;
+
+  window.addEventListener("focus", refreshRemoteMaterials);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") refreshRemoteMaterials();
+  });
+  setInterval(refreshRemoteMaterials, 60000);
+}
+
+async function refreshRemoteMaterials() {
+  if (!remote.enabled || remote.hasPendingLocalChanges || remote.refreshing) return;
+
+  remote.refreshing = true;
+  try {
+    const remoteMaterials = await loadRemoteMaterials();
+    if (remoteMaterials.length > 0) {
+      state.materials = remoteMaterials;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteMaterials));
+      render();
+    }
+  } finally {
+    remote.refreshing = false;
   }
 }
 
@@ -193,11 +230,13 @@ async function saveRemoteMaterials(materials) {
       .upsert(rows, { onConflict: "id" });
 
     if (error) throw error;
+    remote.hasPendingLocalChanges = false;
     setSyncStatus("Sincronizado", "synced");
     return true;
   } catch (error) {
     console.warn("No se pudieron guardar los datos remotos.", error);
-    setSyncStatus("Guardado local", "error");
+    remote.hasPendingLocalChanges = true;
+    setSyncStatus("Solo este dispositivo", "error");
     return false;
   }
 }
@@ -212,11 +251,13 @@ async function deleteRemoteMaterial(id) {
       .eq("id", id);
 
     if (error) throw error;
+    remote.hasPendingLocalChanges = false;
     setSyncStatus("Sincronizado", "synced");
     return true;
   } catch (error) {
     console.warn("No se pudo eliminar el material remoto.", error);
-    setSyncStatus("Guardado local", "error");
+    remote.hasPendingLocalChanges = true;
+    setSyncStatus("Solo este dispositivo", "error");
     return false;
   }
 }
@@ -272,6 +313,7 @@ function bindEvents() {
   els.closeDialogButton.addEventListener("click", () => els.materialDialog.close());
   els.materialForm.addEventListener("submit", saveMaterialFromForm);
   els.deleteMaterialButton.addEventListener("click", deleteCurrentMaterial);
+  els.estanteriaInput.addEventListener("change", () => renderSectionOptions());
 }
 
 function render() {
@@ -296,6 +338,23 @@ function renderShelfOptions() {
     els.shelfFilter.append(new Option(label, value));
   });
   els.shelfFilter.value = SHELF_LABELS[state.shelfFilter] ? state.shelfFilter : "todos";
+}
+
+function renderSectionOptions(selectedValue = "") {
+  const shelf = normalizeShelf(els.estanteriaInput.value);
+  const sections = SHELF_SECTIONS[shelf] || [];
+  const selected = cleanValue(selectedValue);
+
+  els.seccionInput.innerHTML = "";
+  els.seccionInput.append(new Option("Sin sección", ""));
+  sections.forEach((section) => els.seccionInput.append(new Option(section, section)));
+
+  if (selected && !sections.includes(selected)) {
+    els.seccionInput.append(new Option(selected, selected));
+  }
+
+  els.seccionInput.value = selected || "";
+  els.seccionInput.disabled = sections.length === 0 && !selected;
 }
 
 function fillSelect(select, firstLabel, values, selectedValue) {
@@ -389,7 +448,10 @@ function createMaterialCard(material) {
   meta.className = "material-meta";
   meta.append(
     element("span", "", ["Cantidad: ", quantity]),
-    element("span", "", `Estantería: ${formatShelf(material.estanteria)}`),
+    element("span", "", `Estantería: ${formatShelf(material.estanteria)}`)
+  );
+  if (material.seccion) meta.append(element("span", "", `Sección: ${material.seccion}`));
+  meta.append(
     element("span", "", `Ubicación: ${material.ubicacion || "Sin ubicación"}`),
     element("span", "", `Actualizado: ${material.ultima_actualizacion || "Sin fecha"}`),
     element("span", "", `Observaciones: ${material.observaciones || "Sin observaciones"}`)
@@ -451,6 +513,7 @@ function getSearchScore(material, query) {
     material.tipo_material,
     material.estanteria,
     formatShelf(material.estanteria),
+    material.seccion,
     material.ubicacion
   ].map(normalizeText);
   if (fields.some((field) => field === query)) return 0;
@@ -475,6 +538,7 @@ function openMaterialDialog(material = null) {
   els.nombreInput.value = material?.nombre || "";
   els.tipoInput.value = material?.tipo_material || "";
   els.estanteriaInput.value = material?.estanteria || "";
+  renderSectionOptions(material?.seccion || inferSection(material || {}));
   els.cantidadInput.value = material?.cantidad_comprobada ? material.cantidad : "";
   els.unidadInput.value = material?.unidad || "";
   els.estadoInput.value = material?.estado_stock || "verde";
@@ -495,6 +559,7 @@ async function saveMaterialFromForm(event) {
     nombre: els.nombreInput.value,
     tipo_material: els.tipoInput.value,
     estanteria: els.estanteriaInput.value,
+    seccion: els.seccionInput.value,
     cantidad: els.cantidadInput.value,
     cantidad_comprobada: cleanValue(els.cantidadInput.value) !== "",
     unidad: els.unidadInput.value,
@@ -617,7 +682,7 @@ async function copySummary() {
 
 function exportCsv() {
   const rows = getSummaryItems();
-  const header = ["codigo", "nombre", "tipo_material", "estanteria", "cantidad", "cantidad_comprobada", "unidad", "estado_stock", "pedido_hecho", "ubicacion", "observaciones", "ultima_actualizacion"];
+  const header = ["codigo", "nombre", "tipo_material", "estanteria", "seccion", "cantidad", "cantidad_comprobada", "unidad", "estado_stock", "pedido_hecho", "ubicacion", "observaciones", "ultima_actualizacion"];
   const csv = [
     header.join(","),
     ...rows.map((item) => header.map((field) => csvCell(item[field])).join(","))
@@ -658,6 +723,7 @@ function toRemoteRow(material) {
     nombre: normalized.nombre,
     tipo_material: normalized.tipo_material,
     estanteria: normalized.estanteria,
+    seccion: normalized.seccion,
     cantidad: normalized.cantidad,
     cantidad_comprobada: normalized.cantidad_comprobada,
     unidad: normalized.unidad,
@@ -673,6 +739,8 @@ function normalizeMaterial(raw) {
   const material = raw && typeof raw === "object" ? raw : {};
   const cantidad = normalizeQuantity(material.cantidad);
   const codigo = cleanValue(material.codigo);
+  const estanteria = normalizeShelf(material.estanteria);
+  const seccion = cleanValue(material.seccion) || inferSection({ ...material, estanteria });
   const hasExplicitCheckedQuantity = material.cantidad_comprobada === true;
   const checkedStock = hasExplicitCheckedQuantity ? null : MANUALLY_CHECKED_STOCK[codigo];
   const cantidadComprobada = hasExplicitCheckedQuantity || Boolean(checkedStock);
@@ -683,7 +751,8 @@ function normalizeMaterial(raw) {
     codigo,
     nombre: cleanValue(material.nombre) || "Sin nombre",
     tipo_material: cleanValue(material.tipo_material) || "Sin tipo",
-    estanteria: normalizeShelf(material.estanteria),
+    estanteria,
+    seccion,
     cantidad: checkedStock ? checkedStock.cantidad : cantidad,
     cantidad_comprobada: cantidadComprobada,
     unidad: cleanValue(material.unidad),
@@ -728,6 +797,54 @@ function getTypes() {
 function normalizeShelf(value) {
   const shelf = cleanValue(value).toUpperCase();
   return SHELF_LABELS[shelf] ? shelf : "";
+}
+
+function inferSection(material) {
+  if (!material) return "";
+
+  const shelf = normalizeShelf(material.estanteria);
+  const sections = SHELF_SECTIONS[shelf] || [];
+  if (!sections.length) return "";
+
+  const text = normalizeText([
+    material.seccion,
+    material.ubicacion,
+    material.nombre,
+    material.tipo_material
+  ].filter(Boolean).join(" "));
+
+  const rules = {
+    C: [
+      ["Desbroce", ["desbroce", "hilo", "cabezal"]],
+      ["Plantación", ["plantacion", "plantar", "jardi mixte"]],
+      ["Poda", ["poda", "tijera", "felco", "serrucho"]]
+    ],
+    D: [
+      ["Solenoides", ["solenoide"]],
+      ["Programadores", ["programador", "program.", "rainbow", "tbos"]],
+      ["Grifos", ["grifo"]],
+      ["Techline 16\"", ["techline 16", "t 16", "16mm", "16 mm"]],
+      ["Techline 17\"", ["techline 17", "t 17"]]
+    ],
+    E: [
+      ["Difusores", ["difusor"]],
+      ["Boquillas", ["boquilla", "tobera"]],
+      ["Aspersores", ["aspersor"]],
+      ["Bobinas", ["bobina"]],
+      ["Reducciones", ["reduccion", "reducciones"]],
+      ["Electroválvulas", ["electrovalvula", "electroval.", "valvula"]]
+    ],
+    F: [
+      ["Tapones", ["tapon", "tapones"]],
+      ["Collarines", ["collarin", "collarines"]],
+      ["Enlaces", ["enlace", "enlaces", "racor"]],
+      ["Té", [" te ", " tes ", " t "]],
+      ["Codos", ["codo", "codos"]]
+    ]
+  };
+
+  const match = (rules[shelf] || []).find(([, words]) => words.some((word) => text.includes(word)));
+  return match?.[0] || "";
 }
 
 function formatShelf(value) {

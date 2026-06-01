@@ -4,6 +4,7 @@ create table if not exists public.materiales (
   nombre text not null default 'Sin nombre',
   tipo_material text not null default 'Sin tipo',
   estanteria text,
+  seccion text,
   cantidad numeric,
   cantidad_comprobada boolean not null default false,
   unidad text,
@@ -20,6 +21,9 @@ alter table public.materiales
 
 alter table public.materiales
   add column if not exists cantidad_comprobada boolean not null default false;
+
+alter table public.materiales
+  add column if not exists seccion text;
 
 alter table public.materiales enable row level security;
 

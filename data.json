@@ -11,7 +11,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "11203",
@@ -25,7 +26,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "11205",
@@ -39,7 +41,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "11207",
@@ -53,7 +56,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "11211",
@@ -67,7 +71,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "11219",
@@ -81,7 +86,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "11222",
@@ -95,7 +101,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "19918",
@@ -109,7 +116,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "13901",
@@ -123,7 +131,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13902",
@@ -137,7 +146,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13903",
@@ -151,7 +161,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13904",
@@ -165,7 +176,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13907",
@@ -179,7 +191,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13908",
@@ -193,7 +206,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13801",
@@ -207,7 +221,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13802",
@@ -221,7 +236,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13803",
@@ -235,7 +251,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "57815",
@@ -249,7 +266,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80358",
@@ -263,7 +281,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "90001",
@@ -277,7 +296,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "90002",
@@ -291,7 +311,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "90005",
@@ -305,7 +326,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "11160",
@@ -319,7 +341,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11161",
@@ -333,7 +356,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11162",
@@ -347,7 +371,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11163",
@@ -361,7 +386,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11165",
@@ -375,7 +401,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11167",
@@ -389,7 +416,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11168",
@@ -403,7 +431,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11169",
@@ -417,7 +446,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11170",
@@ -431,7 +461,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11174",
@@ -445,7 +476,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11175",
@@ -459,7 +491,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11180",
@@ -473,7 +506,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "",
@@ -487,7 +521,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41077",
@@ -501,7 +536,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80131",
@@ -515,7 +551,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80132",
@@ -529,7 +566,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80571",
@@ -543,7 +581,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13301",
@@ -557,7 +596,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13302",
@@ -571,7 +611,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13303",
@@ -585,7 +626,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13304",
@@ -599,7 +641,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13305",
@@ -613,7 +656,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13306",
@@ -627,7 +671,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13311",
@@ -641,7 +686,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13312",
@@ -655,7 +701,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13313",
@@ -669,7 +716,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13316",
@@ -683,7 +731,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13321",
@@ -697,7 +746,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13322",
@@ -711,7 +761,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13323",
@@ -725,7 +776,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13324",
@@ -739,7 +791,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13325",
@@ -753,7 +806,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13326",
@@ -767,7 +821,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13327",
@@ -781,7 +836,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13328",
@@ -795,7 +851,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13329",
@@ -809,7 +866,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Codos"
     },
     {
         "codigo":  "13813",
@@ -823,7 +881,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 16\""
     },
     {
         "codigo":  "13814",
@@ -837,7 +896,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 16\""
     },
     {
         "codigo":  "14015",
@@ -851,7 +911,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 17\""
     },
     {
         "codigo":  "14020",
@@ -865,7 +926,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 17\""
     },
     {
         "codigo":  "14106",
@@ -879,7 +941,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 16\""
     },
     {
         "codigo":  "13701",
@@ -893,7 +956,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Collarines"
     },
     {
         "codigo":  "13702",
@@ -907,7 +971,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Collarines"
     },
     {
         "codigo":  "13703",
@@ -921,7 +986,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Collarines"
     },
     {
         "codigo":  "13704",
@@ -935,7 +1001,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Collarines"
     },
     {
         "codigo":  "13705",
@@ -949,7 +1016,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Collarines"
     },
     {
         "codigo":  "13706",
@@ -963,7 +1031,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Collarines"
     },
     {
         "codigo":  "13708",
@@ -977,7 +1046,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Collarines"
     },
     {
         "codigo":  "13724",
@@ -991,7 +1061,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Collarines"
     },
     {
         "codigo":  "13756",
@@ -1005,7 +1076,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Collarines"
     },
     {
         "codigo":  "80509",
@@ -1019,7 +1091,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80510",
@@ -1033,7 +1106,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80590",
@@ -1047,7 +1121,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80592",
@@ -1061,7 +1136,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80594",
@@ -1075,7 +1151,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41094",
@@ -1089,7 +1166,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "63039",
@@ -1103,7 +1181,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "63059",
@@ -1117,7 +1196,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "63060",
@@ -1131,7 +1211,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "63064",
@@ -1145,7 +1226,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "63065",
@@ -1159,7 +1241,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "63068",
@@ -1173,7 +1256,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "63069",
@@ -1187,7 +1271,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "63070",
@@ -1201,7 +1286,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "63074",
@@ -1215,7 +1301,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "64011",
@@ -1229,7 +1316,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "64015",
@@ -1243,7 +1331,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "64016",
@@ -1257,7 +1346,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "64017",
@@ -1271,7 +1361,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-31",
         "estanteria":  "C",
-        "cantidad_comprobada":  true
+        "cantidad_comprobada":  true,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "64018",
@@ -1285,7 +1376,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "64019",
@@ -1299,7 +1391,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "64023",
@@ -1313,7 +1406,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "64031",
@@ -1327,7 +1421,8 @@
         "observaciones":  "1 rollo + pico",
         "ultima_actualizacion":  "2026-05-31",
         "estanteria":  "C",
-        "cantidad_comprobada":  true
+        "cantidad_comprobada":  true,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "64032",
@@ -1341,7 +1436,8 @@
         "observaciones":  "1 rollo + pico",
         "ultima_actualizacion":  "2026-05-31",
         "estanteria":  "C",
-        "cantidad_comprobada":  true
+        "cantidad_comprobada":  true,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "65007",
@@ -1355,7 +1451,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "65032",
@@ -1369,7 +1466,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "66106",
@@ -1383,7 +1481,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "80326",
@@ -1397,7 +1496,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "80363",
@@ -1411,7 +1511,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Desbroce"
     },
     {
         "codigo":  "11003",
@@ -1425,7 +1526,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Difusores"
     },
     {
         "codigo":  "11004",
@@ -1439,7 +1541,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Difusores"
     },
     {
         "codigo":  "11007",
@@ -1453,7 +1556,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Difusores"
     },
     {
         "codigo":  "11009",
@@ -1467,7 +1571,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Difusores"
     },
     {
         "codigo":  "11010",
@@ -1481,7 +1586,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Difusores"
     },
     {
         "codigo":  "12001",
@@ -1495,7 +1601,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Electroválvulas"
     },
     {
         "codigo":  "12002",
@@ -1509,7 +1616,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Electroválvulas"
     },
     {
         "codigo":  "12005",
@@ -1523,7 +1631,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Electroválvulas"
     },
     {
         "codigo":  "12101",
@@ -1537,7 +1646,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Electroválvulas"
     },
     {
         "codigo":  "12202",
@@ -1551,7 +1661,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Electroválvulas"
     },
     {
         "codigo":  "12203",
@@ -1565,7 +1676,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Electroválvulas"
     },
     {
         "codigo":  "12301",
@@ -1579,7 +1691,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Electroválvulas"
     },
     {
         "codigo":  "12400",
@@ -1593,7 +1706,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Electroválvulas"
     },
     {
         "codigo":  "12402",
@@ -1607,7 +1721,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Electroválvulas"
     },
     {
         "codigo":  "",
@@ -1621,7 +1736,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "",
@@ -1635,7 +1751,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "",
@@ -1649,7 +1766,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13000",
@@ -1663,7 +1781,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13001",
@@ -1677,7 +1796,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13002",
@@ -1691,7 +1811,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13003",
@@ -1705,7 +1826,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13004",
@@ -1719,7 +1841,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13005",
@@ -1733,7 +1856,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13006",
@@ -1747,7 +1871,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13010",
@@ -1761,7 +1886,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13011",
@@ -1775,7 +1901,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13012",
@@ -1789,7 +1916,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13013",
@@ -1803,7 +1931,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13014",
@@ -1817,7 +1946,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13016",
@@ -1831,7 +1961,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13017",
@@ -1845,7 +1976,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13018",
@@ -1859,7 +1991,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13019",
@@ -1873,7 +2006,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13101",
@@ -1887,7 +2021,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13102",
@@ -1901,7 +2036,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13103",
@@ -1915,7 +2051,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13104",
@@ -1929,7 +2066,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13105",
@@ -1943,7 +2081,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13106",
@@ -1957,7 +2096,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13111",
@@ -1971,7 +2111,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13113",
@@ -1985,7 +2126,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13115",
@@ -1999,7 +2141,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13117",
@@ -2013,7 +2156,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "13118",
@@ -2027,7 +2171,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "14012",
@@ -2041,7 +2186,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 17\""
     },
     {
         "codigo":  "14016",
@@ -2055,7 +2201,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 17\""
     },
     {
         "codigo":  "14018",
@@ -2069,7 +2216,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 17\""
     },
     {
         "codigo":  "14021",
@@ -2083,7 +2231,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 16\""
     },
     {
         "codigo":  "14100",
@@ -2097,7 +2246,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 16\""
     },
     {
         "codigo":  "14101",
@@ -2111,7 +2261,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 16\""
     },
     {
         "codigo":  "41042",
@@ -2125,7 +2276,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41043",
@@ -2139,7 +2291,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41044",
@@ -2153,7 +2306,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41045",
@@ -2167,7 +2321,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41054",
@@ -2181,7 +2336,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41055",
@@ -2195,7 +2351,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41059",
@@ -2209,7 +2366,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41060",
@@ -2223,7 +2381,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41061",
@@ -2237,7 +2396,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41064",
@@ -2251,7 +2411,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41066",
@@ -2265,7 +2426,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41068",
@@ -2279,7 +2441,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41070",
@@ -2293,7 +2456,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41072",
@@ -2307,7 +2471,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41080",
@@ -2321,7 +2486,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41081",
@@ -2335,7 +2501,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41083",
@@ -2349,7 +2516,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41089",
@@ -2363,7 +2531,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41093",
@@ -2377,7 +2546,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41101",
@@ -2391,7 +2561,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41102",
@@ -2405,7 +2576,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41103",
@@ -2419,7 +2591,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41104",
@@ -2433,7 +2606,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41106",
@@ -2447,7 +2621,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41107",
@@ -2461,7 +2636,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41114",
@@ -2475,7 +2651,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41120",
@@ -2489,7 +2666,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41122",
@@ -2503,7 +2681,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41123",
@@ -2517,7 +2696,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41124",
@@ -2531,7 +2711,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41125",
@@ -2545,7 +2726,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "41128",
@@ -2559,7 +2741,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "66518",
@@ -2573,7 +2756,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "A",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "15001",
@@ -2587,7 +2771,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "15100",
@@ -2601,7 +2786,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "57340",
@@ -2615,7 +2801,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "57348",
@@ -2629,7 +2816,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "",
@@ -2643,7 +2831,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "",
@@ -2657,7 +2846,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "",
@@ -2671,7 +2861,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "",
@@ -2685,7 +2876,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "58011",
@@ -2699,7 +2891,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80302",
@@ -2713,7 +2906,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80303",
@@ -2727,7 +2921,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80304",
@@ -2741,7 +2936,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80306",
@@ -2755,7 +2951,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80309",
@@ -2769,7 +2966,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80310",
@@ -2783,7 +2981,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80311",
@@ -2797,7 +2996,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80312",
@@ -2811,7 +3011,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80314",
@@ -2825,7 +3026,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80315",
@@ -2839,7 +3041,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80316",
@@ -2853,7 +3056,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80317",
@@ -2867,7 +3071,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80318",
@@ -2881,7 +3086,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80320",
@@ -2895,7 +3101,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80321",
@@ -2909,7 +3116,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80325",
@@ -2923,7 +3131,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80327",
@@ -2937,7 +3146,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80328",
@@ -2951,7 +3161,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80329",
@@ -2965,7 +3176,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80331",
@@ -2979,7 +3191,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80332",
@@ -2993,7 +3206,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80333",
@@ -3007,7 +3221,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80334",
@@ -3021,7 +3236,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80335",
@@ -3035,7 +3251,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80336",
@@ -3049,7 +3266,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80337",
@@ -3063,7 +3281,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80338",
@@ -3077,7 +3296,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80341",
@@ -3091,7 +3311,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80344",
@@ -3105,7 +3326,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80345",
@@ -3119,7 +3341,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80346",
@@ -3133,7 +3356,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80347",
@@ -3147,7 +3371,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80307",
@@ -3161,7 +3386,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Poda"
     },
     {
         "codigo":  "80308",
@@ -3175,7 +3401,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Poda"
     },
     {
         "codigo":  "80330",
@@ -3189,7 +3416,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-31",
         "estanteria":  "C",
-        "cantidad_comprobada":  true
+        "cantidad_comprobada":  true,
+        "seccion":  "Poda"
     },
     {
         "codigo":  "80356",
@@ -3203,7 +3431,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Poda"
     },
     {
         "codigo":  "80357",
@@ -3217,7 +3446,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Poda"
     },
     {
         "codigo":  "80362",
@@ -3231,7 +3461,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Poda"
     },
     {
         "codigo":  "19110",
@@ -3245,7 +3476,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Enlaces"
     },
     {
         "codigo":  "19922",
@@ -3259,7 +3491,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "65016",
@@ -3273,7 +3506,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "65017",
@@ -3287,7 +3521,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "18304",
@@ -3301,7 +3536,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "18305",
@@ -3315,7 +3551,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "18321",
@@ -3329,7 +3566,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "18206",
@@ -3343,7 +3581,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Programadores"
     },
     {
         "codigo":  "18208",
@@ -3357,7 +3596,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Programadores"
     },
     {
         "codigo":  "18217",
@@ -3371,7 +3611,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Programadores"
     },
     {
         "codigo":  "18223",
@@ -3385,7 +3626,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Programadores"
     },
     {
         "codigo":  "18313",
@@ -3399,7 +3641,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Programadores"
     },
     {
         "codigo":  "18314",
@@ -3413,7 +3656,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Programadores"
     },
     {
         "codigo":  "18316",
@@ -3427,7 +3671,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Programadores"
     },
     {
         "codigo":  "18317",
@@ -3441,7 +3686,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Programadores"
     },
     {
         "codigo":  "18318",
@@ -3455,7 +3701,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Programadores"
     },
     {
         "codigo":  "18329",
@@ -3469,7 +3716,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Programadores"
     },
     {
         "codigo":  "19201",
@@ -3483,7 +3731,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "19202",
@@ -3497,7 +3746,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "19203",
@@ -3511,7 +3761,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "19206",
@@ -3525,7 +3776,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "19207",
@@ -3539,7 +3791,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "19208",
@@ -3553,7 +3806,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "19209",
@@ -3567,7 +3821,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "19901",
@@ -3581,7 +3836,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "19902",
@@ -3595,7 +3851,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "19903",
@@ -3609,7 +3866,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "19906",
@@ -3623,7 +3881,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Aspersores"
     },
     {
         "codigo":  "57349",
@@ -3637,7 +3896,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "57350",
@@ -3651,7 +3911,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80313",
@@ -3665,7 +3926,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-31",
         "estanteria":  "B",
-        "cantidad_comprobada":  true
+        "cantidad_comprobada":  true,
+        "seccion":  ""
     },
     {
         "codigo":  "80581",
@@ -3679,7 +3941,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80582",
@@ -3693,7 +3956,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "B",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80343",
@@ -3707,7 +3971,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Poda"
     },
     {
         "codigo":  "80349",
@@ -3721,7 +3986,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Poda"
     },
     {
         "codigo":  "13501",
@@ -3735,7 +4001,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13502",
@@ -3749,7 +4016,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13503",
@@ -3763,7 +4031,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13504",
@@ -3777,7 +4046,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13505",
@@ -3791,7 +4061,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13506",
@@ -3805,7 +4076,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13507",
@@ -3819,7 +4091,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13515",
@@ -3833,7 +4106,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13516",
@@ -3847,7 +4121,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13518",
@@ -3861,7 +4136,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13519",
@@ -3875,7 +4151,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13601",
@@ -3889,7 +4166,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13602",
@@ -3903,7 +4181,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13603",
@@ -3917,7 +4196,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13611",
@@ -3931,7 +4211,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13612",
@@ -3945,7 +4226,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13620",
@@ -3959,7 +4241,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "13621",
@@ -3973,7 +4256,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "16004",
@@ -3987,7 +4271,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "",
@@ -4001,7 +4286,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "11301",
@@ -4015,7 +4301,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "19103",
@@ -4029,7 +4316,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "19905",
@@ -4043,7 +4331,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "80324",
@@ -4057,7 +4346,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Poda"
     },
     {
         "codigo":  "80351",
@@ -4071,7 +4361,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "C",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Poda"
     },
     {
         "codigo":  "18299",
@@ -4085,7 +4376,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Solenoides"
     },
     {
         "codigo":  "18302",
@@ -4099,7 +4391,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Solenoides"
     },
     {
         "codigo":  "18312",
@@ -4113,7 +4406,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Solenoides"
     },
     {
         "codigo":  "18323",
@@ -4127,7 +4421,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Solenoides"
     },
     {
         "codigo":  "13401",
@@ -4141,7 +4436,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Tapones"
     },
     {
         "codigo":  "13402",
@@ -4155,7 +4451,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Tapones"
     },
     {
         "codigo":  "13403",
@@ -4169,7 +4466,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Tapones"
     },
     {
         "codigo":  "13404",
@@ -4183,7 +4481,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Tapones"
     },
     {
         "codigo":  "13405",
@@ -4197,7 +4496,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Tapones"
     },
     {
         "codigo":  "13406",
@@ -4211,7 +4511,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Tapones"
     },
     {
         "codigo":  "",
@@ -4225,7 +4526,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "",
@@ -4239,7 +4541,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13203",
@@ -4253,7 +4556,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13211",
@@ -4267,7 +4571,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13212",
@@ -4281,7 +4586,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13213",
@@ -4295,7 +4601,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13214",
@@ -4309,7 +4616,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13215",
@@ -4323,7 +4631,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13216",
@@ -4337,7 +4646,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13221",
@@ -4351,7 +4661,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13222",
@@ -4365,7 +4676,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13223",
@@ -4379,7 +4691,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13224",
@@ -4393,7 +4706,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13225",
@@ -4407,7 +4721,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13232",
@@ -4421,7 +4736,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13233",
@@ -4435,7 +4751,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "13241",
@@ -4449,7 +4766,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Té"
     },
     {
         "codigo":  "14011",
@@ -4463,7 +4781,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 17\""
     },
     {
         "codigo":  "14013",
@@ -4477,7 +4796,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 17\""
     },
     {
         "codigo":  "14014",
@@ -4491,7 +4811,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 17\""
     },
     {
         "codigo":  "14103",
@@ -4505,7 +4826,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "D",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Techline 16\""
     },
     {
         "codigo":  "11101",
@@ -4519,7 +4841,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11102",
@@ -4533,7 +4856,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11103",
@@ -4547,7 +4871,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11104",
@@ -4561,7 +4886,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11105",
@@ -4575,7 +4901,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11106",
@@ -4589,7 +4916,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11107",
@@ -4603,7 +4931,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11108",
@@ -4617,7 +4946,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11109",
@@ -4631,7 +4961,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11121",
@@ -4645,7 +4976,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11122",
@@ -4659,7 +4991,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11123",
@@ -4673,7 +5006,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11131",
@@ -4687,7 +5021,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11132",
@@ -4701,7 +5036,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11133",
@@ -4715,7 +5051,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "11141",
@@ -4729,7 +5066,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "E",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  "Boquillas"
     },
     {
         "codigo":  "10021",
@@ -4743,7 +5081,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "10022",
@@ -4757,7 +5096,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "10023",
@@ -4771,7 +5111,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "10024",
@@ -4785,7 +5126,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "10025",
@@ -4799,7 +5141,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "10026",
@@ -4813,7 +5156,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "10027",
@@ -4827,7 +5171,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "10028",
@@ -4841,7 +5186,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "10033",
@@ -4855,7 +5201,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "57719",
@@ -4869,7 +5216,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-29",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "58014",
@@ -4883,7 +5231,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "58016",
@@ -4897,7 +5246,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "58018",
@@ -4911,7 +5261,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "58041",
@@ -4925,7 +5276,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "58042",
@@ -4939,7 +5291,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "58043",
@@ -4953,7 +5306,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-28",
         "estanteria":  "G",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "17111",
@@ -4967,7 +5321,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "17112",
@@ -4981,7 +5336,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "17113",
@@ -4995,7 +5351,8 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     },
     {
         "codigo":  "17202",
@@ -5009,6 +5366,7 @@
         "observaciones":  "",
         "ultima_actualizacion":  "2026-05-30",
         "estanteria":  "F",
-        "cantidad_comprobada":  false
+        "cantidad_comprobada":  false,
+        "seccion":  ""
     }
 ]
