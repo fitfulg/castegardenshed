@@ -42,6 +42,8 @@ const state = {
 
 const remote = {
   client: null,
+  url: "",
+  anonKey: "",
   enabled: false,
   hasPendingLocalChanges: false,
   refreshing: false
@@ -61,6 +63,7 @@ const els = {
   copyNotice: document.querySelector("#copyNotice"),
   constructionNotice: document.querySelector("#constructionNotice"),
   syncStatus: document.querySelector("#syncStatus"),
+  syncError: document.querySelector("#syncError"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
   openNewMaterialButton: document.querySelector("#openNewMaterialButton"),
@@ -106,12 +109,13 @@ function initRemoteDatabase() {
     && !String(config.url).includes("TU-PROYECTO")
     && !String(config.anonKey).includes("TU-CLAVE");
 
-  if (!hasConfig || !window.supabase?.createClient) {
+  if (!hasConfig) {
     setSyncStatus("Modo local", "");
     return;
   }
 
-  remote.client = window.supabase.createClient(config.url, config.anonKey);
+  remote.url = String(config.url).replace(/\/$/, "");
+  remote.anonKey = config.anonKey;
   remote.enabled = true;
   setSyncStatus("Conectando...", "error");
 }
@@ -178,18 +182,12 @@ async function loadDataFile() {
 
 async function loadRemoteMaterials() {
   try {
-    const { data, error } = await remote.client
-      .from(REMOTE_TABLE)
-      .select("*")
-      .order("tipo_material", { ascending: true })
-      .order("nombre", { ascending: true });
-
-    if (error) throw error;
+    const data = await remoteRequest(`${REMOTE_TABLE}?select=*&order=tipo_material.asc,nombre.asc`);
     setSyncStatus("Sincronizado", "synced");
     return asArray(data).map(normalizeMaterial);
   } catch (error) {
     console.warn("No se pudo leer la base de datos remota.", error);
-    setSyncStatus("Solo este dispositivo", "error");
+    setSyncStatus("Solo este dispositivo", "error", getErrorMessage(error));
     return [];
   }
 }
@@ -240,37 +238,64 @@ async function saveRemoteMaterials(materials) {
     } catch (compatibleError) {
       console.warn("No se pudieron guardar los datos remotos.", compatibleError);
       remote.hasPendingLocalChanges = true;
-      setSyncStatus("Solo este dispositivo", "error");
+      setSyncStatus("Solo este dispositivo", "error", getErrorMessage(compatibleError));
       return false;
     }
   }
 }
 
-async function upsertRemoteRows(rows) {
-  const { error } = await remote.client
-    .from(REMOTE_TABLE)
-    .upsert(rows, { onConflict: "id" });
+async function remoteRequest(path, options = {}) {
+  const response = await fetch(`${remote.url}/rest/v1/${path}`, {
+    ...options,
+    headers: {
+      apikey: remote.anonKey,
+      "Content-Type": "application/json",
+      ...(options.headers || {})
+    }
+  });
 
-  if (error) throw error;
+  const text = await response.text();
+  if (!response.ok) {
+    let details = text;
+    try {
+      const json = JSON.parse(text);
+      details = json.message || json.msg || json.error || text;
+    } catch (error) {
+      details = text;
+    }
+    throw new Error(`${response.status} ${details}`.trim());
+  }
+
+  return text ? JSON.parse(text) : null;
+}
+
+async function upsertRemoteRows(rows) {
+  await remoteRequest(`${REMOTE_TABLE}?on_conflict=id`, {
+    method: "POST",
+    headers: {
+      Prefer: "resolution=merge-duplicates,return=minimal"
+    },
+    body: JSON.stringify(rows)
+  });
 }
 
 async function deleteRemoteMaterial(id) {
   if (!remote.enabled) return false;
 
   try {
-    const { error } = await remote.client
-      .from(REMOTE_TABLE)
-      .delete()
-      .eq("id", id);
-
-    if (error) throw error;
+    await remoteRequest(`${REMOTE_TABLE}?id=eq.${encodeURIComponent(id)}`, {
+      method: "DELETE",
+      headers: {
+        Prefer: "return=minimal"
+      }
+    });
     remote.hasPendingLocalChanges = false;
     setSyncStatus("Sincronizado", "synced");
     return true;
   } catch (error) {
     console.warn("No se pudo eliminar el material remoto.", error);
     remote.hasPendingLocalChanges = true;
-    setSyncStatus("Solo este dispositivo", "error");
+    setSyncStatus("Solo este dispositivo", "error", getErrorMessage(error));
     return false;
   }
 }
@@ -721,11 +746,20 @@ async function persistAndRender() {
   render();
 }
 
-function setSyncStatus(text, statusClass) {
+function setSyncStatus(text, statusClass, title = "") {
   if (!els.syncStatus) return;
   els.syncStatus.textContent = text;
+  els.syncStatus.title = title;
+  if (els.syncError) {
+    els.syncError.textContent = title ? `Error: ${title}` : "";
+    els.syncError.hidden = !title;
+  }
   els.syncStatus.classList.toggle("synced", statusClass === "synced");
   els.syncStatus.classList.toggle("error", statusClass === "error");
+}
+
+function getErrorMessage(error) {
+  return error?.message || "No se ha podido conectar con Supabase";
 }
 
 function toRemoteRow(material) {
