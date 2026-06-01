@@ -199,6 +199,7 @@ textarea:focus {
 
 .filter-button,
 .primary-button,
+.success-button,
 .secondary-button,
 .text-button,
 .icon-button {
@@ -242,6 +243,7 @@ textarea:focus {
 }
 
 .primary-button,
+.success-button,
 .secondary-button {
   border: 1px solid transparent;
   font-weight: 700;
@@ -255,6 +257,15 @@ textarea:focus {
 
 .primary-button:hover {
   background: var(--accent-dark);
+}
+
+.success-button {
+  background: var(--green);
+  color: white;
+}
+
+.success-button:hover {
+  background: #166534;
 }
 
 .secondary-button {

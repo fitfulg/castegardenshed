@@ -82,7 +82,6 @@ const els = {
   cantidadInput: document.querySelector("#cantidadInput"),
   unidadInput: document.querySelector("#unidadInput"),
   estadoInput: document.querySelector("#estadoInput"),
-  ubicacionInput: document.querySelector("#ubicacionInput"),
   observacionesInput: document.querySelector("#observacionesInput"),
   pedidoInput: document.querySelector("#pedidoInput"),
   totalCount: document.querySelector("#totalCount"),
@@ -507,6 +506,15 @@ function createMaterialCard(material) {
   toggleOrderButton.textContent = material.pedido_hecho ? "✓ Material pedido" : "Marcar pedido";
   toggleOrderButton.addEventListener("click", () => togglePedido(material.id));
 
+  if (material.estado_stock === "rojo") {
+    const markStockOkButton = document.createElement("button");
+    markStockOkButton.className = "success-button";
+    markStockOkButton.type = "button";
+    markStockOkButton.textContent = "Stock correcto";
+    markStockOkButton.addEventListener("click", () => markStockAsCorrect(material.id));
+    actions.append(markStockOkButton);
+  }
+
   const editButton = document.createElement("button");
   editButton.className = "secondary-button";
   editButton.type = "button";
@@ -581,7 +589,6 @@ function openMaterialDialog(material = null) {
   els.cantidadInput.value = material?.cantidad_comprobada ? material.cantidad : "";
   els.unidadInput.value = material?.unidad || "";
   els.estadoInput.value = material?.estado_stock || "verde";
-  els.ubicacionInput.value = material?.ubicacion || "";
   els.observacionesInput.value = material?.observaciones || "";
   els.pedidoInput.checked = Boolean(material?.pedido_hecho);
   els.materialDialog.showModal();
@@ -603,7 +610,7 @@ async function saveMaterialFromForm(event) {
     cantidad_comprobada: cleanValue(els.cantidadInput.value) !== "",
     unidad: els.unidadInput.value,
     estado_stock: els.estadoInput.value,
-    ubicacion: els.ubicacionInput.value,
+    ubicacion: state.materials.find((item) => item.id === id)?.ubicacion || "",
     pedido_hecho: els.pedidoInput.checked,
     observaciones: els.observacionesInput.value,
     ultima_actualizacion: new Date().toISOString().slice(0, 10)
@@ -639,6 +646,18 @@ async function togglePedido(id) {
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
   material.pedido_hecho = !material.pedido_hecho;
+  material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
+  await persistAndRender();
+}
+
+async function markStockAsCorrect(id) {
+  const material = state.materials.find((item) => item.id === id);
+  if (!material) return;
+
+  material.estado_stock = "verde";
+  material.cantidad = null;
+  material.cantidad_comprobada = false;
+  material.pedido_hecho = false;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
   await persistAndRender();
 }
