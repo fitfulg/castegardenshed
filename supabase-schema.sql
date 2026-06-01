@@ -4,7 +4,8 @@ create table if not exists public.materiales (
   nombre text not null default 'Sin nombre',
   tipo_material text not null default 'Sin tipo',
   estanteria text,
-  cantidad numeric not null default 0,
+  cantidad numeric,
+  cantidad_comprobada boolean not null default false,
   unidad text,
   ubicacion text,
   estado_stock text not null default 'pendiente',
@@ -12,6 +13,13 @@ create table if not exists public.materiales (
   observaciones text,
   ultima_actualizacion date
 );
+
+alter table public.materiales
+  alter column cantidad drop not null,
+  alter column cantidad drop default;
+
+alter table public.materiales
+  add column if not exists cantidad_comprobada boolean not null default false;
 
 alter table public.materiales enable row level security;
 

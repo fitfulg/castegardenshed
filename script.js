@@ -1,6 +1,13 @@
-const STORAGE_KEY = "almacen_materiales_v4";
-const LEGACY_STORAGE_KEYS = ["almacen_materiales_v3"];
+const STORAGE_KEY = "almacen_materiales_v5";
+const LEGACY_STORAGE_KEYS = ["almacen_materiales_v4", "almacen_materiales_v3"];
 const REMOTE_TABLE = "materiales";
+const MANUALLY_CHECKED_STOCK = {
+  "64017": { cantidad: 0, estado_stock: "rojo", pedido_hecho: true },
+  "64031": { cantidad: 1, estado_stock: "rojo", pedido_hecho: true, observaciones: "1 rollo + pico" },
+  "64032": { cantidad: 1, estado_stock: "rojo", pedido_hecho: true, observaciones: "1 rollo + pico" },
+  "80330": { cantidad: 3, estado_stock: "amarillo" },
+  "80313": { cantidad: 0, estado_stock: "amarillo" }
+};
 
 const SHELF_LABELS = {
   A: "A - EPI",
@@ -370,7 +377,10 @@ function createMaterialCard(material) {
   }
 
   const quantityClass = material.estado_stock === "verde" ? "" : material.estado_stock;
-  const quantity = element("span", `quantity ${quantityClass}`, `${formatQuantity(material.cantidad)} ${material.unidad || ""}`.trim());
+  const quantityLabel = material.cantidad_comprobada
+    ? `${formatQuantity(material.cantidad)} ${material.unidad || ""}`.trim()
+    : "Stock correcto";
+  const quantity = element("span", `quantity ${quantityClass}`, quantityLabel);
 
   const meta = document.createElement("div");
   meta.className = "material-meta";
@@ -462,7 +472,7 @@ function openMaterialDialog(material = null) {
   els.nombreInput.value = material?.nombre || "";
   els.tipoInput.value = material?.tipo_material || "";
   els.estanteriaInput.value = material?.estanteria || "";
-  els.cantidadInput.value = material?.cantidad ?? "";
+  els.cantidadInput.value = material?.cantidad_comprobada ? material.cantidad : "";
   els.unidadInput.value = material?.unidad || "";
   els.estadoInput.value = material?.estado_stock || "verde";
   els.ubicacionInput.value = material?.ubicacion || "";
@@ -483,6 +493,7 @@ async function saveMaterialFromForm(event) {
     tipo_material: els.tipoInput.value,
     estanteria: els.estanteriaInput.value,
     cantidad: els.cantidadInput.value,
+    cantidad_comprobada: cleanValue(els.cantidadInput.value) !== "",
     unidad: els.unidadInput.value,
     estado_stock: els.estadoInput.value,
     ubicacion: els.ubicacionInput.value,
@@ -578,7 +589,8 @@ function buildSummaryText(items) {
 
 function formatSummaryLine(item) {
   const orderState = item.pedido_hecho ? "Material pedido" : "Sin pedir";
-  return `- ${item.codigo || "Sin código"} | ${item.nombre || "Sin nombre"} | ${formatShelf(item.estanteria)} | ${formatQuantity(item.cantidad)} ${item.unidad || ""} | ${orderState}`;
+  const quantity = item.cantidad_comprobada ? `${formatQuantity(item.cantidad)} ${item.unidad || ""}`.trim() : "Stock correcto";
+  return `- ${item.codigo || "Sin código"} | ${item.nombre || "Sin nombre"} | ${formatShelf(item.estanteria)} | ${quantity} | ${orderState}`;
 }
 
 async function copySummary() {
@@ -602,7 +614,7 @@ async function copySummary() {
 
 function exportCsv() {
   const rows = getSummaryItems();
-  const header = ["codigo", "nombre", "tipo_material", "estanteria", "cantidad", "unidad", "estado_stock", "pedido_hecho", "ubicacion", "observaciones", "ultima_actualizacion"];
+  const header = ["codigo", "nombre", "tipo_material", "estanteria", "cantidad", "cantidad_comprobada", "unidad", "estado_stock", "pedido_hecho", "ubicacion", "observaciones", "ultima_actualizacion"];
   const csv = [
     header.join(","),
     ...rows.map((item) => header.map((field) => csvCell(item[field])).join(","))
@@ -644,6 +656,7 @@ function toRemoteRow(material) {
     tipo_material: normalized.tipo_material,
     estanteria: normalized.estanteria,
     cantidad: normalized.cantidad,
+    cantidad_comprobada: normalized.cantidad_comprobada,
     unidad: normalized.unidad,
     ubicacion: normalized.ubicacion,
     estado_stock: normalized.estado_stock,
@@ -655,20 +668,26 @@ function toRemoteRow(material) {
 
 function normalizeMaterial(raw) {
   const material = raw && typeof raw === "object" ? raw : {};
-  const estado = normalizeText(material.estado_stock);
+  const cantidad = normalizeQuantity(material.cantidad);
+  const codigo = cleanValue(material.codigo);
+  const hasExplicitCheckedQuantity = material.cantidad_comprobada === true;
+  const checkedStock = hasExplicitCheckedQuantity ? null : MANUALLY_CHECKED_STOCK[codigo];
+  const cantidadComprobada = hasExplicitCheckedQuantity || Boolean(checkedStock);
+  const estado = checkedStock ? checkedStock.estado_stock : normalizeText(material.estado_stock || "verde");
 
   return {
     id: String(material.id || material.codigo || createId()),
-    codigo: cleanValue(material.codigo),
+    codigo,
     nombre: cleanValue(material.nombre) || "Sin nombre",
     tipo_material: cleanValue(material.tipo_material) || "Sin tipo",
     estanteria: normalizeShelf(material.estanteria),
-    cantidad: Number.isFinite(Number(material.cantidad)) ? Number(material.cantidad) : 0,
+    cantidad: checkedStock ? checkedStock.cantidad : cantidad,
+    cantidad_comprobada: cantidadComprobada,
     unidad: cleanValue(material.unidad),
     ubicacion: cleanValue(material.ubicacion),
-    estado_stock: ["pendiente", "verde", "amarillo", "rojo"].includes(estado) ? estado : "pendiente",
-    pedido_hecho: Boolean(material.pedido_hecho),
-    observaciones: cleanValue(material.observaciones),
+    estado_stock: ["pendiente", "verde", "amarillo", "rojo"].includes(estado) ? estado : "verde",
+    pedido_hecho: checkedStock?.pedido_hecho ?? Boolean(material.pedido_hecho),
+    observaciones: cleanValue(checkedStock?.observaciones ?? material.observaciones),
     ultima_actualizacion: cleanValue(material.ultima_actualizacion)
   };
 }
@@ -681,6 +700,14 @@ function asArray(data) {
 
 function cleanValue(value) {
   return String(value ?? "").replace(/\s+/g, " ").trim();
+}
+
+function normalizeQuantity(value) {
+  const text = cleanValue(value);
+  if (text === "") return null;
+
+  const quantity = Number(text.replace(",", "."));
+  return Number.isFinite(quantity) ? quantity : null;
 }
 
 function normalizeText(value) {
