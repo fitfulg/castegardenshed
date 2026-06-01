@@ -491,9 +491,9 @@ function createMaterialCard(material) {
   );
   if (material.seccion) meta.append(element("span", "", `Sección: ${material.seccion}`));
   meta.append(
-    element("span", "", `Actualizado: ${material.ultima_actualizacion || "Sin fecha"}`),
-    element("span", "", `Observaciones: ${material.observaciones || "Sin observaciones"}`)
+    element("span", "", `Actualizado: ${material.ultima_actualizacion || "Sin fecha"}`)
   );
+  if (material.observaciones) meta.append(element("span", "", `Observaciones: ${material.observaciones}`));
 
   main.append(titleRow, meta);
 
