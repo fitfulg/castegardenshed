@@ -22,12 +22,17 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.45;
+  overflow-x: hidden;
 }
 
 button,
@@ -35,6 +40,7 @@ input,
 select,
 textarea {
   font: inherit;
+  max-width: 100%;
 }
 
 button {
@@ -207,6 +213,8 @@ textarea:focus {
   color: var(--text);
   display: inline-flex;
   gap: 7px;
+  justify-content: space-between;
+  min-width: 0;
   padding: 8px 12px;
 }
 
@@ -278,8 +286,11 @@ textarea {
   border: 1px solid #b8c8c2;
   border-radius: 8px;
   color: var(--text);
+  font-size: 16px;
+  min-width: 0;
   min-height: 40px;
   padding: 8px 10px;
+  width: 100%;
 }
 
 textarea {
@@ -540,7 +551,9 @@ textarea {
   border: 0;
   border-radius: 8px;
   box-shadow: 0 28px 90px rgba(15, 23, 42, 0.32);
+  max-height: calc(100dvh - 24px);
   max-width: 760px;
+  overflow: auto;
   padding: 0;
   width: calc(100% - 24px);
 }
@@ -622,8 +635,25 @@ textarea {
 }
 
 @media (max-width: 560px) {
+  .layout {
+    gap: 12px;
+    padding: 12px 10px 28px;
+  }
+
+  .control-panel,
+  .summary-panel,
+  .type-counts-panel {
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
   .app-header {
     align-items: stretch;
+    gap: 12px;
+    padding: 16px 12px;
   }
 
   .header-actions,
@@ -640,11 +670,69 @@ textarea {
 
   .filters {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .filter-button {
-    padding-left: 8px;
-    padding-right: 8px;
+    font-size: 16px;
+    min-height: 48px;
+    padding: 10px 12px;
+    width: 100%;
+  }
+
+  .type-filter-row {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .type-filter-row label {
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  .section-title-row {
+    align-items: stretch;
+    display: grid;
+  }
+
+  .material-card {
+    padding: 12px;
+  }
+
+  .material-name {
+    font-size: 17px;
+  }
+
+  .material-dialog {
+    border-radius: 0;
+    height: 100dvh;
+    max-height: 100dvh;
+    width: 100vw;
+  }
+
+  #materialForm {
+    padding: 14px 12px calc(18px + env(safe-area-inset-bottom));
+  }
+
+  .dialog-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    margin: -14px -12px 14px;
+    padding: 12px;
+  }
+
+  .dialog-actions {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+  }
+
+  .dialog-actions button {
+    min-height: 48px;
+    width: 100%;
   }
 }
