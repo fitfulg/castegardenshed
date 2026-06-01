@@ -1,7 +1,7 @@
 const STORAGE_KEY = "almacen_materiales_v5";
 const LEGACY_STORAGE_KEYS = ["almacen_materiales_v4", "almacen_materiales_v3"];
 const REMOTE_TABLE = "materiales";
-const REMOTE_OPTIONAL_FIELDS = ["seccion"];
+const REMOTE_OPTIONAL_FIELDS = ["seccion", "cantidad_comprobada"];
 const MANUALLY_CHECKED_STOCK = {
   "64017": { cantidad: 0, estado_stock: "rojo", pedido_hecho: true },
   "64031": { cantidad: 1, estado_stock: "rojo", pedido_hecho: true, observaciones: "1 rollo + pico" },
