@@ -64,6 +64,7 @@ const els = {
   constructionNotice: document.querySelector("#constructionNotice"),
   syncStatus: document.querySelector("#syncStatus"),
   syncError: document.querySelector("#syncError"),
+  materialsColumn: document.querySelector(".materials-column"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
   openNewMaterialButton: document.querySelector("#openNewMaterialButton"),
@@ -325,6 +326,7 @@ function bindEvents() {
         item.classList.toggle("active", item === button);
       });
       renderMaterials();
+      scrollToMaterialsOnMobile();
     });
   });
 
@@ -658,6 +660,14 @@ function clearFilters() {
     button.classList.toggle("active", button.dataset.stockFilter === "todos");
   });
   renderMaterials();
+}
+
+function scrollToMaterialsOnMobile() {
+  if (!els.materialsColumn || !window.matchMedia("(max-width: 700px)").matches) return;
+
+  window.requestAnimationFrame(() => {
+    els.materialsColumn.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 }
 
 function groupMaterialsByType(materials) {
