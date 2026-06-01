@@ -501,10 +501,10 @@ textarea {
 
 .stock-switch {
   align-items: center;
-  background: var(--green-soft);
-  border: 1px solid #bbf7d0;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
   border-radius: 999px;
-  color: var(--green);
+  color: var(--muted);
   cursor: pointer;
   display: inline-flex;
   gap: 8px;
@@ -523,7 +523,7 @@ textarea {
 
 .switch-track {
   background: #ffffff;
-  border: 2px solid var(--green);
+  border: 2px solid #94a3b8;
   border-radius: 999px;
   display: inline-flex;
   height: 20px;
@@ -532,7 +532,7 @@ textarea {
 }
 
 .switch-track::after {
-  background: var(--green);
+  background: #94a3b8;
   border-radius: 999px;
   content: "";
   height: 12px;
@@ -545,6 +545,20 @@ textarea {
 
 .stock-switch input:checked + .switch-track::after {
   transform: translateX(16px);
+}
+
+.stock-switch:has(input:checked) {
+  background: var(--green-soft);
+  border-color: #bbf7d0;
+  color: var(--green);
+}
+
+.stock-switch input:checked + .switch-track {
+  border-color: var(--green);
+}
+
+.stock-switch input:checked + .switch-track::after {
+  background: var(--green);
 }
 
 .switch-text {
