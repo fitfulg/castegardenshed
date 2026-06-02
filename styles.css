@@ -906,8 +906,19 @@ textarea {
     grid-template-columns: auto auto minmax(32px, 1fr);
   }
 
+  .shelf-badge {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .material-code {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
   .card-edit-button {
     grid-column: 3;
+    grid-row: 1;
     justify-self: end;
     margin-left: 0;
   }
@@ -915,10 +926,12 @@ textarea {
   .material-name {
     font-size: 17px;
     grid-column: 1 / -1;
+    grid-row: 2;
   }
 
   .type-tag {
     grid-column: 1 / -1;
+    grid-row: 3;
     justify-self: start;
   }
 
