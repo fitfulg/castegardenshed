@@ -473,10 +473,6 @@ function createMaterialCard(material) {
     element("span", "tag type-tag", highlight(material.tipo_material || "Sin tipo"))
   );
 
-  if (material.pedido_hecho) {
-    titleRow.append(element("span", "tag order-tag", "✓ Material pedido"));
-  }
-
   const quantityClass = material.estado_stock === "verde" ? "" : material.estado_stock;
   const quantityLabel = material.cantidad_comprobada
     ? `${formatQuantity(material.cantidad)} ${material.unidad || ""}`.trim()
@@ -500,13 +496,8 @@ function createMaterialCard(material) {
   const actions = document.createElement("div");
   actions.className = "material-actions";
 
-  const toggleOrderButton = document.createElement("button");
-  toggleOrderButton.className = material.pedido_hecho ? "secondary-button" : "primary-button";
-  toggleOrderButton.type = "button";
-  toggleOrderButton.textContent = material.pedido_hecho ? "✓ Material pedido" : "Marcar pedido";
-  toggleOrderButton.addEventListener("click", () => togglePedido(material.id));
-
   actions.append(createStockSwitch(material));
+  actions.append(createPedidoSwitch(material));
 
   const editButton = document.createElement("button");
   editButton.className = "secondary-button";
@@ -514,7 +505,7 @@ function createMaterialCard(material) {
   editButton.textContent = "Editar";
   editButton.addEventListener("click", () => openMaterialDialog(material));
 
-  actions.append(toggleOrderButton, editButton);
+  actions.append(editButton);
   card.append(main, actions);
 
   return card;
@@ -531,6 +522,20 @@ function createStockSwitch(material) {
   input.addEventListener("change", () => toggleStockState(material.id, input.checked));
 
   label.append(input, element("span", "switch-track", ""), element("span", "switch-text", input.checked ? "Stock correcto" : "Faltan"));
+  return label;
+}
+
+function createPedidoSwitch(material) {
+  const label = document.createElement("label");
+  label.className = "stock-switch order-switch";
+  label.title = "Marcar si el material ya esta pedido";
+
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.checked = Boolean(material.pedido_hecho);
+  input.addEventListener("change", () => togglePedidoState(material.id, input.checked));
+
+  label.append(input, element("span", "switch-track", ""), element("span", "switch-text", input.checked ? "Material pedido" : "Sin pedir"));
   return label;
 }
 
@@ -651,10 +656,10 @@ async function deleteCurrentMaterial() {
   }
 }
 
-async function togglePedido(id) {
+async function togglePedidoState(id, isOrdered) {
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
-  material.pedido_hecho = !material.pedido_hecho;
+  material.pedido_hecho = isOrdered;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
   await persistAndRender();
 }

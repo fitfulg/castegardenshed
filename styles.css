@@ -460,11 +460,6 @@ textarea {
   color: #166534;
 }
 
-.order-tag {
-  background: var(--blue-soft);
-  color: var(--blue-text);
-}
-
 .material-meta {
   color: var(--muted);
   display: grid;
@@ -559,6 +554,20 @@ textarea {
 
 .stock-switch input:checked + .switch-track::after {
   background: var(--green);
+}
+
+.order-switch:has(input:checked) {
+  background: #e0f2fe;
+  border-color: #bae6fd;
+  color: var(--primary);
+}
+
+.order-switch input:checked + .switch-track {
+  border-color: var(--primary);
+}
+
+.order-switch input:checked + .switch-track::after {
+  background: var(--primary);
 }
 
 .switch-text {
