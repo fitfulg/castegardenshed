@@ -70,6 +70,7 @@ const els = {
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
   showSummaryButton: document.querySelector("#showSummaryButton"),
   showListButton: document.querySelector("#showListButton"),
+  refreshPageButton: document.querySelector("#refreshPageButton"),
   openNewMaterialButton: document.querySelector("#openNewMaterialButton"),
   materialDialog: document.querySelector("#materialDialog"),
   materialForm: document.querySelector("#materialForm"),
@@ -352,6 +353,7 @@ function bindEvents() {
   els.exportCsvButton.addEventListener("click", exportCsv);
   els.showSummaryButton.addEventListener("click", () => scrollToSectionOnMobile(els.summaryPanel));
   els.showListButton.addEventListener("click", () => scrollToSectionOnMobile(els.materialsColumn));
+  els.refreshPageButton.addEventListener("click", () => window.location.reload());
   els.openNewMaterialButton.addEventListener("click", () => openMaterialDialog());
   els.toggleGroupButton.addEventListener("click", toggleGroupByType);
   els.closeDialogButton.addEventListener("click", () => els.materialDialog.close());
