@@ -473,6 +473,15 @@ function createMaterialCard(material) {
     element("span", "tag type-tag", highlight(material.tipo_material || "Sin tipo"))
   );
 
+  const editButton = document.createElement("button");
+  editButton.className = "card-edit-button";
+  editButton.type = "button";
+  editButton.title = "Editar material";
+  editButton.ariaLabel = "Editar material";
+  editButton.textContent = "✎";
+  editButton.addEventListener("click", () => openMaterialDialog(material));
+  titleRow.append(editButton);
+
   const meta = document.createElement("div");
   meta.className = "material-meta";
   meta.append(
@@ -493,13 +502,13 @@ function createMaterialCard(material) {
   actions.append(createStockSwitch(material));
   actions.append(createPedidoSwitch(material));
 
-  const editButton = document.createElement("button");
-  editButton.className = "secondary-button";
-  editButton.type = "button";
-  editButton.textContent = "Editar";
-  editButton.addEventListener("click", () => openMaterialDialog(material));
+  const reviewButton = document.createElement("button");
+  reviewButton.className = "review-button";
+  reviewButton.type = "button";
+  reviewButton.textContent = "Revisar";
+  reviewButton.addEventListener("click", () => markAsReview(material.id));
 
-  actions.append(editButton);
+  actions.append(reviewButton);
   card.append(main, actions);
 
   return card;
@@ -711,6 +720,15 @@ async function saveInlineQuantity(id, value) {
   material.cantidad = quantity;
   material.cantidad_comprobada = true;
   material.estado_stock = quantity === 0 ? "rojo" : material.estado_stock === "rojo" ? "amarillo" : material.estado_stock;
+  material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
+  await persistAndRender();
+}
+
+async function markAsReview(id) {
+  const material = state.materials.find((item) => item.id === id);
+  if (!material) return;
+
+  material.estado_stock = "amarillo";
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
   await persistAndRender();
 }

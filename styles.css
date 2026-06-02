@@ -418,6 +418,29 @@ textarea {
   margin-bottom: 8px;
 }
 
+.card-edit-button {
+  align-items: center;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: 900;
+  height: 32px;
+  justify-content: center;
+  margin-left: auto;
+  padding: 0;
+  width: 32px;
+}
+
+.card-edit-button:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
 .shelf-badge {
   align-items: center;
   background: #111827;
@@ -546,6 +569,20 @@ textarea {
   display: grid;
   gap: 8px;
   min-width: 140px;
+}
+
+.review-button {
+  background: var(--yellow-soft);
+  border: 1px solid #f6c453;
+  border-radius: 8px;
+  color: #7c4a03;
+  font-weight: 800;
+  min-height: 40px;
+  padding: 9px 13px;
+}
+
+.review-button:hover {
+  background: #fde68a;
 }
 
 .stock-switch {
