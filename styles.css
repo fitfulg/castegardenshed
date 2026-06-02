@@ -517,6 +517,39 @@ textarea {
   gap: 6px;
 }
 
+.quantity-display {
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.quantity-status {
+  background: var(--surface-soft);
+  border-radius: 8px;
+  color: var(--muted);
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: 900;
+  padding: 4px 8px;
+}
+
+.quantity-add-button {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent-dark);
+  cursor: pointer;
+  font-weight: 800;
+  min-height: 30px;
+  padding: 3px 9px;
+}
+
+.quantity-add-button:hover {
+  background: var(--blue-soft);
+  border-color: #bfdbfe;
+}
+
 .quantity-editor {
   align-items: center;
   background: var(--surface-soft);

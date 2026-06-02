@@ -543,6 +543,31 @@ function createPedidoSwitch(material) {
 }
 
 function createQuantityControl(material) {
+  if (!material.cantidad_comprobada) {
+    const wrapper = document.createElement("span");
+    wrapper.className = "quantity-display";
+
+    const label = element("span", "quantity-status", "Stock correcto");
+    const addButton = document.createElement("button");
+    addButton.className = "quantity-add-button";
+    addButton.type = "button";
+    addButton.title = "Añadir cantidad";
+    addButton.ariaLabel = "Añadir cantidad";
+    addButton.textContent = "+ uds";
+    addButton.addEventListener("click", () => {
+      const editor = createQuantityEditor(material, "");
+      wrapper.replaceWith(editor);
+      editor.querySelector("input")?.focus();
+    });
+
+    wrapper.append(label, addButton);
+    return wrapper;
+  }
+
+  return createQuantityEditor(material, material.cantidad !== null ? String(material.cantidad).replace(",", ".") : "");
+}
+
+function createQuantityEditor(material, value) {
   const wrapper = document.createElement("span");
   wrapper.className = `quantity-editor ${material.estado_stock === "verde" ? "" : material.estado_stock}`;
 
@@ -552,8 +577,8 @@ function createQuantityControl(material) {
   input.step = "1";
   input.inputMode = "decimal";
   input.ariaLabel = `Cantidad de ${material.nombre || material.codigo || "material"}`;
-  input.placeholder = material.cantidad_comprobada ? "" : "Stock correcto";
-  input.value = material.cantidad_comprobada && material.cantidad !== null ? String(material.cantidad).replace(",", ".") : "";
+  input.dataset.quantityId = material.id;
+  input.value = value;
 
   const unit = element("span", "quantity-unit", material.unidad || "uds");
 
@@ -711,7 +736,14 @@ async function saveInlineQuantity(id, value) {
   if (!material) return;
 
   const text = cleanValue(value);
-  if (text === "") return;
+  if (text === "") {
+    material.cantidad = null;
+    material.cantidad_comprobada = false;
+    material.estado_stock = "verde";
+    material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
+    await persistAndRender();
+    return;
+  }
 
   const quantity = normalizeQuantity(text);
   if (quantity === null || quantity < 0) return;
@@ -719,7 +751,7 @@ async function saveInlineQuantity(id, value) {
 
   material.cantidad = quantity;
   material.cantidad_comprobada = true;
-  material.estado_stock = quantity === 0 ? "rojo" : material.estado_stock === "rojo" ? "amarillo" : material.estado_stock;
+  material.estado_stock = quantity === 0 ? "rojo" : material.estado_stock === "rojo" ? "verde" : material.estado_stock;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
   await persistAndRender();
 }
