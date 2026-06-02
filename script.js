@@ -890,7 +890,7 @@ function toRemoteRow(material) {
     tipo_material: normalized.tipo_material,
     estanteria: normalized.estanteria,
     seccion: normalized.seccion,
-    cantidad: normalized.cantidad,
+    cantidad: normalized.cantidad_comprobada ? normalized.cantidad : 0,
     cantidad_comprobada: normalized.cantidad_comprobada,
     unidad: normalized.unidad,
     ubicacion: normalized.ubicacion,
