@@ -506,7 +506,7 @@ function createMaterialCard(material) {
   toggleOrderButton.textContent = material.pedido_hecho ? "✓ Material pedido" : "Marcar pedido";
   toggleOrderButton.addEventListener("click", () => togglePedido(material.id));
 
-  if (material.estado_stock === "rojo") actions.append(createStockSwitch(material));
+  actions.append(createStockSwitch(material));
 
   const editButton = document.createElement("button");
   editButton.className = "secondary-button";
@@ -523,14 +523,14 @@ function createMaterialCard(material) {
 function createStockSwitch(material) {
   const label = document.createElement("label");
   label.className = "stock-switch";
-  label.title = "Pasar a stock correcto";
+  label.title = "Cambiar entre stock correcto y falta material";
 
   const input = document.createElement("input");
   input.type = "checkbox";
-  input.checked = false;
-  input.addEventListener("change", () => markStockAsCorrect(material.id));
+  input.checked = material.estado_stock === "verde";
+  input.addEventListener("change", () => toggleStockState(material.id, input.checked));
 
-  label.append(input, element("span", "switch-track", ""), element("span", "switch-text", "Stock correcto"));
+  label.append(input, element("span", "switch-track", ""), element("span", "switch-text", input.checked ? "Stock correcto" : "Faltan"));
   return label;
 }
 
@@ -659,13 +659,13 @@ async function togglePedido(id) {
   await persistAndRender();
 }
 
-async function markStockAsCorrect(id) {
+async function toggleStockState(id, hasStock) {
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
 
-  material.estado_stock = "verde";
-  material.cantidad = null;
-  material.cantidad_comprobada = false;
+  material.estado_stock = hasStock ? "verde" : "rojo";
+  material.cantidad = hasStock ? null : 0;
+  material.cantidad_comprobada = !hasStock;
   material.pedido_hecho = false;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
   await persistAndRender();
