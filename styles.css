@@ -900,8 +900,26 @@ textarea {
     padding: 12px;
   }
 
+  .material-title-row {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto minmax(32px, 1fr);
+  }
+
+  .card-edit-button {
+    grid-column: 3;
+    justify-self: end;
+    margin-left: 0;
+  }
+
   .material-name {
     font-size: 17px;
+    grid-column: 1 / -1;
+  }
+
+  .type-tag {
+    grid-column: 1 / -1;
+    justify-self: start;
   }
 
   .material-dialog {
