@@ -473,16 +473,10 @@ function createMaterialCard(material) {
     element("span", "tag type-tag", highlight(material.tipo_material || "Sin tipo"))
   );
 
-  const quantityClass = material.estado_stock === "verde" ? "" : material.estado_stock;
-  const quantityLabel = material.cantidad_comprobada
-    ? `${formatQuantity(material.cantidad)} ${material.unidad || ""}`.trim()
-    : "Stock correcto";
-  const quantity = element("span", `quantity ${quantityClass}`, quantityLabel);
-
   const meta = document.createElement("div");
   meta.className = "material-meta";
   meta.append(
-    element("span", "", ["Cantidad: ", quantity]),
+    element("span", "quantity-line", ["Cantidad: ", createQuantityControl(material)]),
     element("span", "", `Estantería: ${formatShelf(material.estanteria)}`)
   );
   if (material.seccion) meta.append(element("span", "", `Sección: ${material.seccion}`));
@@ -537,6 +531,33 @@ function createPedidoSwitch(material) {
 
   label.append(input, element("span", "switch-track", ""), element("span", "switch-text", input.checked ? "Material pedido" : "Sin pedir"));
   return label;
+}
+
+function createQuantityControl(material) {
+  const wrapper = document.createElement("span");
+  wrapper.className = `quantity-editor ${material.estado_stock === "verde" ? "" : material.estado_stock}`;
+
+  const input = document.createElement("input");
+  input.type = "number";
+  input.min = "0";
+  input.step = "1";
+  input.inputMode = "decimal";
+  input.ariaLabel = `Cantidad de ${material.nombre || material.codigo || "material"}`;
+  input.placeholder = material.cantidad_comprobada ? "" : "Stock correcto";
+  input.value = material.cantidad_comprobada && material.cantidad !== null ? String(material.cantidad).replace(",", ".") : "";
+
+  const unit = element("span", "quantity-unit", material.unidad || "uds");
+
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      input.blur();
+    }
+  });
+  input.addEventListener("blur", () => saveInlineQuantity(material.id, input.value));
+
+  wrapper.append(input, unit);
+  return wrapper;
 }
 
 function renderSummary() {
@@ -672,6 +693,24 @@ async function toggleStockState(id, hasStock) {
   material.cantidad = hasStock ? null : 0;
   material.cantidad_comprobada = !hasStock;
   material.pedido_hecho = false;
+  material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
+  await persistAndRender();
+}
+
+async function saveInlineQuantity(id, value) {
+  const material = state.materials.find((item) => item.id === id);
+  if (!material) return;
+
+  const text = cleanValue(value);
+  if (text === "") return;
+
+  const quantity = normalizeQuantity(text);
+  if (quantity === null || quantity < 0) return;
+  if (material.cantidad_comprobada && material.cantidad === quantity) return;
+
+  material.cantidad = quantity;
+  material.cantidad_comprobada = true;
+  material.estado_stock = quantity === 0 ? "rojo" : material.estado_stock === "rojo" ? "amarillo" : material.estado_stock;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
   await persistAndRender();
 }
