@@ -845,7 +845,13 @@ textarea {
   }
 
   .material-card {
+    grid-template-columns: 1fr;
     padding: 12px;
+  }
+
+  .material-main,
+  .material-actions {
+    grid-column: 1;
   }
 
   .material-title-row {
@@ -881,6 +887,14 @@ textarea {
     grid-column: 1 / -1;
     grid-row: 3;
     justify-self: start;
+  }
+
+  .material-meta {
+    width: 100%;
+  }
+
+  .material-actions {
+    margin-top: 4px;
   }
 
   .material-dialog {
