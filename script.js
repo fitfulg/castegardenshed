@@ -499,47 +499,26 @@ function createMaterialCard(material) {
   const actions = document.createElement("div");
   actions.className = "material-actions";
 
-  actions.append(createStockSwitch(material));
-  actions.append(createPedidoSwitch(material));
+  actions.append(
+    createActionButton("Correcto", material.estado_stock === "verde", "ok", () => toggleStockState(material.id, true)),
+    createActionButton("Faltan", material.estado_stock === "rojo", "critical", () => toggleStockState(material.id, false)),
+    createActionButton("Pedido", material.pedido_hecho, "order", () => togglePedidoState(material.id, !material.pedido_hecho))
+  );
 
-  const reviewButton = document.createElement("button");
-  reviewButton.className = "review-button";
-  reviewButton.type = "button";
-  reviewButton.textContent = "Revisar";
-  reviewButton.addEventListener("click", () => markAsReview(material.id));
-
-  actions.append(reviewButton);
+  actions.append(createActionButton("Revisar", material.estado_stock === "amarillo", "review", () => markAsReview(material.id)));
   card.append(main, actions);
 
   return card;
 }
 
-function createStockSwitch(material) {
-  const label = document.createElement("label");
-  label.className = "stock-switch";
-  label.title = "Cambiar entre stock correcto y falta material";
-
-  const input = document.createElement("input");
-  input.type = "checkbox";
-  input.checked = material.estado_stock === "verde";
-  input.addEventListener("change", () => toggleStockState(material.id, input.checked));
-
-  label.append(input, element("span", "switch-track", ""), element("span", "switch-text", input.checked ? "Stock correcto" : "Faltan"));
-  return label;
-}
-
-function createPedidoSwitch(material) {
-  const label = document.createElement("label");
-  label.className = "stock-switch order-switch";
-  label.title = "Marcar si el material ya esta pedido";
-
-  const input = document.createElement("input");
-  input.type = "checkbox";
-  input.checked = Boolean(material.pedido_hecho);
-  input.addEventListener("change", () => togglePedidoState(material.id, input.checked));
-
-  label.append(input, element("span", "switch-track", ""), element("span", "switch-text", input.checked ? "Material pedido" : "Sin pedir"));
-  return label;
+function createActionButton(text, isActive, tone, onClick) {
+  const button = document.createElement("button");
+  button.className = `state-button ${tone} ${isActive ? "active" : "inactive"}`;
+  button.type = "button";
+  button.textContent = text;
+  button.setAttribute("aria-pressed", String(isActive));
+  button.addEventListener("click", onClick);
+  return button;
 }
 
 function createQuantityControl(material) {

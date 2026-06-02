@@ -600,103 +600,52 @@ textarea {
 .material-actions {
   align-content: start;
   display: grid;
-  gap: 8px;
-  min-width: 140px;
+  gap: 6px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 180px;
 }
 
-.review-button {
-  background: var(--yellow-soft);
-  border: 1px solid #f6c453;
-  border-radius: 8px;
-  color: #7c4a03;
-  font-weight: 800;
-  min-height: 40px;
-  padding: 9px 13px;
-}
-
-.review-button:hover {
-  background: #fde68a;
-}
-
-.stock-switch {
-  align-items: center;
+.state-button {
   background: var(--surface-soft);
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 8px;
   color: var(--muted);
   cursor: pointer;
-  display: inline-flex;
-  gap: 8px;
-  justify-content: center;
-  min-height: 40px;
-  padding: 7px 10px;
-  user-select: none;
+  font-weight: 800;
+  min-height: 34px;
+  padding: 6px 8px;
 }
 
-.stock-switch input {
-  height: 1px;
-  opacity: 0;
-  position: absolute;
-  width: 1px;
+.state-button.inactive {
+  opacity: 0.62;
 }
 
-.switch-track {
-  background: #ffffff;
-  border: 2px solid #94a3b8;
-  border-radius: 999px;
-  display: inline-flex;
-  height: 20px;
-  position: relative;
-  width: 36px;
-}
-
-.switch-track::after {
-  background: #94a3b8;
-  border-radius: 999px;
-  content: "";
-  height: 12px;
-  left: 2px;
-  position: absolute;
-  top: 2px;
-  transition: transform 160ms ease;
-  width: 12px;
-}
-
-.stock-switch input:checked + .switch-track::after {
-  transform: translateX(16px);
-}
-
-.stock-switch:has(input:checked) {
+.state-button.ok.active {
   background: var(--green-soft);
   border-color: #bbf7d0;
   color: var(--green);
 }
 
-.stock-switch input:checked + .switch-track {
-  border-color: var(--green);
-}
-
-.stock-switch input:checked + .switch-track::after {
-  background: var(--green);
-}
-
-.order-switch:has(input:checked) {
-  background: #e0f2fe;
-  border-color: #bae6fd;
+.state-button.order.active {
+  background: var(--blue-soft);
+  border-color: #bfdbfe;
   color: var(--accent);
 }
 
-.order-switch input:checked + .switch-track {
-  background: var(--accent);
-  border-color: var(--accent);
+.state-button.review.active {
+  background: var(--yellow-soft);
+  border-color: #f6c453;
+  color: #7c4a03;
 }
 
-.order-switch input:checked + .switch-track::after {
-  background: #ffffff;
+.state-button.critical.active {
+  background: var(--red-soft);
+  border-color: #fecaca;
+  color: var(--red);
 }
 
-.switch-text {
-  font-weight: 800;
+.state-button:hover {
+  opacity: 1;
 }
 
 .empty-state {
@@ -857,8 +806,7 @@ textarea {
   }
 
   .header-actions,
-  .summary-actions,
-  .material-actions {
+  .summary-actions {
     display: grid;
     grid-template-columns: 1fr;
   }
