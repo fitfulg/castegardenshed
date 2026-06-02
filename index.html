@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestor de material de almacén</title>
-    <link rel="stylesheet" href="styles.css?v=20260602-10">
+    <link rel="stylesheet" href="styles.css?v=20260602-11">
   </head>
   <body>
     <div id="constructionNotice" class="construction-notice" role="status">
@@ -19,6 +19,7 @@
       <div class="header-actions">
         <span id="syncStatus" class="sync-status">Modo local</span>
         <span id="syncError" class="sync-error" hidden></span>
+        <button class="secondary-button mobile-jump-button" id="showSummaryButton" type="button">Ver resumen</button>
         <button class="primary-button" id="openNewMaterialButton" type="button">Añadir material</button>
       </div>
     </header>
@@ -74,6 +75,7 @@
               <option value="todos">Todos</option>
             </select>
           </div>
+          <button class="secondary-button mobile-jump-button" id="showListButton" type="button">Volver al listado</button>
           <pre id="weeklySummary" class="weekly-summary"></pre>
           <div class="summary-actions">
             <button class="primary-button" id="copySummaryButton" type="button">Copiar resumen</button>
@@ -167,7 +169,7 @@
       </form>
     </dialog>
 
-    <script src="supabase-config.js?v=20260602-10"></script>
-    <script src="script.js?v=20260602-10"></script>
+    <script src="supabase-config.js?v=20260602-11"></script>
+    <script src="script.js?v=20260602-11"></script>
   </body>
 </html>

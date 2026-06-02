@@ -65,8 +65,11 @@ const els = {
   syncStatus: document.querySelector("#syncStatus"),
   syncError: document.querySelector("#syncError"),
   materialsColumn: document.querySelector(".materials-column"),
+  summaryPanel: document.querySelector(".summary-panel"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
+  showSummaryButton: document.querySelector("#showSummaryButton"),
+  showListButton: document.querySelector("#showListButton"),
   openNewMaterialButton: document.querySelector("#openNewMaterialButton"),
   materialDialog: document.querySelector("#materialDialog"),
   materialForm: document.querySelector("#materialForm"),
@@ -347,6 +350,8 @@ function bindEvents() {
   els.clearFiltersButton.addEventListener("click", clearFilters);
   els.copySummaryButton.addEventListener("click", copySummary);
   els.exportCsvButton.addEventListener("click", exportCsv);
+  els.showSummaryButton.addEventListener("click", () => scrollToSectionOnMobile(els.summaryPanel));
+  els.showListButton.addEventListener("click", () => scrollToSectionOnMobile(els.materialsColumn));
   els.openNewMaterialButton.addEventListener("click", () => openMaterialDialog());
   els.toggleGroupButton.addEventListener("click", toggleGroupByType);
   els.closeDialogButton.addEventListener("click", () => els.materialDialog.close());
@@ -764,10 +769,14 @@ function clearFilters() {
 }
 
 function scrollToMaterialsOnMobile() {
-  if (!els.materialsColumn || !window.matchMedia("(max-width: 700px)").matches) return;
+  scrollToSectionOnMobile(els.materialsColumn);
+}
+
+function scrollToSectionOnMobile(target) {
+  if (!target || !window.matchMedia("(max-width: 700px)").matches) return;
 
   window.requestAnimationFrame(() => {
-    els.materialsColumn.scrollIntoView({ behavior: "smooth", block: "start" });
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
