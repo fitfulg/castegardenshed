@@ -559,15 +559,16 @@ textarea {
 .order-switch:has(input:checked) {
   background: #e0f2fe;
   border-color: #bae6fd;
-  color: var(--primary);
+  color: var(--accent);
 }
 
 .order-switch input:checked + .switch-track {
-  border-color: var(--primary);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .order-switch input:checked + .switch-track::after {
-  background: var(--primary);
+  background: #ffffff;
 }
 
 .switch-text {
