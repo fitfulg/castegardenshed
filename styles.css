@@ -740,18 +740,26 @@ textarea {
 }
 
 .loan-card.fixed .loan-detail,
-.loan-inline {
+.loan-inline.fixed {
   color: #5b21b6;
 }
 
-.loan-card.temporary .loan-detail {
+.loan-card.temporary .loan-detail,
+.loan-inline.temporary {
   color: #0f766e;
 }
 
 .loan-inline {
-  background: #ede9fe;
   border-radius: 8px;
   padding: 4px 8px;
+}
+
+.loan-inline.fixed {
+  background: #ede9fe;
+}
+
+.loan-inline.temporary {
+  background: #eef8fb;
 }
 
 .weekly-summary {

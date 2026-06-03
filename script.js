@@ -594,7 +594,11 @@ function createActionButton(text, isActive, tone, onClick) {
 }
 
 function createLoanBadge(material) {
-  return element("span", "loan-inline", `A devolver: ${formatQuantity(material.prestado_cantidad)} ${formatLoanUnit(material.unidad)} - ${material.prestado_fijo ? "Fijo" : "Temporal"}`);
+  return element(
+    "span",
+    `loan-inline ${material.prestado_fijo ? "fixed" : "temporary"}`,
+    `A devolver: ${formatQuantity(material.prestado_cantidad)} ${formatLoanUnit(material.unidad)} - ${material.prestado_fijo ? "Fijo" : "Temporal"}`
+  );
 }
 
 function createQuantityControl(material) {
