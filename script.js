@@ -973,8 +973,9 @@ function csvCell(value) {
 
 async function persistAndRender() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.materials));
-  await saveRemoteMaterials(state.materials);
+  remote.hasPendingLocalChanges = remote.enabled;
   render();
+  await saveRemoteMaterials(state.materials);
 }
 
 function setSyncStatus(text, statusClass, title = "") {
