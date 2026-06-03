@@ -470,35 +470,52 @@ function renderMaterials() {
 }
 
 function renderLoans() {
-  const loans = state.materials.filter(hasLoan).sort(compareMaterials);
+  const loans = state.materials.filter(hasLoan);
   els.loanList.innerHTML = "";
   els.loanEmptyState.hidden = loans.length > 0;
 
-  loans.forEach((material) => {
-    const row = document.createElement("article");
-    row.className = "loan-card";
+  const fixedLoans = loans.filter((material) => material.prestado_fijo).sort(compareLoansByDate);
+  const temporaryLoans = loans.filter((material) => !material.prestado_fijo).sort(compareLoansByDate);
 
-    const loanText = `${formatQuantity(material.prestado_cantidad)} ${formatLoanUnit(material.unidad)}`;
-    const fixedText = material.prestado_fijo ? "Fijo" : "Temporal";
-    const dateText = material.prestado_fecha || "Sin fecha";
+  [
+    { title: "Fijos", items: fixedLoans, tone: "fixed" },
+    { title: "Temporales", items: temporaryLoans, tone: "temporary" }
+  ].forEach((group) => {
+    if (!group.items.length) return;
 
-    row.append(
-      element("div", "loan-main", [
-        element("span", "material-code", material.codigo || "Sin código"),
-        element("strong", "", material.nombre || "Sin nombre"),
-        element("span", "loan-detail", `${loanText} a devolver - ${fixedText} - ${dateText}`)
-      ])
-    );
+    const section = document.createElement("section");
+    section.className = `loan-group ${group.tone}`;
+    section.append(element("h3", "loan-group-title", `${group.title} (${group.items.length})`));
 
-    const returnButton = document.createElement("button");
-    returnButton.className = "secondary-button compact-button";
-    returnButton.type = "button";
-    returnButton.textContent = "Devuelto";
-    returnButton.addEventListener("click", () => clearLoan(material.id));
-    row.append(returnButton);
-
-    els.loanList.append(row);
+    group.items.forEach((material) => section.append(createLoanCard(material, group.tone)));
+    els.loanList.append(section);
   });
+}
+
+function createLoanCard(material, tone) {
+  const row = document.createElement("article");
+  row.className = `loan-card ${tone}`;
+
+  const loanText = `${formatQuantity(material.prestado_cantidad)} ${formatLoanUnit(material.unidad)}`;
+  const fixedText = material.prestado_fijo ? "Fijo" : "Temporal";
+  const dateText = material.prestado_fecha || "Sin fecha";
+
+  row.append(
+    element("div", "loan-main", [
+      element("span", "material-code", material.codigo || "Sin código"),
+      element("strong", "", material.nombre || "Sin nombre"),
+      element("span", "loan-detail", `${loanText} a devolver - ${fixedText} - ${dateText}`)
+    ])
+  );
+
+  const returnButton = document.createElement("button");
+  returnButton.className = "secondary-button compact-button";
+  returnButton.type = "button";
+  returnButton.textContent = "Devuelto";
+  returnButton.addEventListener("click", () => clearLoan(material.id));
+  row.append(returnButton);
+
+  return row;
 }
 
 function createMaterialCard(material) {
@@ -679,6 +696,11 @@ function compareMaterials(a, b) {
   return (a.tipo_material || "").localeCompare(b.tipo_material || "", "es", { sensitivity: "base" })
     || (a.nombre || "").localeCompare(b.nombre || "", "es", { sensitivity: "base" })
     || (a.codigo || "").localeCompare(b.codigo || "", "es", { sensitivity: "base" });
+}
+
+function compareLoansByDate(a, b) {
+  const dateCompare = (b.prestado_fecha || "").localeCompare(a.prestado_fecha || "");
+  return dateCompare || compareMaterials(a, b);
 }
 
 function openMaterialDialog(material = null) {

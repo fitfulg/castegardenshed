@@ -691,19 +691,39 @@ textarea {
 
 .loan-list {
   display: grid;
-  gap: 10px;
+  gap: 16px;
   margin-top: 12px;
+}
+
+.loan-group {
+  display: grid;
+  gap: 10px;
+}
+
+.loan-group-title {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0;
 }
 
 .loan-card {
   align-items: center;
-  background: var(--surface-soft);
   border: 1px solid var(--line);
   border-radius: 8px;
   display: grid;
   gap: 10px;
   grid-template-columns: minmax(0, 1fr) auto;
   padding: 10px;
+}
+
+.loan-card.fixed {
+  background: #f3efff;
+  border-color: #ddd6fe;
+}
+
+.loan-card.temporary {
+  background: #eef8fb;
+  border-color: #bae6fd;
 }
 
 .loan-main {
@@ -716,8 +736,16 @@ textarea {
 
 .loan-detail,
 .loan-inline {
-  color: #5b21b6;
   font-weight: 800;
+}
+
+.loan-card.fixed .loan-detail,
+.loan-inline {
+  color: #5b21b6;
+}
+
+.loan-card.temporary .loan-detail {
+  color: #0f766e;
 }
 
 .loan-inline {
