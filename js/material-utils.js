@@ -1,5 +1,6 @@
 import {
   MANUALLY_CHECKED_STOCK,
+  REMOTE_OPTIONAL_FIELDS,
   SHELF_LABELS,
   SHELF_SECTIONS
 } from "./app-config.js";
@@ -141,6 +142,37 @@ export function formatTotalUnit(unit) {
 
 export function formatLoanUnit(unit) {
   return cleanValue(unit) || "uds";
+}
+
+export function toRemoteRow(material) {
+  const normalized = normalizeMaterial(material);
+  return {
+    id: normalized.id,
+    codigo: normalized.codigo,
+    nombre: normalized.nombre,
+    tipo_material: normalized.tipo_material,
+    estanteria: normalized.estanteria,
+    seccion: normalized.seccion,
+    cantidad: normalized.cantidad_comprobada ? normalized.cantidad : 0,
+    cantidad_comprobada: normalized.cantidad_comprobada,
+    unidad: normalized.unidad,
+    ubicacion: normalized.ubicacion,
+    estado_stock: normalized.estado_stock,
+    pedido_hecho: normalized.pedido_hecho,
+    prestado_cantidad: normalized.prestado_cantidad,
+    prestado_fijo: normalized.prestado_fijo,
+    prestado_fecha: normalized.prestado_fecha || null,
+    observaciones: normalized.observaciones,
+    ultima_actualizacion: normalized.ultima_actualizacion || null
+  };
+}
+
+export function toRemoteCompatibleRow(material) {
+  const row = toRemoteRow(material);
+  REMOTE_OPTIONAL_FIELDS.forEach((field) => {
+    delete row[field];
+  });
+  return row;
 }
 
 function createId() {

@@ -1,7 +1,6 @@
 import {
   APP_VERSION,
   LEGACY_STORAGE_KEYS,
-  REMOTE_OPTIONAL_FIELDS,
   REMOTE_TABLE,
   SHELF_LABELS,
   SHELF_SECTIONS,
@@ -20,7 +19,9 @@ import {
   normalizeMaterial,
   normalizeQuantity,
   normalizeShelf,
-  normalizeText
+  normalizeText,
+  toRemoteCompatibleRow,
+  toRemoteRow
 } from "./js/material-utils.js";
 
 const state = {
@@ -992,37 +993,6 @@ function setSyncStatus(text, statusClass, title = "") {
 
 function getErrorMessage(error) {
   return error?.message || "No se ha podido conectar con Supabase";
-}
-
-function toRemoteRow(material) {
-  const normalized = normalizeMaterial(material);
-  return {
-    id: normalized.id,
-    codigo: normalized.codigo,
-    nombre: normalized.nombre,
-    tipo_material: normalized.tipo_material,
-    estanteria: normalized.estanteria,
-    seccion: normalized.seccion,
-    cantidad: normalized.cantidad_comprobada ? normalized.cantidad : 0,
-    cantidad_comprobada: normalized.cantidad_comprobada,
-    unidad: normalized.unidad,
-    ubicacion: normalized.ubicacion,
-    estado_stock: normalized.estado_stock,
-    pedido_hecho: normalized.pedido_hecho,
-    prestado_cantidad: normalized.prestado_cantidad,
-    prestado_fijo: normalized.prestado_fijo,
-    prestado_fecha: normalized.prestado_fecha || null,
-    observaciones: normalized.observaciones,
-    ultima_actualizacion: normalized.ultima_actualizacion || null
-  };
-}
-
-function toRemoteCompatibleRow(material) {
-  const row = toRemoteRow(material);
-  REMOTE_OPTIONAL_FIELDS.forEach((field) => {
-    delete row[field];
-  });
-  return row;
 }
 
 function getTypes() {
