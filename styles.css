@@ -665,9 +665,9 @@ textarea {
 }
 
 .state-button.return.active {
-  background: var(--green-soft);
-  border-color: #86efac;
-  color: var(--green);
+  background: #ffffff;
+  border-color: #94a3b8;
+  color: #334155;
 }
 
 .state-button.critical.active {
