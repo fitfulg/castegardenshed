@@ -66,6 +66,8 @@ const els = {
   syncError: document.querySelector("#syncError"),
   materialsColumn: document.querySelector(".materials-column"),
   summaryPanel: document.querySelector(".summary-panel"),
+  loanList: document.querySelector("#loanList"),
+  loanEmptyState: document.querySelector("#loanEmptyState"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
   showSummaryButton: document.querySelector("#showSummaryButton"),
@@ -368,6 +370,7 @@ function render() {
   renderStats();
   renderTypeCounts();
   renderMaterials();
+  renderLoans();
   renderSummary();
 }
 
@@ -464,6 +467,38 @@ function renderMaterials() {
   els.materialsList.append(fragment);
 }
 
+function renderLoans() {
+  const loans = state.materials.filter(hasLoan).sort(compareMaterials);
+  els.loanList.innerHTML = "";
+  els.loanEmptyState.hidden = loans.length > 0;
+
+  loans.forEach((material) => {
+    const row = document.createElement("article");
+    row.className = "loan-card";
+
+    const loanText = `${formatQuantity(material.prestado_cantidad)} ${formatLoanUnit(material.unidad)}`;
+    const fixedText = material.prestado_fijo ? "Fijo" : "Temporal";
+    const dateText = material.prestado_fecha || "Sin fecha";
+
+    row.append(
+      element("div", "loan-main", [
+        element("span", "material-code", material.codigo || "Sin código"),
+        element("strong", "", material.nombre || "Sin nombre"),
+        element("span", "loan-detail", `${loanText} a devolver - ${fixedText} - ${dateText}`)
+      ])
+    );
+
+    const returnButton = document.createElement("button");
+    returnButton.className = "secondary-button compact-button";
+    returnButton.type = "button";
+    returnButton.textContent = "Devuelto";
+    returnButton.addEventListener("click", () => clearLoan(material.id));
+    row.append(returnButton);
+
+    els.loanList.append(row);
+  });
+}
+
 function createMaterialCard(material) {
   const card = document.createElement("article");
   card.className = `material-card stock-${material.estado_stock}`;
@@ -489,10 +524,13 @@ function createMaterialCard(material) {
   editButton.addEventListener("click", () => openMaterialDialog(material));
   titleRow.append(editButton);
 
+  const quantityLine = ["Cantidad: ", createQuantityControl(material)];
+  if (hasLoan(material)) quantityLine.push(createLoanBadge(material));
+
   const meta = document.createElement("div");
   meta.className = "material-meta";
   meta.append(
-    element("span", "quantity-line", ["Cantidad: ", createQuantityControl(material)]),
+    element("span", "quantity-line", quantityLine),
     element("span", "", `Estantería: ${formatShelf(material.estanteria)}`)
   );
   if (material.seccion) meta.append(element("span", "", `Sección: ${material.seccion}`));
@@ -512,7 +550,10 @@ function createMaterialCard(material) {
     createActionButton("Pedido", material.pedido_hecho, "order", () => togglePedidoState(material.id, !material.pedido_hecho))
   );
 
-  actions.append(createActionButton("Revisar", material.estado_stock === "amarillo", "review", () => markAsReview(material.id)));
+  actions.append(
+    createActionButton("Revisar", material.estado_stock === "amarillo", "review", () => markAsReview(material.id)),
+    createActionButton("Prestar", hasLoan(material), "loan", () => lendMaterial(material.id))
+  );
   card.append(main, actions);
 
   return card;
@@ -526,6 +567,10 @@ function createActionButton(text, isActive, tone, onClick) {
   button.setAttribute("aria-pressed", String(isActive));
   button.addEventListener("click", onClick);
   return button;
+}
+
+function createLoanBadge(material) {
+  return element("span", "loan-inline", `A devolver: ${formatQuantity(material.prestado_cantidad)} ${formatLoanUnit(material.unidad)} - ${material.prestado_fijo ? "Fijo" : "Temporal"}`);
 }
 
 function createQuantityControl(material) {
@@ -566,7 +611,7 @@ function createQuantityEditor(material, value) {
   input.dataset.quantityId = material.id;
   input.value = value;
 
-  const unit = element("span", "quantity-unit", material.unidad || "uds");
+  const unit = element("span", "quantity-unit", formatTotalUnit(material.unidad));
 
   input.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
@@ -751,6 +796,43 @@ async function markAsReview(id) {
   await persistAndRender();
 }
 
+async function lendMaterial(id) {
+  const material = state.materials.find((item) => item.id === id);
+  if (!material) return;
+
+  const current = hasLoan(material) ? formatQuantity(material.prestado_cantidad) : "";
+  const value = prompt(`Cantidad prestada de ${material.nombre || material.codigo || "material"}:`, current);
+  if (value === null) return;
+
+  const quantity = normalizeQuantity(value);
+  if (quantity === null || quantity <= 0) {
+    alert("Indica una cantidad mayor que 0.");
+    return;
+  }
+
+  const fixed = confirm("¿Este préstamo es fijo?\n\nAceptar = fijo\nCancelar = temporal");
+  material.prestado_cantidad = quantity;
+  material.prestado_fijo = fixed;
+  material.prestado_fecha = new Date().toISOString().slice(0, 10);
+  material.ultima_actualizacion = material.prestado_fecha;
+  await persistAndRender();
+}
+
+async function clearLoan(id) {
+  const material = state.materials.find((item) => item.id === id);
+  if (!material) return;
+
+  material.prestado_cantidad = 0;
+  material.prestado_fijo = false;
+  material.prestado_fecha = "";
+  material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
+  await persistAndRender();
+}
+
+function hasLoan(material) {
+  return Number(material?.prestado_cantidad || 0) > 0;
+}
+
 function toggleGroupByType() {
   state.groupByType = !state.groupByType;
   renderMaterials();
@@ -816,7 +898,7 @@ function buildSummaryText(items) {
 
 function formatSummaryLine(item) {
   const orderState = item.pedido_hecho ? "Material pedido" : "Sin pedir";
-  const quantity = item.cantidad_comprobada ? `${formatQuantity(item.cantidad)} ${item.unidad || ""}`.trim() : "Stock correcto";
+  const quantity = item.cantidad_comprobada ? `${formatQuantity(item.cantidad)} ${formatTotalUnit(item.unidad)}`.trim() : "Stock correcto";
   return `- ${item.codigo || "Sin código"} | ${item.nombre || "Sin nombre"} | ${formatShelf(item.estanteria)} | ${quantity} | ${orderState}`;
 }
 
@@ -841,7 +923,7 @@ async function copySummary() {
 
 function exportCsv() {
   const rows = getSummaryItems();
-  const header = ["codigo", "nombre", "tipo_material", "estanteria", "seccion", "cantidad", "cantidad_comprobada", "unidad", "estado_stock", "pedido_hecho", "ubicacion", "observaciones", "ultima_actualizacion"];
+  const header = ["codigo", "nombre", "tipo_material", "estanteria", "seccion", "cantidad", "cantidad_comprobada", "unidad", "estado_stock", "pedido_hecho", "prestado_cantidad", "prestado_fijo", "prestado_fecha", "ubicacion", "observaciones", "ultima_actualizacion"];
   const csv = [
     header.join(","),
     ...rows.map((item) => header.map((field) => csvCell(item[field])).join(","))
@@ -898,6 +980,9 @@ function toRemoteRow(material) {
     ubicacion: normalized.ubicacion,
     estado_stock: normalized.estado_stock,
     pedido_hecho: normalized.pedido_hecho,
+    prestado_cantidad: normalized.prestado_cantidad,
+    prestado_fijo: normalized.prestado_fijo,
+    prestado_fecha: normalized.prestado_fecha,
     observaciones: normalized.observaciones,
     ultima_actualizacion: normalized.ultima_actualizacion
   };
@@ -935,6 +1020,9 @@ function normalizeMaterial(raw) {
     ubicacion: cleanValue(material.ubicacion),
     estado_stock: ["pendiente", "verde", "amarillo", "rojo"].includes(estado) ? estado : "verde",
     pedido_hecho: checkedStock?.pedido_hecho ?? Boolean(material.pedido_hecho),
+    prestado_cantidad: Math.max(0, normalizeQuantity(material.prestado_cantidad) || 0),
+    prestado_fijo: Boolean(material.prestado_fijo),
+    prestado_fecha: cleanValue(material.prestado_fecha),
     observaciones: cleanValue(checkedStock?.observaciones ?? material.observaciones),
     ultima_actualizacion: cleanValue(material.ultima_actualizacion)
   };
@@ -1030,6 +1118,15 @@ function formatShelf(value) {
 
 function formatQuantity(value) {
   return Number(value).toLocaleString("es-ES", { maximumFractionDigits: 2 });
+}
+
+function formatTotalUnit(unit) {
+  const label = cleanValue(unit) || "uds";
+  return `${label} totales`;
+}
+
+function formatLoanUnit(unit) {
+  return cleanValue(unit) || "uds";
 }
 
 function createId() {

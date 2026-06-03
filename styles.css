@@ -174,6 +174,7 @@ h2 {
 
 .control-panel,
 .summary-panel,
+.loan-panel,
 .type-counts-panel {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -657,6 +658,12 @@ textarea {
   color: #7c4a03;
 }
 
+.state-button.loan.active {
+  background: #ede9fe;
+  border-color: #ddd6fe;
+  color: #5b21b6;
+}
+
 .state-button.critical.active {
   background: var(--red-soft);
   border-color: #fecaca;
@@ -674,6 +681,43 @@ textarea {
   color: var(--muted);
   padding: 24px;
   text-align: center;
+}
+
+.loan-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.loan-card {
+  align-items: center;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 10px;
+}
+
+.loan-main {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.loan-detail,
+.loan-inline {
+  color: #5b21b6;
+  font-weight: 800;
+}
+
+.loan-inline {
+  background: #ede9fe;
+  border-radius: 8px;
+  padding: 4px 8px;
 }
 
 .weekly-summary {
@@ -810,6 +854,7 @@ textarea {
 
   .control-panel,
   .summary-panel,
+  .loan-panel,
   .type-counts-panel {
     padding: 12px;
   }
@@ -924,6 +969,10 @@ textarea {
 
   .material-actions {
     margin-top: 4px;
+  }
+
+  .loan-card {
+    grid-template-columns: 1fr;
   }
 
   .material-dialog {

@@ -11,6 +11,9 @@ create table if not exists public.materiales (
   ubicacion text,
   estado_stock text not null default 'pendiente',
   pedido_hecho boolean not null default false,
+  prestado_cantidad numeric not null default 0,
+  prestado_fijo boolean not null default false,
+  prestado_fecha date,
   observaciones text,
   ultima_actualizacion date
 );
@@ -24,6 +27,15 @@ alter table public.materiales
 
 alter table public.materiales
   add column if not exists seccion text;
+
+alter table public.materiales
+  add column if not exists prestado_cantidad numeric not null default 0;
+
+alter table public.materiales
+  add column if not exists prestado_fijo boolean not null default false;
+
+alter table public.materiales
+  add column if not exists prestado_fecha date;
 
 alter table public.materiales enable row level security;
 

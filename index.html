@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestor de material de almacén</title>
-    <link rel="stylesheet" href="styles.css?v=20260602-13">
+    <link rel="stylesheet" href="styles.css?v=20260603-1">
   </head>
   <body>
     <div id="constructionNotice" class="construction-notice" role="status">
@@ -83,6 +83,14 @@
           </div>
           <p id="copyNotice" class="copy-notice" role="status" hidden>Resumen copiado.</p>
         </aside>
+      </section>
+
+      <section class="loan-panel" aria-label="Material prestado">
+        <div class="section-title-row">
+          <h2>Material prestado</h2>
+        </div>
+        <div id="loanList" class="loan-list"></div>
+        <p id="loanEmptyState" class="empty-state">No hay material prestado.</p>
       </section>
 
       <section class="type-counts-panel" aria-label="Contador por tipo de material">
@@ -169,7 +177,7 @@
       </form>
     </dialog>
 
-    <script src="supabase-config.js?v=20260602-13"></script>
-    <script src="script.js?v=20260602-13"></script>
+    <script src="supabase-config.js?v=20260603-1"></script>
+    <script src="script.js?v=20260603-1"></script>
   </body>
 </html>
