@@ -982,9 +982,9 @@ function toRemoteRow(material) {
     pedido_hecho: normalized.pedido_hecho,
     prestado_cantidad: normalized.prestado_cantidad,
     prestado_fijo: normalized.prestado_fijo,
-    prestado_fecha: normalized.prestado_fecha,
+    prestado_fecha: normalized.prestado_fecha || null,
     observaciones: normalized.observaciones,
-    ultima_actualizacion: normalized.ultima_actualizacion
+    ultima_actualizacion: normalized.ultima_actualizacion || null
   };
 }
 
