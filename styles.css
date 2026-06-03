@@ -664,6 +664,12 @@ textarea {
   color: #5b21b6;
 }
 
+.state-button.return.active {
+  background: var(--green-soft);
+  border-color: #86efac;
+  color: var(--green);
+}
+
 .state-button.critical.active {
   background: var(--red-soft);
   border-color: #fecaca;
@@ -895,7 +901,7 @@ textarea {
   .mobile-jump-button {
     display: inline-flex;
     justify-content: center;
-    width: 100%;
+    width: auto;
   }
 
   .summary-panel .mobile-jump-button {

@@ -70,6 +70,7 @@ const els = {
   loanEmptyState: document.querySelector("#loanEmptyState"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
+  showLoansButton: document.querySelector("#showLoansButton"),
   showSummaryButton: document.querySelector("#showSummaryButton"),
   showListButton: document.querySelector("#showListButton"),
   refreshPageButton: document.querySelector("#refreshPageButton"),
@@ -353,6 +354,7 @@ function bindEvents() {
   els.clearFiltersButton.addEventListener("click", clearFilters);
   els.copySummaryButton.addEventListener("click", copySummary);
   els.exportCsvButton.addEventListener("click", exportCsv);
+  els.showLoansButton.addEventListener("click", () => scrollToSection(document.querySelector(".loan-panel")));
   els.showSummaryButton.addEventListener("click", () => scrollToSectionOnMobile(els.summaryPanel));
   els.showListButton.addEventListener("click", () => scrollToSectionOnMobile(els.materialsColumn));
   els.refreshPageButton.addEventListener("click", () => window.location.reload());
@@ -550,10 +552,15 @@ function createMaterialCard(material) {
     createActionButton("Pedido", material.pedido_hecho, "order", () => togglePedidoState(material.id, !material.pedido_hecho))
   );
 
-  actions.append(
-    createActionButton("Revisar", material.estado_stock === "amarillo", "review", () => markAsReview(material.id)),
-    createActionButton("Prestar", hasLoan(material), "loan", () => lendMaterial(material.id))
-  );
+  actions.append(createActionButton("Revisar", material.estado_stock === "amarillo", "review", () => markAsReview(material.id)));
+  if (hasLoan(material)) {
+    actions.append(
+      createActionButton("Editar préstamo", true, "loan", () => lendMaterial(material.id)),
+      createActionButton("Devuelto", true, "return", () => clearLoan(material.id))
+    );
+  } else {
+    actions.append(createActionButton("Prestar", false, "loan", () => lendMaterial(material.id)));
+  }
   card.append(main, actions);
 
   return card;
@@ -858,6 +865,12 @@ function scrollToMaterialsOnMobile() {
 
 function scrollToSectionOnMobile(target) {
   if (!target || !window.matchMedia("(max-width: 700px)").matches) return;
+
+  scrollToSection(target);
+}
+
+function scrollToSection(target) {
+  if (!target) return;
 
   window.requestAnimationFrame(() => {
     target.scrollIntoView({ behavior: "smooth", block: "start" });
