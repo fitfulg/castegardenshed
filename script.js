@@ -362,9 +362,10 @@ function bindEvents() {
   els.copySummaryButton.addEventListener("click", copySummary);
   els.exportCsvButton.addEventListener("click", exportCsv);
   els.showLoansButton.addEventListener("click", () => setActiveView(state.activeView === "loans" ? "list" : "loans"));
-  els.showSummaryButton.addEventListener("click", () => scrollToSectionOnMobile(els.summaryPanel));
-  els.showListButton.addEventListener("click", () => scrollToSectionOnMobile(els.materialsColumn));
+  els.showSummaryButton.addEventListener("click", () => setActiveView(isMobileView() ? "summary" : "list"));
+  els.showListButton.addEventListener("click", () => setActiveView("list"));
   els.showMainListButton.addEventListener("click", () => setActiveView("list"));
+  window.addEventListener("resize", renderActiveView);
   els.refreshPageButton.addEventListener("click", () => window.location.reload());
   els.openNewMaterialButton.addEventListener("click", () => openMaterialDialog());
   els.toggleGroupButton.addEventListener("click", toggleGroupByType);
@@ -386,20 +387,29 @@ function render() {
 }
 
 function renderActiveView() {
+  const isMobile = isMobileView();
   const isLoansView = state.activeView === "loans";
+  const isSummaryView = isMobile && state.activeView === "summary";
 
-  els.controlPanel.hidden = isLoansView;
+  els.controlPanel.hidden = isLoansView || isSummaryView;
   els.contentGrid.hidden = isLoansView;
-  els.typeCountsPanel.hidden = isLoansView;
+  els.materialsColumn.hidden = isSummaryView;
+  els.summaryPanel.hidden = isMobile && !isSummaryView;
+  els.typeCountsPanel.hidden = isLoansView || isSummaryView;
   els.loanPanel.hidden = !isLoansView;
   els.showLoansButton.textContent = isLoansView ? "Ver listado" : "Ver prestados";
   els.showLoansButton.setAttribute("aria-pressed", String(isLoansView));
+  els.showSummaryButton.setAttribute("aria-pressed", String(isSummaryView));
 }
 
 function setActiveView(view) {
-  state.activeView = view === "loans" ? "loans" : "list";
+  state.activeView = ["loans", "summary"].includes(view) ? view : "list";
   renderActiveView();
   scrollToSection(document.querySelector(".app-header"));
+}
+
+function isMobileView() {
+  return window.matchMedia("(max-width: 560px)").matches;
 }
 
 function renderTypeOptions() {
