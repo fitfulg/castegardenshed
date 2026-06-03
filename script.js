@@ -31,7 +31,8 @@ const state = {
   typeFilter: "todos",
   shelfFilter: "todos",
   summaryTypeFilter: "todos",
-  groupByType: false
+  groupByType: false,
+  activeView: "list"
 };
 
 const remote = {
@@ -61,6 +62,10 @@ const els = {
   syncError: document.querySelector("#syncError"),
   materialsColumn: document.querySelector(".materials-column"),
   summaryPanel: document.querySelector(".summary-panel"),
+  controlPanel: document.querySelector(".control-panel"),
+  contentGrid: document.querySelector(".content-grid"),
+  loanPanel: document.querySelector(".loan-panel"),
+  typeCountsPanel: document.querySelector(".type-counts-panel"),
   loanList: document.querySelector("#loanList"),
   loanEmptyState: document.querySelector("#loanEmptyState"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
@@ -68,6 +73,7 @@ const els = {
   showLoansButton: document.querySelector("#showLoansButton"),
   showSummaryButton: document.querySelector("#showSummaryButton"),
   showListButton: document.querySelector("#showListButton"),
+  showMainListButton: document.querySelector("#showMainListButton"),
   refreshPageButton: document.querySelector("#refreshPageButton"),
   openNewMaterialButton: document.querySelector("#openNewMaterialButton"),
   materialDialog: document.querySelector("#materialDialog"),
@@ -355,9 +361,10 @@ function bindEvents() {
   els.clearFiltersButton.addEventListener("click", clearFilters);
   els.copySummaryButton.addEventListener("click", copySummary);
   els.exportCsvButton.addEventListener("click", exportCsv);
-  els.showLoansButton.addEventListener("click", () => scrollToSection(document.querySelector(".loan-panel")));
+  els.showLoansButton.addEventListener("click", () => setActiveView(state.activeView === "loans" ? "list" : "loans"));
   els.showSummaryButton.addEventListener("click", () => scrollToSectionOnMobile(els.summaryPanel));
   els.showListButton.addEventListener("click", () => scrollToSectionOnMobile(els.materialsColumn));
+  els.showMainListButton.addEventListener("click", () => setActiveView("list"));
   els.refreshPageButton.addEventListener("click", () => window.location.reload());
   els.openNewMaterialButton.addEventListener("click", () => openMaterialDialog());
   els.toggleGroupButton.addEventListener("click", toggleGroupByType);
@@ -368,6 +375,7 @@ function bindEvents() {
 }
 
 function render() {
+  renderActiveView();
   renderTypeOptions();
   renderShelfOptions();
   renderStats();
@@ -375,6 +383,23 @@ function render() {
   renderMaterials();
   renderLoans();
   renderSummary();
+}
+
+function renderActiveView() {
+  const isLoansView = state.activeView === "loans";
+
+  els.controlPanel.hidden = isLoansView;
+  els.contentGrid.hidden = isLoansView;
+  els.typeCountsPanel.hidden = isLoansView;
+  els.loanPanel.hidden = !isLoansView;
+  els.showLoansButton.textContent = isLoansView ? "Ver listado" : "Ver prestados";
+  els.showLoansButton.setAttribute("aria-pressed", String(isLoansView));
+}
+
+function setActiveView(view) {
+  state.activeView = view === "loans" ? "loans" : "list";
+  renderActiveView();
+  scrollToSection(document.querySelector(".app-header"));
 }
 
 function renderTypeOptions() {
