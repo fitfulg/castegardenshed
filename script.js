@@ -2,6 +2,7 @@ const STORAGE_KEY = "almacen_materiales_v5";
 const LEGACY_STORAGE_KEYS = ["almacen_materiales_v4", "almacen_materiales_v3"];
 const REMOTE_TABLE = "materiales";
 const REMOTE_OPTIONAL_FIELDS = ["seccion", "cantidad_comprobada"];
+const APP_VERSION = "1.0.0";
 const MANUALLY_CHECKED_STOCK = {
   "64017": { cantidad: 0, estado_stock: "rojo", pedido_hecho: true },
   "64031": { cantidad: 1, estado_stock: "rojo", pedido_hecho: true, observaciones: "1 rollo + pico" },
@@ -62,6 +63,7 @@ const els = {
   exportCsvButton: document.querySelector("#exportCsvButton"),
   copyNotice: document.querySelector("#copyNotice"),
   constructionNotice: document.querySelector("#constructionNotice"),
+  appVersion: document.querySelector("#appVersion"),
   syncStatus: document.querySelector("#syncStatus"),
   syncError: document.querySelector("#syncError"),
   materialsColumn: document.querySelector(".materials-column"),
@@ -102,12 +104,18 @@ const els = {
 init();
 
 async function init() {
+  renderAppVersion();
   initRemoteDatabase();
   state.materials = await loadMaterials();
   bindEvents();
   startRemoteRefresh();
   showConstructionNotice();
   render();
+}
+
+function renderAppVersion() {
+  document.documentElement.dataset.appVersion = APP_VERSION;
+  if (els.appVersion) els.appVersion.textContent = `v${APP_VERSION}`;
 }
 
 function initRemoteDatabase() {
