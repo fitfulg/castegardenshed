@@ -11,6 +11,7 @@ import {
   cleanValue,
   compareLoansByDate,
   compareMaterials,
+  createId,
   formatLoanUnit,
   formatQuantity,
   formatShelf,
@@ -781,7 +782,7 @@ async function saveMaterialFromForm(event) {
     state.materials.push(material);
   }
 
-  await persistAndRender();
+  await persistAndRender(material);
   els.materialDialog.close();
 }
 
@@ -805,7 +806,7 @@ async function togglePedidoState(id, isOrdered) {
   if (!material) return;
   material.pedido_hecho = isOrdered;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender();
+  await persistAndRender(material);
 }
 
 async function toggleStockState(id, hasStock) {
@@ -817,7 +818,7 @@ async function toggleStockState(id, hasStock) {
   material.cantidad_comprobada = !hasStock;
   material.pedido_hecho = false;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender();
+  await persistAndRender(material);
 }
 
 async function saveInlineQuantity(id, value) {
@@ -830,7 +831,7 @@ async function saveInlineQuantity(id, value) {
     material.cantidad_comprobada = false;
     material.estado_stock = "verde";
     material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-    await persistAndRender();
+    await persistAndRender(material);
     return;
   }
 
@@ -842,7 +843,7 @@ async function saveInlineQuantity(id, value) {
   material.cantidad_comprobada = true;
   material.estado_stock = quantity === 0 ? "rojo" : material.estado_stock === "rojo" ? "verde" : material.estado_stock;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender();
+  await persistAndRender(material);
 }
 
 async function markAsReview(id) {
@@ -851,7 +852,7 @@ async function markAsReview(id) {
 
   material.estado_stock = "amarillo";
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender();
+  await persistAndRender(material);
 }
 
 async function lendMaterial(id) {
@@ -873,7 +874,7 @@ async function lendMaterial(id) {
   material.prestado_fijo = fixed;
   material.prestado_fecha = new Date().toISOString().slice(0, 10);
   material.ultima_actualizacion = material.prestado_fecha;
-  await persistAndRender();
+  await persistAndRender(material);
 }
 
 async function clearLoan(id) {
@@ -884,7 +885,7 @@ async function clearLoan(id) {
   material.prestado_fijo = false;
   material.prestado_fecha = "";
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender();
+  await persistAndRender(material);
 }
 
 function hasLoan(material) {
@@ -1007,11 +1008,12 @@ function csvCell(value) {
   return `"${text.replaceAll('"', '""')}"`;
 }
 
-async function persistAndRender() {
+async function persistAndRender(remotePayload = state.materials) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.materials));
   remote.hasPendingLocalChanges = remote.enabled;
   render();
-  await saveRemoteMaterials(state.materials);
+  const materialsToSync = Array.isArray(remotePayload) ? remotePayload : [remotePayload];
+  await saveRemoteMaterials(materialsToSync);
 }
 
 function setSyncStatus(text, statusClass, title = "") {

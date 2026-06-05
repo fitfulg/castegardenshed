@@ -1,18 +1,10 @@
-export const APP_VERSION = "1.0.2";
+export const APP_VERSION = "1.0.3";
 
 export const STORAGE_KEY = "almacen_materiales_v5";
 export const LEGACY_STORAGE_KEYS = ["almacen_materiales_v4", "almacen_materiales_v3"];
 
 export const REMOTE_TABLE = "materiales";
 export const REMOTE_OPTIONAL_FIELDS = ["seccion", "cantidad_comprobada"];
-
-export const MANUALLY_CHECKED_STOCK = {
-  "64017": { cantidad: 0, estado_stock: "rojo", pedido_hecho: true },
-  "64031": { cantidad: 1, estado_stock: "rojo", pedido_hecho: true, observaciones: "1 rollo + pico" },
-  "64032": { cantidad: 1, estado_stock: "rojo", pedido_hecho: true, observaciones: "1 rollo + pico" },
-  "80330": { cantidad: 3, estado_stock: "amarillo" },
-  "80313": { cantidad: 0, estado_stock: "amarillo" }
-};
 
 export const SHELF_LABELS = {
   A: "A - EPI",

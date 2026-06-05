@@ -1,5 +1,4 @@
 import {
-  MANUALLY_CHECKED_STOCK,
   REMOTE_OPTIONAL_FIELDS,
   SHELF_LABELS,
   SHELF_SECTIONS
@@ -12,9 +11,7 @@ export function normalizeMaterial(raw) {
   const estanteria = normalizeShelf(material.estanteria);
   const seccion = cleanValue(material.seccion) || inferSection({ ...material, estanteria });
   const hasExplicitCheckedQuantity = material.cantidad_comprobada === true;
-  const checkedStock = hasExplicitCheckedQuantity ? null : MANUALLY_CHECKED_STOCK[codigo];
-  const cantidadComprobada = hasExplicitCheckedQuantity || Boolean(checkedStock);
-  const estado = checkedStock ? checkedStock.estado_stock : normalizeText(material.estado_stock || "verde");
+  const estado = normalizeText(material.estado_stock || "verde");
 
   return {
     id: String(material.id || material.codigo || createId()),
@@ -23,16 +20,16 @@ export function normalizeMaterial(raw) {
     tipo_material: cleanValue(material.tipo_material) || "Sin tipo",
     estanteria,
     seccion,
-    cantidad: checkedStock ? checkedStock.cantidad : cantidad,
-    cantidad_comprobada: cantidadComprobada,
+    cantidad,
+    cantidad_comprobada: hasExplicitCheckedQuantity,
     unidad: cleanValue(material.unidad),
     ubicacion: cleanValue(material.ubicacion),
     estado_stock: ["pendiente", "verde", "amarillo", "rojo"].includes(estado) ? estado : "verde",
-    pedido_hecho: checkedStock?.pedido_hecho ?? Boolean(material.pedido_hecho),
+    pedido_hecho: Boolean(material.pedido_hecho),
     prestado_cantidad: Math.max(0, normalizeQuantity(material.prestado_cantidad) || 0),
     prestado_fijo: Boolean(material.prestado_fijo),
     prestado_fecha: cleanValue(material.prestado_fecha),
-    observaciones: cleanValue(checkedStock?.observaciones ?? material.observaciones),
+    observaciones: cleanValue(material.observaciones),
     ultima_actualizacion: cleanValue(material.ultima_actualizacion)
   };
 }
@@ -175,6 +172,6 @@ export function toRemoteCompatibleRow(material) {
   return row;
 }
 
-function createId() {
+export function createId() {
   return `mat-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
