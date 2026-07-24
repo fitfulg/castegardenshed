@@ -210,6 +210,28 @@ h2 {
   color: var(--accent-dark);
 }
 
+.log-button {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  margin-left: 10px;
+  min-height: 32px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.log-button:hover,
+.log-button:focus-visible,
+.log-button[aria-pressed="true"] {
+  background: var(--surface-soft);
+  color: var(--accent-dark);
+}
+
 .sync-status.synced {
   background: var(--green-soft);
   border-color: #bbf7d0;
@@ -814,6 +836,12 @@ textarea {
   min-width: 0;
 }
 
+.change-log-prefix {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .change-log-user {
   color: #4338ca;
   font-weight: 900;
@@ -1138,6 +1166,12 @@ textarea {
   .header-actions .secondary-button,
   .header-actions .primary-button {
     grid-column: 1 / -1;
+  }
+
+  .header-actions .log-button {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-left: 0;
   }
 
   .user-tag {

@@ -711,7 +711,7 @@ function renderActiveView() {
   els.changeLogPanel.hidden = !isLogView;
   els.showLoansButton.textContent = isLoansView ? "Ver listado" : "Ver prestados";
   els.showLoansButton.setAttribute("aria-pressed", String(isLoansView));
-  els.showLogButton.textContent = isLogView ? "Ver listado" : "Ver registro";
+  els.showLogButton.textContent = isLogView ? "Listado" : "Histórico";
   els.showLogButton.setAttribute("aria-pressed", String(isLogView));
   els.showSummaryButton.setAttribute("aria-pressed", String(isSummaryView));
 }
@@ -900,6 +900,7 @@ function createChangeLogCard(entry) {
   const materialText = [entry.nombre, entry.codigo ? `C.${entry.codigo}` : ""].filter(Boolean).join(" - ") || "material sin nombre";
   const title = element("div", "change-log-title");
   title.append(
+    element("span", "change-log-prefix", "El usuario"),
     element("strong", "change-log-user", entry.usuario),
     element("span", "change-log-action", formatChangeAction(entry.accion)),
     element("strong", "change-log-material", materialText)
