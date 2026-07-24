@@ -30,7 +30,9 @@ export function normalizeMaterial(raw) {
     prestado_fijo: Boolean(material.prestado_fijo),
     prestado_fecha: cleanValue(material.prestado_fecha),
     observaciones: cleanValue(material.observaciones),
-    ultima_actualizacion: cleanValue(material.ultima_actualizacion)
+    ultima_actualizacion: cleanValue(material.ultima_actualizacion),
+    modificado_por: cleanValue(material.modificado_por),
+    modificado_en: cleanValue(material.modificado_en)
   };
 }
 
@@ -160,7 +162,9 @@ export function toRemoteRow(material) {
     prestado_fijo: normalized.prestado_fijo,
     prestado_fecha: normalized.prestado_fecha || null,
     observaciones: normalized.observaciones,
-    ultima_actualizacion: normalized.ultima_actualizacion || null
+    ultima_actualizacion: normalized.ultima_actualizacion || null,
+    modificado_por: normalized.modificado_por,
+    modificado_en: normalized.modificado_en || null
   };
 }
 

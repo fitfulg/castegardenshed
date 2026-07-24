@@ -15,7 +15,9 @@ create table if not exists public.materiales (
   prestado_fijo boolean not null default false,
   prestado_fecha date,
   observaciones text,
-  ultima_actualizacion date
+  ultima_actualizacion date,
+  modificado_por text,
+  modificado_en timestamptz
 );
 
 alter table public.materiales
@@ -37,6 +39,12 @@ alter table public.materiales
 alter table public.materiales
   add column if not exists prestado_fecha date;
 
+alter table public.materiales
+  add column if not exists modificado_por text;
+
+alter table public.materiales
+  add column if not exists modificado_en timestamptz;
+
 alter table public.materiales enable row level security;
 
 drop policy if exists "Lectura publica de materiales" on public.materiales;
@@ -56,3 +64,36 @@ using (true)
 with check (true);
 
 grant select, insert, update, delete on public.materiales to anon;
+
+create table if not exists public.materiales_cambios (
+  id text primary key,
+  fecha timestamptz not null default now(),
+  usuario text not null default 'Sin identificar',
+  accion text not null,
+  material_id text,
+  codigo text,
+  nombre text,
+  estado_stock text,
+  cantidad numeric,
+  pedido_hecho boolean,
+  observaciones text
+);
+
+alter table public.materiales_cambios enable row level security;
+
+drop policy if exists "Lectura publica de cambios de materiales" on public.materiales_cambios;
+drop policy if exists "Insercion publica de cambios de materiales" on public.materiales_cambios;
+
+create policy "Lectura publica de cambios de materiales"
+on public.materiales_cambios
+for select
+to anon
+using (true);
+
+create policy "Insercion publica de cambios de materiales"
+on public.materiales_cambios
+for insert
+to anon
+with check (true);
+
+grant select, insert on public.materiales_cambios to anon;

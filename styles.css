@@ -181,6 +181,17 @@ h2 {
   white-space: nowrap;
 }
 
+.user-tag {
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  border-radius: 999px;
+  color: #3730a3;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 8px 11px;
+  white-space: nowrap;
+}
+
 .sync-status.synced {
   background: var(--green-soft);
   border-color: #bbf7d0;
@@ -883,6 +894,49 @@ textarea {
 
 #materialForm {
   padding: 18px;
+}
+
+.user-dialog {
+  max-width: 520px;
+}
+
+.user-dialog-content {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.user-dialog-text {
+  color: var(--muted);
+  margin: -6px 0 0;
+}
+
+.plant-user-options {
+  display: grid;
+  gap: 10px;
+}
+
+.plant-option-button {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  color: var(--green);
+  cursor: pointer;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 800;
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.plant-option-button:hover,
+.plant-option-button:focus-visible {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+.reroll-user-button {
+  justify-self: start;
 }
 
 .dialog-header {

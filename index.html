@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestor de material de almacén</title>
-    <link rel="stylesheet" href="styles.css?v=1.0.6">
+    <link rel="stylesheet" href="styles.css?v=1.0.8">
   </head>
   <body>
     <div id="constructionNotice" class="construction-notice" role="status">
@@ -16,10 +16,12 @@
 
     <header class="app-header">
       <div>
-        <p class="eyebrow">Almacén <span id="appVersion" class="app-version">v1.0.6</span></p>
+        <p class="eyebrow">Almacén <span id="appVersion" class="app-version">v1.0.8</span></p>
         <h1><button class="title-refresh-button" id="refreshPageButton" type="button">Material de almacén</button></h1>
       </div>
       <div class="header-actions">
+        <span id="currentUserTag" class="user-tag">Usuario: Sin identificar</span>
+        <button class="secondary-button compact-button" id="changeUserButton" type="button">Cambiar usuario</button>
         <span id="syncStatus" class="sync-status">Modo local</span>
         <span id="syncError" class="sync-error" hidden></span>
         <button class="secondary-button" id="showLoansButton" type="button">Ver prestados</button>
@@ -105,6 +107,21 @@
       </section>
     </main>
 
+    <dialog id="userDialog" class="material-dialog user-dialog">
+      <div class="user-dialog-content">
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow">Registro de cambios</p>
+            <h2>Escoge una planta</h2>
+          </div>
+          <button class="icon-button" id="closeUserDialogButton" type="button" aria-label="Cerrar">×</button>
+        </div>
+        <p class="user-dialog-text">Este nombre quedará marcado en los cambios que hagas desde este dispositivo.</p>
+        <div id="plantUserOptions" class="plant-user-options" aria-label="Opciones de usuario"></div>
+        <button class="secondary-button reroll-user-button" id="rerollUserOptionsButton" type="button">Nuevas opciones</button>
+      </div>
+    </dialog>
+
     <dialog id="materialDialog" class="material-dialog">
       <form id="materialForm" method="dialog">
         <div class="dialog-header">
@@ -184,7 +201,7 @@
       </form>
     </dialog>
 
-    <script src="supabase-config.js?v=1.0.6"></script>
-    <script type="module" src="script.js?v=1.0.6"></script>
+    <script src="supabase-config.js?v=1.0.8"></script>
+    <script type="module" src="script.js?v=1.0.8"></script>
   </body>
 </html>

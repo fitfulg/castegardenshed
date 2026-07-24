@@ -1,11 +1,13 @@
 import {
+  AUDIT_TABLE,
   APP_VERSION,
   LAST_UPDATE_KEY,
   LEGACY_STORAGE_KEYS,
   REMOTE_TABLE,
   SHELF_LABELS,
   SHELF_SECTIONS,
-  STORAGE_KEY
+  STORAGE_KEY,
+  USER_KEY
 } from "./js/app-config.js";
 import {
   asArray,
@@ -25,6 +27,7 @@ import {
   toRemoteCompatibleRow,
   toRemoteRow
 } from "./js/material-utils.js";
+import { pickPlantUserOptions } from "./js/plant-users.js";
 
 const state = {
   materials: [],
@@ -34,7 +37,8 @@ const state = {
   shelfFilter: "todos",
   summaryTypeFilter: "todos",
   groupByType: false,
-  activeView: "list"
+  activeView: "list",
+  plantUserOptions: []
 };
 
 const remote = {
@@ -61,6 +65,8 @@ const els = {
   constructionNotice: document.querySelector("#constructionNotice"),
   lastUpdateNotice: document.querySelector("#lastUpdateNotice"),
   appVersion: document.querySelector("#appVersion"),
+  currentUserTag: document.querySelector("#currentUserTag"),
+  changeUserButton: document.querySelector("#changeUserButton"),
   syncStatus: document.querySelector("#syncStatus"),
   syncError: document.querySelector("#syncError"),
   materialsColumn: document.querySelector(".materials-column"),
@@ -80,6 +86,10 @@ const els = {
   refreshPageButton: document.querySelector("#refreshPageButton"),
   openNewMaterialButton: document.querySelector("#openNewMaterialButton"),
   materialDialog: document.querySelector("#materialDialog"),
+  userDialog: document.querySelector("#userDialog"),
+  plantUserOptions: document.querySelector("#plantUserOptions"),
+  rerollUserOptionsButton: document.querySelector("#rerollUserOptionsButton"),
+  closeUserDialogButton: document.querySelector("#closeUserDialogButton"),
   materialForm: document.querySelector("#materialForm"),
   dialogTitle: document.querySelector("#dialogTitle"),
   closeDialogButton: document.querySelector("#closeDialogButton"),
@@ -111,6 +121,8 @@ async function init() {
   initRemoteDatabase();
   state.materials = await loadMaterials();
   bindEvents();
+  ensureCurrentUser();
+  renderCurrentUser();
   startRemoteRefresh();
   showConstructionNotice();
   render();
@@ -119,6 +131,52 @@ async function init() {
 function renderAppVersion() {
   document.documentElement.dataset.appVersion = APP_VERSION;
   if (els.appVersion) els.appVersion.textContent = `v${APP_VERSION}`;
+}
+
+function getCurrentUser() {
+  return cleanValue(localStorage.getItem(USER_KEY)) || "Sin identificar";
+}
+
+function setCurrentUser(value) {
+  const user = cleanValue(value) || "Sin identificar";
+  localStorage.setItem(USER_KEY, user);
+  renderCurrentUser();
+  els.userDialog?.close();
+}
+
+function ensureCurrentUser() {
+  if (cleanValue(localStorage.getItem(USER_KEY))) return;
+  openUserDialog();
+}
+
+function changeCurrentUser() {
+  openUserDialog();
+}
+
+function renderCurrentUser() {
+  if (els.currentUserTag) els.currentUserTag.textContent = `Usuario: ${getCurrentUser()}`;
+}
+
+function openUserDialog() {
+  renderPlantUserOptions();
+  if (els.userDialog?.showModal) {
+    els.userDialog.showModal();
+  }
+}
+
+function renderPlantUserOptions() {
+  if (!els.plantUserOptions) return;
+
+  state.plantUserOptions = pickPlantUserOptions(3);
+  els.plantUserOptions.innerHTML = "";
+  state.plantUserOptions.forEach((name) => {
+    const button = document.createElement("button");
+    button.className = "plant-option-button";
+    button.type = "button";
+    button.textContent = name;
+    button.addEventListener("click", () => setCurrentUser(name));
+    els.plantUserOptions.append(button);
+  });
 }
 
 function markLastUpdate(date = new Date()) {
@@ -377,6 +435,54 @@ async function deleteRemoteMaterial(id) {
   }
 }
 
+function stampMaterialsForChange(materials, date = new Date()) {
+  const changedAt = date.toISOString();
+  asArray(materials).forEach((material) => {
+    material.modificado_por = getCurrentUser();
+    material.modificado_en = changedAt;
+  });
+  return changedAt;
+}
+
+async function recordRemoteChanges(materials, action) {
+  if (!remote.enabled) return false;
+
+  const rows = asArray(materials)
+    .filter(Boolean)
+    .map((material) => {
+      const normalized = normalizeMaterial(material);
+      return {
+        id: `cambio-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        fecha: normalized.modificado_en || new Date().toISOString(),
+        usuario: getCurrentUser(),
+        accion: action,
+        material_id: normalized.id,
+        codigo: normalized.codigo,
+        nombre: normalized.nombre,
+        estado_stock: normalized.estado_stock,
+        cantidad: normalized.cantidad_comprobada ? normalized.cantidad : null,
+        pedido_hecho: normalized.pedido_hecho,
+        observaciones: normalized.observaciones
+      };
+    });
+
+  if (!rows.length) return false;
+
+  try {
+    await remoteRequest(AUDIT_TABLE, {
+      method: "POST",
+      headers: {
+        Prefer: "return=minimal"
+      },
+      body: JSON.stringify(rows)
+    });
+    return true;
+  } catch (error) {
+    console.warn("No se pudo registrar el historial de cambios.", error);
+    return false;
+  }
+}
+
 function loadSavedMaterials(storageKey) {
   const saved = localStorage.getItem(storageKey);
   if (!saved) return [];
@@ -430,6 +536,9 @@ function bindEvents() {
   els.showMainListButton.addEventListener("click", () => setActiveView("list"));
   window.addEventListener("resize", renderActiveView);
   els.refreshPageButton.addEventListener("click", () => window.location.reload());
+  els.changeUserButton?.addEventListener("click", changeCurrentUser);
+  els.rerollUserOptionsButton?.addEventListener("click", renderPlantUserOptions);
+  els.closeUserDialogButton?.addEventListener("click", () => els.userDialog?.close());
   els.openNewMaterialButton.addEventListener("click", () => openMaterialDialog());
   els.toggleGroupButton.addEventListener("click", toggleGroupByType);
   els.closeDialogButton.addEventListener("click", () => els.materialDialog.close());
@@ -655,9 +764,8 @@ function createMaterialCard(material) {
     element("span", "", `Estantería: ${formatShelf(material.estanteria)}`)
   );
   if (material.seccion) meta.append(element("span", "", `Sección: ${material.seccion}`));
-  meta.append(
-    element("span", "", `Actualizado: ${material.ultima_actualizacion || "Sin fecha"}`)
-  );
+  const updatedBy = material.modificado_por ? ` por ${material.modificado_por}` : "";
+  meta.append(element("span", "", `Actualizado: ${material.ultima_actualizacion || "Sin fecha"}${updatedBy}`));
   if (material.observaciones) meta.append(element("span", "material-observations", `Observaciones: ${material.observaciones}`));
 
   main.append(titleRow, meta);
@@ -863,13 +971,14 @@ async function saveMaterialFromForm(event) {
   });
 
   const existingIndex = state.materials.findIndex((item) => item.id === id);
+  const action = existingIndex >= 0 ? "editar" : "crear";
   if (existingIndex >= 0) {
     state.materials[existingIndex] = material;
   } else {
     state.materials.push(material);
   }
 
-  await persistAndRender(material);
+  await persistAndRender(material, action);
   els.materialDialog.close();
 }
 
@@ -880,10 +989,18 @@ async function deleteCurrentMaterial() {
   const name = material?.nombre || "este material";
 
   if (confirm(`Eliminar ${name}?`)) {
+    const deletedMaterial = material
+      ? normalizeMaterial({
+          ...material,
+          modificado_por: getCurrentUser(),
+          modificado_en: new Date().toISOString()
+        })
+      : null;
     state.materials = state.materials.filter((item) => item.id !== id);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.materials));
     markLastUpdate();
-    await deleteRemoteMaterial(id);
+    const deleted = await deleteRemoteMaterial(id);
+    if (deleted && deletedMaterial) await recordRemoteChanges(deletedMaterial, "eliminar");
     render();
     els.materialDialog.close();
   }
@@ -894,7 +1011,7 @@ async function togglePedidoState(id, isOrdered) {
   if (!material) return;
   material.pedido_hecho = isOrdered;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender(material);
+  await persistAndRender(material, isOrdered ? "material pedido" : "sin pedir");
 }
 
 async function toggleStockState(id, hasStock) {
@@ -906,7 +1023,7 @@ async function toggleStockState(id, hasStock) {
   material.cantidad_comprobada = !hasStock;
   material.pedido_hecho = false;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender(material);
+  await persistAndRender(material, hasStock ? "stock correcto" : "faltan");
 }
 
 async function saveInlineQuantity(id, value) {
@@ -919,7 +1036,7 @@ async function saveInlineQuantity(id, value) {
     material.cantidad_comprobada = false;
     material.estado_stock = "verde";
     material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-    await persistAndRender(material);
+    await persistAndRender(material, "cantidad");
     return;
   }
 
@@ -935,7 +1052,7 @@ async function saveInlineQuantity(id, value) {
     material.estado_stock = "verde";
   }
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender(material);
+  await persistAndRender(material, "cantidad");
 }
 
 async function markAsReview(id) {
@@ -944,7 +1061,7 @@ async function markAsReview(id) {
 
   material.estado_stock = "amarillo";
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender(material);
+  await persistAndRender(material, "revisar");
 }
 
 async function markAsNoRestock(id) {
@@ -956,7 +1073,7 @@ async function markAsNoRestock(id) {
   material.cantidad_comprobada = true;
   material.pedido_hecho = false;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender(material);
+  await persistAndRender(material, "obsoleto");
 }
 
 async function lendMaterial(id) {
@@ -978,7 +1095,7 @@ async function lendMaterial(id) {
   material.prestado_fijo = fixed;
   material.prestado_fecha = new Date().toISOString().slice(0, 10);
   material.ultima_actualizacion = material.prestado_fecha;
-  await persistAndRender(material);
+  await persistAndRender(material, "prestar");
 }
 
 async function clearLoan(id) {
@@ -989,7 +1106,7 @@ async function clearLoan(id) {
   material.prestado_fijo = false;
   material.prestado_fecha = "";
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
-  await persistAndRender(material);
+  await persistAndRender(material, "devuelto");
 }
 
 function hasLoan(material) {
@@ -1122,13 +1239,15 @@ function csvCell(value) {
   return `"${text.replaceAll('"', '""')}"`;
 }
 
-async function persistAndRender(remotePayload = state.materials) {
+async function persistAndRender(remotePayload = state.materials, action = "actualizar") {
+  const materialsToSync = Array.isArray(remotePayload) ? remotePayload : [remotePayload];
+  stampMaterialsForChange(materialsToSync);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.materials));
   markLastUpdate();
   remote.hasPendingLocalChanges = remote.enabled;
   render();
-  const materialsToSync = Array.isArray(remotePayload) ? remotePayload : [remotePayload];
-  await saveRemoteMaterials(materialsToSync);
+  const saved = await saveRemoteMaterials(materialsToSync);
+  if (saved) await recordRemoteChanges(materialsToSync, action);
 }
 
 function setSyncStatus(text, statusClass, title = "") {
