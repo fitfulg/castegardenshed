@@ -1,7 +1,8 @@
-export const APP_VERSION = "1.0.3";
+export const APP_VERSION = "1.0.4";
 
 export const STORAGE_KEY = "almacen_materiales_v5";
 export const LEGACY_STORAGE_KEYS = ["almacen_materiales_v4", "almacen_materiales_v3"];
+export const LAST_UPDATE_KEY = "almacen_ultimo_cambio_v1";
 
 export const REMOTE_TABLE = "materiales";
 export const REMOTE_OPTIONAL_FIELDS = ["seccion", "cantidad_comprobada"];

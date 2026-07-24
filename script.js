@@ -1,5 +1,6 @@
 import {
   APP_VERSION,
+  LAST_UPDATE_KEY,
   LEGACY_STORAGE_KEYS,
   REMOTE_TABLE,
   SHELF_LABELS,
@@ -58,6 +59,7 @@ const els = {
   exportCsvButton: document.querySelector("#exportCsvButton"),
   copyNotice: document.querySelector("#copyNotice"),
   constructionNotice: document.querySelector("#constructionNotice"),
+  lastUpdateNotice: document.querySelector("#lastUpdateNotice"),
   appVersion: document.querySelector("#appVersion"),
   syncStatus: document.querySelector("#syncStatus"),
   syncError: document.querySelector("#syncError"),
@@ -118,6 +120,63 @@ function renderAppVersion() {
   if (els.appVersion) els.appVersion.textContent = `v${APP_VERSION}`;
 }
 
+function markLastUpdate(date = new Date()) {
+  localStorage.setItem(LAST_UPDATE_KEY, date.toISOString());
+  renderLastUpdateNotice({ date, hasTime: true });
+}
+
+function getLastUpdateInfo() {
+  const saved = localStorage.getItem(LAST_UPDATE_KEY);
+  if (saved) {
+    const date = new Date(saved);
+    if (!Number.isNaN(date.getTime())) return { date, hasTime: true };
+  }
+
+  const latestDate = state.materials
+    .map((material) => cleanValue(material.ultima_actualizacion))
+    .filter(Boolean)
+    .sort()
+    .at(-1);
+
+  if (!latestDate) return null;
+
+  const date = new Date(`${latestDate}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return null;
+  return { date, hasTime: false };
+}
+
+function materialsSnapshot(materials) {
+  return JSON.stringify(asArray(materials).map(normalizeMaterial));
+}
+
+function markLastUpdateIfChanged(previousMaterials, nextMaterials) {
+  if (materialsSnapshot(previousMaterials) !== materialsSnapshot(nextMaterials)) {
+    markLastUpdate();
+  }
+}
+
+function renderLastUpdateNotice(updateInfo = getLastUpdateInfo()) {
+  if (!els.lastUpdateNotice) return;
+
+  if (!updateInfo) {
+    els.lastUpdateNotice.textContent = "Sin cambios registrados";
+    els.lastUpdateNotice.title = "";
+    return;
+  }
+
+  const dateText = new Intl.DateTimeFormat("es-ES", { dateStyle: "short" }).format(updateInfo.date);
+  const timeText = new Intl.DateTimeFormat("es-ES", {
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(updateInfo.date);
+  const text = updateInfo.hasTime
+    ? `Actualizado el ${dateText}, a las ${timeText}`
+    : `Actualizado el ${dateText}`;
+
+  els.lastUpdateNotice.textContent = text;
+  els.lastUpdateNotice.title = text;
+}
+
 function initRemoteDatabase() {
   const config = window.CASTEGARDEN_SUPABASE || {};
   const hasConfig = config.url && config.anonKey
@@ -151,6 +210,7 @@ async function loadMaterials() {
   if (remote.enabled) {
     const remoteMaterials = await loadRemoteMaterials();
     if (remoteMaterials.length > 0) {
+      markLastUpdateIfChanged(localMaterials, remoteMaterials);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteMaterials));
       return remoteMaterials;
     }
@@ -224,6 +284,7 @@ async function refreshRemoteMaterials() {
   try {
     const remoteMaterials = await loadRemoteMaterials();
     if (remoteMaterials.length > 0) {
+      markLastUpdateIfChanged(state.materials, remoteMaterials);
       state.materials = remoteMaterials;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteMaterials));
       render();
@@ -378,6 +439,7 @@ function bindEvents() {
 
 function render() {
   renderActiveView();
+  renderLastUpdateNotice();
   renderTypeOptions();
   renderShelfOptions();
   renderStats();
@@ -795,6 +857,7 @@ async function deleteCurrentMaterial() {
   if (confirm(`Eliminar ${name}?`)) {
     state.materials = state.materials.filter((item) => item.id !== id);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.materials));
+    markLastUpdate();
     await deleteRemoteMaterial(id);
     render();
     els.materialDialog.close();
@@ -1010,6 +1073,7 @@ function csvCell(value) {
 
 async function persistAndRender(remotePayload = state.materials) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.materials));
+  markLastUpdate();
   remote.hasPendingLocalChanges = remote.enabled;
   render();
   const materialsToSync = Array.isArray(remotePayload) ? remotePayload : [remotePayload];
