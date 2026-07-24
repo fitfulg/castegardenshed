@@ -7,7 +7,8 @@ import {
   SHELF_LABELS,
   SHELF_SECTIONS,
   STORAGE_KEY,
-  USER_KEY
+  USER_KEY,
+  USER_SESSION_TIMEOUT_MS
 } from "./js/app-config.js";
 import {
   asArray,
@@ -39,7 +40,8 @@ const state = {
   groupByType: false,
   activeView: "list",
   plantUserOptions: [],
-  changeLog: []
+  changeLog: [],
+  userLogoutTimer: null
 };
 
 const remote = {
@@ -142,20 +144,51 @@ function renderAppVersion() {
   if (els.appVersion) els.appVersion.textContent = `v${APP_VERSION}`;
 }
 
+function getStoredUser() {
+  return cleanValue(localStorage.getItem(USER_KEY));
+}
+
 function getCurrentUser() {
-  return cleanValue(localStorage.getItem(USER_KEY)) || "Sin identificar";
+  return getStoredUser() || "Sin identificar";
 }
 
 function setCurrentUser(value) {
   const user = cleanValue(value) || "Sin identificar";
   localStorage.setItem(USER_KEY, user);
+  resetUserSessionTimer();
   renderCurrentUser();
   els.userDialog?.close();
 }
 
 function ensureCurrentUser() {
-  if (cleanValue(localStorage.getItem(USER_KEY))) return;
+  if (getStoredUser()) {
+    resetUserSessionTimer();
+    return;
+  }
   openUserDialog();
+}
+
+function requireCurrentUser() {
+  if (getStoredUser()) return true;
+  openUserDialog();
+  setSyncStatus("Escoge usuario", "error", "La sesión ha caducado. Escoge usuario antes de guardar cambios.");
+  return false;
+}
+
+function resetUserSessionTimer() {
+  if (state.userLogoutTimer) clearTimeout(state.userLogoutTimer);
+  if (!getStoredUser()) return;
+
+  state.userLogoutTimer = setTimeout(expireUserSession, USER_SESSION_TIMEOUT_MS);
+}
+
+function expireUserSession() {
+  localStorage.removeItem(USER_KEY);
+  if (state.userLogoutTimer) clearTimeout(state.userLogoutTimer);
+  state.userLogoutTimer = null;
+  renderCurrentUser();
+  setSyncStatus("Escoge usuario", "error", "Sesión cerrada tras 5 minutos sin cambios.");
+  if (!document.hidden) openUserDialog();
 }
 
 function changeCurrentUser() {
@@ -1085,6 +1118,7 @@ function prepareObservations(value, previousValue = "") {
 
 async function saveMaterialFromForm(event) {
   event.preventDefault();
+  if (!requireCurrentUser()) return;
 
   const id = els.materialId.value || createId();
   const previousMaterial = state.materials.find((item) => item.id === id);
@@ -1121,6 +1155,7 @@ async function saveMaterialFromForm(event) {
 }
 
 async function deleteCurrentMaterial() {
+  if (!requireCurrentUser()) return;
   const id = els.materialId.value;
   if (!id) return;
   const material = state.materials.find((item) => item.id === id);
@@ -1145,6 +1180,7 @@ async function deleteCurrentMaterial() {
 }
 
 async function togglePedidoState(id, isOrdered) {
+  if (!requireCurrentUser()) return;
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
   material.pedido_hecho = isOrdered;
@@ -1153,6 +1189,7 @@ async function togglePedidoState(id, isOrdered) {
 }
 
 async function toggleStockState(id, hasStock) {
+  if (!requireCurrentUser()) return;
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
 
@@ -1165,6 +1202,7 @@ async function toggleStockState(id, hasStock) {
 }
 
 async function saveInlineQuantity(id, value) {
+  if (!requireCurrentUser()) return;
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
 
@@ -1194,6 +1232,7 @@ async function saveInlineQuantity(id, value) {
 }
 
 async function markAsReview(id) {
+  if (!requireCurrentUser()) return;
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
 
@@ -1203,6 +1242,7 @@ async function markAsReview(id) {
 }
 
 async function markAsNoRestock(id) {
+  if (!requireCurrentUser()) return;
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
 
@@ -1215,6 +1255,7 @@ async function markAsNoRestock(id) {
 }
 
 async function lendMaterial(id) {
+  if (!requireCurrentUser()) return;
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
 
@@ -1237,6 +1278,7 @@ async function lendMaterial(id) {
 }
 
 async function clearLoan(id) {
+  if (!requireCurrentUser()) return;
   const material = state.materials.find((item) => item.id === id);
   if (!material) return;
 
@@ -1378,14 +1420,18 @@ function csvCell(value) {
 }
 
 async function persistAndRender(remotePayload = state.materials, action = "actualizar") {
+  if (!requireCurrentUser()) return false;
+
   const materialsToSync = Array.isArray(remotePayload) ? remotePayload : [remotePayload];
   stampMaterialsForChange(materialsToSync);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.materials));
   markLastUpdate();
+  resetUserSessionTimer();
   remote.hasPendingLocalChanges = remote.enabled;
   render();
   const saved = await saveRemoteMaterials(materialsToSync);
   if (saved) await recordRemoteChanges(materialsToSync, action);
+  return saved;
 }
 
 function setSyncStatus(text, statusClass, title = "") {

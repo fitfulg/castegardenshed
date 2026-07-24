@@ -1,9 +1,10 @@
-export const APP_VERSION = "1.0.9";
+export const APP_VERSION = "1.1.0";
 
 export const STORAGE_KEY = "almacen_materiales_v5";
 export const LEGACY_STORAGE_KEYS = ["almacen_materiales_v4", "almacen_materiales_v3"];
 export const LAST_UPDATE_KEY = "almacen_ultimo_cambio_v1";
 export const USER_KEY = "almacen_usuario_actual_v1";
+export const USER_SESSION_TIMEOUT_MS = 5 * 60 * 1000;
 
 export const REMOTE_TABLE = "materiales";
 export const AUDIT_TABLE = "materiales_cambios";
