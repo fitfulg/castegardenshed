@@ -789,6 +789,40 @@ textarea {
   margin-top: 12px;
 }
 
+.change-log-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.change-log-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 12px;
+}
+
+.change-log-title {
+  color: var(--text);
+  min-width: 0;
+}
+
+.change-log-date {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.change-log-detail {
+  color: var(--muted);
+  font-size: 14px;
+  grid-column: 1 / -1;
+}
+
 .loan-group {
   display: grid;
   gap: 10px;
@@ -954,6 +988,28 @@ textarea {
 }
 
 .reroll-user-button {
+  justify-self: start;
+}
+
+.custom-user-form {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+  padding-top: 14px;
+}
+
+.custom-user-form label {
+  color: var(--muted);
+  display: grid;
+  font-weight: 800;
+  gap: 6px;
+}
+
+.custom-user-form input {
+  width: 100%;
+}
+
+.custom-user-form .primary-button {
   justify-self: start;
 }
 
@@ -1182,6 +1238,14 @@ textarea {
 
   .loan-card {
     grid-template-columns: 1fr;
+  }
+
+  .change-log-card {
+    grid-template-columns: 1fr;
+  }
+
+  .change-log-date {
+    white-space: normal;
   }
 
   .material-dialog {

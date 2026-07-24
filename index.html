@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestor de material de almacén</title>
-    <link rel="stylesheet" href="styles.css?v=1.0.8">
+    <link rel="stylesheet" href="styles.css?v=1.0.9">
   </head>
   <body>
     <div id="constructionNotice" class="construction-notice" role="status">
@@ -16,7 +16,7 @@
 
     <header class="app-header">
       <div>
-        <p class="eyebrow">Almacén <span id="appVersion" class="app-version">v1.0.8</span> <span id="syncStatus" class="sync-status">Modo local</span></p>
+        <p class="eyebrow">Almacén <span id="appVersion" class="app-version">v1.0.9</span> <span id="syncStatus" class="sync-status">Modo local</span></p>
         <h1><button class="title-refresh-button" id="refreshPageButton" type="button">Material de almacén</button></h1>
       </div>
       <div class="header-actions">
@@ -24,6 +24,7 @@
         <button class="user-change-button" id="changeUserButton" type="button">Cambiar usuario</button>
         <span id="syncError" class="sync-error" hidden></span>
         <button class="secondary-button" id="showLoansButton" type="button">Ver prestados</button>
+        <button class="secondary-button" id="showLogButton" type="button">Ver registro</button>
         <button class="secondary-button mobile-jump-button" id="showSummaryButton" type="button">Ver resumen</button>
         <button class="primary-button" id="openNewMaterialButton" type="button">Añadir material</button>
       </div>
@@ -98,6 +99,15 @@
         </div>
         <div id="loanList" class="loan-list"></div>
         <p id="loanEmptyState" class="empty-state">No hay material prestado.</p>
+      </section>
+
+      <section class="change-log-panel" aria-label="Registro de cambios" hidden>
+        <div class="section-title-row">
+          <h2>Registro de cambios</h2>
+          <button class="secondary-button compact-button" id="showListFromLogButton" type="button">Volver al listado</button>
+        </div>
+        <div id="changeLogList" class="change-log-list"></div>
+        <p id="changeLogEmptyState" class="empty-state">No hay cambios registrados.</p>
       </section>
 
       <section class="type-counts-panel" aria-label="Contador por tipo de material">
@@ -200,7 +210,7 @@
       </form>
     </dialog>
 
-    <script src="supabase-config.js?v=1.0.8"></script>
-    <script type="module" src="script.js?v=1.0.8"></script>
+    <script src="supabase-config.js?v=1.0.9"></script>
+    <script type="module" src="script.js?v=1.0.9"></script>
   </body>
 </html>

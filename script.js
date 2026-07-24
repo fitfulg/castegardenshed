@@ -38,7 +38,8 @@ const state = {
   summaryTypeFilter: "todos",
   groupByType: false,
   activeView: "list",
-  plantUserOptions: []
+  plantUserOptions: [],
+  changeLog: []
 };
 
 const remote = {
@@ -74,15 +75,20 @@ const els = {
   controlPanel: document.querySelector(".control-panel"),
   contentGrid: document.querySelector(".content-grid"),
   loanPanel: document.querySelector(".loan-panel"),
+  changeLogPanel: document.querySelector(".change-log-panel"),
   typeCountsPanel: document.querySelector(".type-counts-panel"),
   loanList: document.querySelector("#loanList"),
   loanEmptyState: document.querySelector("#loanEmptyState"),
+  changeLogList: document.querySelector("#changeLogList"),
+  changeLogEmptyState: document.querySelector("#changeLogEmptyState"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
   showLoansButton: document.querySelector("#showLoansButton"),
+  showLogButton: document.querySelector("#showLogButton"),
   showSummaryButton: document.querySelector("#showSummaryButton"),
   showListButton: document.querySelector("#showListButton"),
   showMainListButton: document.querySelector("#showMainListButton"),
+  showListFromLogButton: document.querySelector("#showListFromLogButton"),
   refreshPageButton: document.querySelector("#refreshPageButton"),
   openNewMaterialButton: document.querySelector("#openNewMaterialButton"),
   materialDialog: document.querySelector("#materialDialog"),
@@ -90,6 +96,8 @@ const els = {
   plantUserOptions: document.querySelector("#plantUserOptions"),
   rerollUserOptionsButton: document.querySelector("#rerollUserOptionsButton"),
   closeUserDialogButton: document.querySelector("#closeUserDialogButton"),
+  customUserForm: document.querySelector("#customUserForm"),
+  customUserInput: document.querySelector("#customUserInput"),
   materialForm: document.querySelector("#materialForm"),
   dialogTitle: document.querySelector("#dialogTitle"),
   closeDialogButton: document.querySelector("#closeDialogButton"),
@@ -120,6 +128,7 @@ async function init() {
   renderAppVersion();
   initRemoteDatabase();
   state.materials = await loadMaterials();
+  state.changeLog = await loadRemoteChangeLog();
   bindEvents();
   ensureCurrentUser();
   renderCurrentUser();
@@ -159,6 +168,7 @@ function renderCurrentUser() {
 
 function openUserDialog() {
   renderPlantUserOptions();
+  if (els.customUserInput) els.customUserInput.value = "";
   if (els.userDialog?.showModal) {
     els.userDialog.showModal();
   }
@@ -177,6 +187,13 @@ function renderPlantUserOptions() {
     button.addEventListener("click", () => setCurrentUser(name));
     els.plantUserOptions.append(button);
   });
+}
+
+function saveCustomUser(event) {
+  event.preventDefault();
+  const user = cleanValue(els.customUserInput?.value);
+  if (!user) return;
+  setCurrentUser(user);
 }
 
 function markLastUpdate(date = new Date()) {
@@ -326,6 +343,18 @@ async function loadRemoteMaterials() {
   }
 }
 
+async function loadRemoteChangeLog() {
+  if (!remote.enabled) return [];
+
+  try {
+    const data = await remoteRequest(`${AUDIT_TABLE}?select=*&order=fecha.desc&limit=100`);
+    return asArray(data).map(normalizeChangeLogEntry);
+  } catch (error) {
+    console.warn("No se pudo leer el registro de cambios.", error);
+    return [];
+  }
+}
+
 function startRemoteRefresh() {
   if (!remote.enabled) return;
 
@@ -345,6 +374,7 @@ async function refreshRemoteMaterials() {
     if (remoteMaterials.length > 0) {
       markLastUpdateIfChanged(state.materials, remoteMaterials);
       state.materials = remoteMaterials;
+      state.changeLog = await loadRemoteChangeLog();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteMaterials));
       render();
     }
@@ -476,6 +506,8 @@ async function recordRemoteChanges(materials, action) {
       },
       body: JSON.stringify(rows)
     });
+    state.changeLog = [...rows.map(normalizeChangeLogEntry), ...state.changeLog].slice(0, 100);
+    renderChangeLog();
     return true;
   } catch (error) {
     console.warn("No se pudo registrar el historial de cambios.", error);
@@ -493,6 +525,23 @@ function loadSavedMaterials(storageKey) {
     console.warn("No se pudieron cargar los datos guardados.", error);
     return [];
   }
+}
+
+function normalizeChangeLogEntry(raw) {
+  const entry = raw && typeof raw === "object" ? raw : {};
+  return {
+    id: String(entry.id || createId()),
+    fecha: cleanValue(entry.fecha),
+    usuario: cleanValue(entry.usuario) || "Sin identificar",
+    accion: cleanValue(entry.accion) || "modifico",
+    material_id: cleanValue(entry.material_id),
+    codigo: cleanValue(entry.codigo),
+    nombre: cleanValue(entry.nombre) || "Sin nombre",
+    estado_stock: cleanValue(entry.estado_stock),
+    cantidad: normalizeQuantity(entry.cantidad),
+    pedido_hecho: Boolean(entry.pedido_hecho),
+    observaciones: cleanValue(entry.observaciones)
+  };
 }
 
 function bindEvents() {
@@ -531,14 +580,17 @@ function bindEvents() {
   els.copySummaryButton.addEventListener("click", copySummary);
   els.exportCsvButton.addEventListener("click", exportCsv);
   els.showLoansButton.addEventListener("click", () => setActiveView(state.activeView === "loans" ? "list" : "loans"));
+  els.showLogButton.addEventListener("click", () => setActiveView(state.activeView === "log" ? "list" : "log"));
   els.showSummaryButton.addEventListener("click", () => setActiveView(isMobileView() ? "summary" : "list"));
   els.showListButton.addEventListener("click", () => setActiveView("list"));
   els.showMainListButton.addEventListener("click", () => setActiveView("list"));
+  els.showListFromLogButton.addEventListener("click", () => setActiveView("list"));
   window.addEventListener("resize", renderActiveView);
   els.refreshPageButton.addEventListener("click", () => window.location.reload());
   els.changeUserButton?.addEventListener("click", changeCurrentUser);
   els.rerollUserOptionsButton?.addEventListener("click", renderPlantUserOptions);
   els.closeUserDialogButton?.addEventListener("click", () => els.userDialog?.close());
+  els.customUserForm?.addEventListener("submit", saveCustomUser);
   els.openNewMaterialButton.addEventListener("click", () => openMaterialDialog());
   els.toggleGroupButton.addEventListener("click", toggleGroupByType);
   els.closeDialogButton.addEventListener("click", () => els.materialDialog.close());
@@ -556,27 +608,32 @@ function render() {
   renderTypeCounts();
   renderMaterials();
   renderLoans();
+  renderChangeLog();
   renderSummary();
 }
 
 function renderActiveView() {
   const isMobile = isMobileView();
   const isLoansView = state.activeView === "loans";
+  const isLogView = state.activeView === "log";
   const isSummaryView = isMobile && state.activeView === "summary";
 
-  els.controlPanel.hidden = isLoansView || isSummaryView;
-  els.contentGrid.hidden = isLoansView;
+  els.controlPanel.hidden = isLoansView || isLogView || isSummaryView;
+  els.contentGrid.hidden = isLoansView || isLogView;
   els.materialsColumn.hidden = isSummaryView;
   els.summaryPanel.hidden = isMobile && !isSummaryView;
-  els.typeCountsPanel.hidden = isLoansView || isSummaryView;
+  els.typeCountsPanel.hidden = isLoansView || isLogView || isSummaryView;
   els.loanPanel.hidden = !isLoansView;
+  els.changeLogPanel.hidden = !isLogView;
   els.showLoansButton.textContent = isLoansView ? "Ver listado" : "Ver prestados";
   els.showLoansButton.setAttribute("aria-pressed", String(isLoansView));
+  els.showLogButton.textContent = isLogView ? "Ver listado" : "Ver registro";
+  els.showLogButton.setAttribute("aria-pressed", String(isLogView));
   els.showSummaryButton.setAttribute("aria-pressed", String(isSummaryView));
 }
 
 function setActiveView(view) {
-  state.activeView = ["loans", "summary"].includes(view) ? view : "list";
+  state.activeView = ["loans", "log", "summary"].includes(view) ? view : "list";
   renderActiveView();
   scrollToSection(document.querySelector(".app-header"));
 }
@@ -727,6 +784,87 @@ function createLoanCard(material, tone) {
   row.append(returnButton);
 
   return row;
+}
+
+function renderChangeLog() {
+  els.changeLogList.innerHTML = "";
+  els.changeLogEmptyState.hidden = state.changeLog.length > 0;
+
+  if (!remote.enabled) {
+    els.changeLogEmptyState.textContent = "El registro necesita Supabase conectado.";
+    return;
+  }
+
+  if (!state.changeLog.length) {
+    els.changeLogEmptyState.textContent = "No hay cambios registrados.";
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  state.changeLog.forEach((entry) => fragment.append(createChangeLogCard(entry)));
+  els.changeLogList.append(fragment);
+}
+
+function createChangeLogCard(entry) {
+  const row = document.createElement("article");
+  row.className = "change-log-card";
+
+  const materialText = [entry.nombre, entry.codigo ? `C.${entry.codigo}` : ""].filter(Boolean).join(" - ");
+  row.append(
+    element("strong", "change-log-title", `${entry.usuario} ${formatChangeAction(entry.accion)} ${materialText}`),
+    element("span", "change-log-date", formatChangeDate(entry.fecha))
+  );
+
+  const details = [];
+  if (entry.estado_stock) details.push(`Estado: ${formatStockState(entry.estado_stock)}`);
+  if (entry.cantidad !== null) details.push(`Cantidad: ${formatQuantity(entry.cantidad)}`);
+  if (entry.pedido_hecho) details.push("Material pedido");
+  if (entry.observaciones) details.push(`Observaciones: ${entry.observaciones}`);
+  if (details.length) row.append(element("span", "change-log-detail", details.join(" · ")));
+
+  return row;
+}
+
+function formatChangeAction(action) {
+  const labels = {
+    "actualizar": "modifico",
+    "crear": "creo",
+    "editar": "edito",
+    "eliminar": "elimino",
+    "material pedido": "marco como pedido",
+    "sin pedir": "quito el pedido de",
+    "stock correcto": "marco como correcto",
+    "faltan": "marco como faltante",
+    "cantidad": "modifico la cantidad de",
+    "revisar": "marco para revisar",
+    "obsoleto": "marco como obsoleto",
+    "prestar": "presto",
+    "devuelto": "marco como devuelto"
+  };
+  return labels[action] || "modifico";
+}
+
+function formatChangeDate(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Fecha no disponible";
+  return date.toLocaleString("es-ES", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
+function formatStockState(value) {
+  const labels = {
+    verde: "Correcto",
+    amarillo: "Revisar",
+    rojo: "Faltan",
+    gris: "Obsoleto",
+    pendiente: "Pendiente"
+  };
+  return labels[value] || value;
 }
 
 function createMaterialCard(material) {
