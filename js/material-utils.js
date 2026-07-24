@@ -24,7 +24,7 @@ export function normalizeMaterial(raw) {
     cantidad_comprobada: hasExplicitCheckedQuantity,
     unidad: cleanValue(material.unidad),
     ubicacion: cleanValue(material.ubicacion),
-    estado_stock: ["pendiente", "verde", "amarillo", "rojo"].includes(estado) ? estado : "verde",
+    estado_stock: ["pendiente", "verde", "amarillo", "rojo", "gris"].includes(estado) ? estado : "verde",
     pedido_hecho: Boolean(material.pedido_hecho),
     prestado_cantidad: Math.max(0, normalizeQuantity(material.prestado_cantidad) || 0),
     prestado_fijo: Boolean(material.prestado_fijo),

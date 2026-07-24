@@ -99,6 +99,7 @@ const els = {
   greenCount: document.querySelector("#greenCount"),
   yellowCount: document.querySelector("#yellowCount"),
   redCount: document.querySelector("#redCount"),
+  grayCount: document.querySelector("#grayCount"),
   orderCount: document.querySelector("#orderCount"),
   typeCounts: document.querySelector("#typeCounts")
 };
@@ -519,12 +520,14 @@ function renderStats() {
   const green = state.materials.filter((item) => item.estado_stock === "verde").length;
   const yellow = state.materials.filter((item) => item.estado_stock === "amarillo").length;
   const red = state.materials.filter((item) => item.estado_stock === "rojo").length;
+  const gray = state.materials.filter((item) => item.estado_stock === "gris").length;
   const ordered = state.materials.filter((item) => item.pedido_hecho).length;
 
   els.totalCount.textContent = total;
   els.greenCount.textContent = green;
   els.yellowCount.textContent = yellow;
   els.redCount.textContent = red;
+  els.grayCount.textContent = gray;
   els.orderCount.textContent = ordered;
 }
 
@@ -665,6 +668,7 @@ function createMaterialCard(material) {
   actions.append(
     createActionButton("Correcto", material.estado_stock === "verde", "ok", () => toggleStockState(material.id, true)),
     createActionButton("Faltan", material.estado_stock === "rojo", "critical", () => toggleStockState(material.id, false)),
+    createActionButton("Obsoleto", material.estado_stock === "gris", "paused", () => markAsNoRestock(material.id)),
     createActionButton("Pedido", material.pedido_hecho, "order", () => togglePedidoState(material.id, !material.pedido_hecho))
   );
 
@@ -820,6 +824,7 @@ async function saveMaterialFromForm(event) {
   const id = els.materialId.value || createId();
   const quantity = normalizeQuantity(els.cantidadInput.value);
   const hasCheckedQuantity = cleanValue(els.cantidadInput.value) !== "";
+  const selectedStockState = cleanValue(els.estadoInput.value) || "verde";
   const material = normalizeMaterial({
     id,
     codigo: els.codigoInput.value,
@@ -830,7 +835,7 @@ async function saveMaterialFromForm(event) {
     cantidad: els.cantidadInput.value,
     cantidad_comprobada: hasCheckedQuantity,
     unidad: els.unidadInput.value,
-    estado_stock: hasCheckedQuantity && quantity === 0 ? "rojo" : els.estadoInput.value,
+    estado_stock: hasCheckedQuantity && quantity === 0 && selectedStockState !== "gris" ? "rojo" : selectedStockState,
     ubicacion: state.materials.find((item) => item.id === id)?.ubicacion || "",
     pedido_hecho: els.pedidoInput.checked,
     observaciones: els.observacionesInput.value,
@@ -904,7 +909,11 @@ async function saveInlineQuantity(id, value) {
 
   material.cantidad = quantity;
   material.cantidad_comprobada = true;
-  material.estado_stock = quantity === 0 ? "rojo" : material.estado_stock === "rojo" ? "verde" : material.estado_stock;
+  if (quantity === 0) {
+    material.estado_stock = material.estado_stock === "gris" ? "gris" : "rojo";
+  } else if (["rojo", "gris"].includes(material.estado_stock)) {
+    material.estado_stock = "verde";
+  }
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
   await persistAndRender(material);
 }
@@ -914,6 +923,18 @@ async function markAsReview(id) {
   if (!material) return;
 
   material.estado_stock = "amarillo";
+  material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
+  await persistAndRender(material);
+}
+
+async function markAsNoRestock(id) {
+  const material = state.materials.find((item) => item.id === id);
+  if (!material) return;
+
+  material.estado_stock = "gris";
+  material.cantidad = 0;
+  material.cantidad_comprobada = true;
+  material.pedido_hecho = false;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
   await persistAndRender(material);
 }

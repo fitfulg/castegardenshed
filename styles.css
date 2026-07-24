@@ -368,6 +368,10 @@ textarea {
   background: var(--red);
 }
 
+.status-dot.paused {
+  background: #64748b;
+}
+
 .check-icon {
   align-items: center;
   background: var(--green);
@@ -459,6 +463,10 @@ textarea {
 
 .material-card.stock-rojo {
   border-left-color: var(--red);
+}
+
+.material-card.stock-gris {
+  border-left-color: #64748b;
 }
 
 .material-main {
@@ -570,6 +578,11 @@ textarea {
   color: var(--red);
 }
 
+.quantity.gris {
+  background: var(--surface-soft);
+  color: #475569;
+}
+
 .quantity-line {
   align-items: center;
   display: inline-flex;
@@ -630,6 +643,12 @@ textarea {
   background: var(--red-soft);
   border-color: #fecaca;
   color: var(--red);
+}
+
+.quantity-editor.gris {
+  background: var(--surface-soft);
+  border-color: #cbd5e1;
+  color: #475569;
 }
 
 .quantity-editor input {
@@ -714,6 +733,12 @@ textarea {
   background: var(--red-soft);
   border-color: #fecaca;
   color: var(--red);
+}
+
+.state-button.paused.active {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  color: #334155;
 }
 
 .state-button:hover {
