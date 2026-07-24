@@ -807,7 +807,27 @@ textarea {
 
 .change-log-title {
   color: var(--text);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  line-height: 1.35;
   min-width: 0;
+}
+
+.change-log-user {
+  color: #4338ca;
+  font-weight: 900;
+}
+
+.change-log-action {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.change-log-material {
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-weight: 900;
 }
 
 .change-log-date {

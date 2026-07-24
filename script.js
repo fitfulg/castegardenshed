@@ -897,11 +897,14 @@ function createChangeLogCard(entry) {
   const row = document.createElement("article");
   row.className = "change-log-card";
 
-  const materialText = [entry.nombre, entry.codigo ? `C.${entry.codigo}` : ""].filter(Boolean).join(" - ");
-  row.append(
-    element("strong", "change-log-title", `${entry.usuario} ${formatChangeAction(entry.accion)} ${materialText}`),
-    element("span", "change-log-date", formatChangeDate(entry.fecha))
+  const materialText = [entry.nombre, entry.codigo ? `C.${entry.codigo}` : ""].filter(Boolean).join(" - ") || "material sin nombre";
+  const title = element("div", "change-log-title");
+  title.append(
+    element("strong", "change-log-user", entry.usuario),
+    element("span", "change-log-action", formatChangeAction(entry.accion)),
+    element("strong", "change-log-material", materialText)
   );
+  row.append(title, element("span", "change-log-date", formatChangeDate(entry.fecha)));
 
   const details = [];
   if (entry.estado_stock) details.push(`Estado: ${formatStockState(entry.estado_stock)}`);
@@ -915,21 +918,21 @@ function createChangeLogCard(entry) {
 
 function formatChangeAction(action) {
   const labels = {
-    "actualizar": "modifico",
-    "crear": "creo",
-    "editar": "edito",
-    "eliminar": "elimino",
-    "material pedido": "marco como pedido",
-    "sin pedir": "quito el pedido de",
-    "stock correcto": "marco como correcto",
-    "faltan": "marco como faltante",
-    "cantidad": "modifico la cantidad de",
-    "revisar": "marco para revisar",
-    "obsoleto": "marco como obsoleto",
-    "prestar": "presto",
-    "devuelto": "marco como devuelto"
+    "actualizar": "modificó",
+    "crear": "creó",
+    "editar": "editó",
+    "eliminar": "eliminó",
+    "material pedido": "marcó como pedido",
+    "sin pedir": "quitó el pedido de",
+    "stock correcto": "marcó como correcto",
+    "faltan": "marcó como faltante",
+    "cantidad": "modificó la cantidad de",
+    "revisar": "marcó para revisar",
+    "obsoleto": "marcó como obsoleto",
+    "prestar": "prestó",
+    "devuelto": "marcó como devuelto"
   };
-  return labels[action] || "modifico";
+  return labels[action] || "modificó";
 }
 
 function formatChangeDate(value) {
