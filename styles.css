@@ -1045,23 +1045,39 @@ textarea {
 .custom-user-form {
   border-top: 1px solid var(--line);
   display: grid;
-  gap: 10px;
+  gap: 8px;
   padding-top: 14px;
 }
 
 .custom-user-form label {
-  color: var(--muted);
+  color: #4f5f5b;
   display: grid;
-  font-weight: 800;
-  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 7px;
 }
 
 .custom-user-form input {
+  border: 1px solid #b8c8c2;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  min-height: 42px;
+  padding: 9px 11px;
   width: 100%;
 }
 
+.custom-user-form input::placeholder {
+  color: #8a9692;
+  font-weight: 500;
+}
+
 .custom-user-form .primary-button {
+  font-size: 14px;
   justify-self: start;
+  min-height: 36px;
+  padding: 7px 11px;
 }
 
 .dialog-header {
