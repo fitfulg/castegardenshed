@@ -8,6 +8,7 @@ import {
   SHELF_SECTIONS,
   STORAGE_KEY,
   USER_KEY,
+  USER_SESSION_EXPIRES_AT_KEY,
   USER_SESSION_TIMEOUT_MS
 } from "./js/app-config.js";
 import {
@@ -41,6 +42,7 @@ const state = {
   activeView: "list",
   plantUserOptions: [],
   changeLog: [],
+  changeLogError: "",
   userLogoutTimer: null
 };
 
@@ -155,40 +157,79 @@ function getCurrentUser() {
 function setCurrentUser(value) {
   const user = cleanValue(value) || "Sin identificar";
   localStorage.setItem(USER_KEY, user);
-  resetUserSessionTimer();
+  renewUserSession();
   renderCurrentUser();
   els.userDialog?.close();
 }
 
 function ensureCurrentUser() {
-  if (getStoredUser()) {
-    resetUserSessionTimer();
+  if (hasActiveUserSession()) {
+    scheduleUserSessionExpiry();
     return;
   }
   openUserDialog();
 }
 
 function requireCurrentUser() {
-  if (getStoredUser()) return true;
+  if (hasActiveUserSession()) return true;
   openUserDialog();
   setSyncStatus("Escoge usuario", "error", "La sesión ha caducado. Escoge usuario antes de guardar cambios.");
   return false;
 }
 
-function resetUserSessionTimer() {
+function getUserSessionExpiresAt() {
+  const expiresAt = Number(localStorage.getItem(USER_SESSION_EXPIRES_AT_KEY));
+  return Number.isFinite(expiresAt) ? expiresAt : 0;
+}
+
+function hasActiveUserSession() {
+  if (!getStoredUser()) return false;
+
+  const expiresAt = getUserSessionExpiresAt();
+  if (!expiresAt || Date.now() >= expiresAt) {
+    expireUserSession({ openDialog: false });
+    return false;
+  }
+
+  return true;
+}
+
+function renewUserSession() {
+  if (!getStoredUser()) return;
+  localStorage.setItem(USER_SESSION_EXPIRES_AT_KEY, String(Date.now() + USER_SESSION_TIMEOUT_MS));
+  scheduleUserSessionExpiry();
+}
+
+function scheduleUserSessionExpiry() {
   if (state.userLogoutTimer) clearTimeout(state.userLogoutTimer);
   if (!getStoredUser()) return;
 
-  state.userLogoutTimer = setTimeout(expireUserSession, USER_SESSION_TIMEOUT_MS);
+  const remaining = getUserSessionExpiresAt() - Date.now();
+  if (remaining <= 0) {
+    expireUserSession();
+    return;
+  }
+
+  state.userLogoutTimer = setTimeout(expireUserSession, remaining);
 }
 
-function expireUserSession() {
+function resetUserSessionTimer() {
+  renewUserSession();
+}
+
+function checkUserSessionExpiry() {
+  if (getStoredUser() && !hasActiveUserSession() && !document.hidden) openUserDialog();
+}
+
+function expireUserSession(options = {}) {
+  const { openDialog = true } = options;
   localStorage.removeItem(USER_KEY);
+  localStorage.removeItem(USER_SESSION_EXPIRES_AT_KEY);
   if (state.userLogoutTimer) clearTimeout(state.userLogoutTimer);
   state.userLogoutTimer = null;
   renderCurrentUser();
   setSyncStatus("Escoge usuario", "error", "Sesión cerrada tras 5 minutos sin cambios.");
-  if (!document.hidden) openUserDialog();
+  if (openDialog && !document.hidden) openUserDialog();
 }
 
 function changeCurrentUser() {
@@ -381,9 +422,11 @@ async function loadRemoteChangeLog() {
 
   try {
     const data = await remoteRequest(`${AUDIT_TABLE}?select=*&order=fecha.desc&limit=100`);
+    state.changeLogError = "";
     return asArray(data).map(normalizeChangeLogEntry);
   } catch (error) {
     console.warn("No se pudo leer el registro de cambios.", error);
+    state.changeLogError = getErrorMessage(error);
     return [];
   }
 }
@@ -539,11 +582,15 @@ async function recordRemoteChanges(materials, action) {
       },
       body: JSON.stringify(rows)
     });
+    state.changeLogError = "";
     state.changeLog = [...rows.map(normalizeChangeLogEntry), ...state.changeLog].slice(0, 100);
     renderChangeLog();
     return true;
   } catch (error) {
     console.warn("No se pudo registrar el historial de cambios.", error);
+    state.changeLogError = getErrorMessage(error);
+    setSyncStatus("Log no guardado", "error", `Material guardado, pero no se pudo guardar el registro: ${state.changeLogError}`);
+    renderChangeLog();
     return false;
   }
 }
@@ -619,6 +666,10 @@ function bindEvents() {
   els.showMainListButton.addEventListener("click", () => setActiveView("list"));
   els.showListFromLogButton.addEventListener("click", () => setActiveView("list"));
   window.addEventListener("resize", renderActiveView);
+  window.addEventListener("focus", checkUserSessionExpiry);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") checkUserSessionExpiry();
+  });
   els.refreshPageButton.addEventListener("click", () => window.location.reload());
   els.changeUserButton?.addEventListener("click", changeCurrentUser);
   els.rerollUserOptionsButton?.addEventListener("click", renderPlantUserOptions);
@@ -821,15 +872,19 @@ function createLoanCard(material, tone) {
 
 function renderChangeLog() {
   els.changeLogList.innerHTML = "";
-  els.changeLogEmptyState.hidden = state.changeLog.length > 0;
+  els.changeLogEmptyState.hidden = state.changeLog.length > 0 && !state.changeLogError;
 
   if (!remote.enabled) {
     els.changeLogEmptyState.textContent = "El registro necesita Supabase conectado.";
     return;
   }
 
+  if (state.changeLogError) {
+    els.changeLogEmptyState.textContent = `No se pudo guardar o leer el registro de cambios: ${state.changeLogError}. Revisa que la tabla materiales_cambios exista en Supabase.`;
+  }
+
   if (!state.changeLog.length) {
-    els.changeLogEmptyState.textContent = "No hay cambios registrados.";
+    if (!state.changeLogError) els.changeLogEmptyState.textContent = "No hay cambios registrados.";
     return;
   }
 
