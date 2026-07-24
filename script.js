@@ -911,7 +911,7 @@ function createChangeLogCard(entry) {
   if (entry.estado_stock) details.push(`Estado: ${formatStockState(entry.estado_stock)}`);
   if (entry.cantidad !== null) details.push(`Cantidad: ${formatQuantity(entry.cantidad)}`);
   if (entry.pedido_hecho) details.push("Material pedido");
-  if (entry.observaciones) details.push(`Observaciones: ${entry.observaciones}`);
+  if (entry.observaciones) details.push(formatObservationLine(entry.observaciones));
   if (details.length) row.append(element("span", "change-log-detail", details.join(" · ")));
 
   return row;
@@ -996,7 +996,7 @@ function createMaterialCard(material) {
   if (material.seccion) meta.append(element("span", "", `Sección: ${material.seccion}`));
   const updatedBy = material.modificado_por ? ` por ${material.modificado_por}` : "";
   meta.append(element("span", "", `Actualizado: ${material.ultima_actualizacion || "Sin fecha"}${updatedBy}`));
-  if (material.observaciones) meta.append(element("span", "material-observations", `Observaciones: ${material.observaciones}`));
+  if (material.observaciones) meta.append(element("span", "material-observations", formatObservationLine(material.observaciones)));
 
   main.append(titleRow, meta);
 
@@ -1165,6 +1165,21 @@ function formatObservationDate(date = new Date()) {
 
 function hasTrailingDate(text) {
   return /\b\d{1,2}\/\d{1,2}\/\d{2,4}\s*$/.test(cleanValue(text));
+}
+
+function splitTrailingObservationDate(value) {
+  const text = cleanValue(value);
+  const match = text.match(/(?:[.!?]\s*)?(\d{1,2}\/\d{1,2}\/\d{2,4})\s*$/);
+  if (!match) return { text, date: "" };
+
+  const note = text.slice(0, match.index).trim();
+  return { text: note, date: match[1] };
+}
+
+function formatObservationLine(value) {
+  const { text, date } = splitTrailingObservationDate(value);
+  const label = date ? `Observaciones ${date}` : "Observaciones";
+  return `${label}: ${text}`;
 }
 
 function prepareObservations(value, previousValue = "") {
@@ -1431,7 +1446,7 @@ function formatSummaryLine(item) {
   ];
 
   if (item.observaciones) {
-    lines.push(`  Observaciones: ${item.observaciones}`);
+    lines.push(`  ${formatObservationLine(item.observaciones)}`);
   }
 
   return lines.join("\n");
