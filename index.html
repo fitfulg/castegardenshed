@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestor de material de almacén</title>
-    <link rel="stylesheet" href="styles.css?v=1.1.0">
+    <link rel="stylesheet" href="styles.css?v=1.1.1">
   </head>
   <body>
     <div id="constructionNotice" class="construction-notice" role="status">
@@ -16,7 +16,7 @@
 
     <header class="app-header">
       <div>
-        <p class="eyebrow">Almacén <span id="appVersion" class="app-version">v1.1.0</span> <span id="syncStatus" class="sync-status">Modo local</span></p>
+        <p class="eyebrow">Almacén <span id="appVersion" class="app-version">v1.1.0</span> <span id="syncStatus" class="sync-status">Modo local</span> <button class="log-button" id="showLogButton" type="button">Histórico</button></p>
         <h1><button class="title-refresh-button" id="refreshPageButton" type="button">Material de almacén</button></h1>
       </div>
       <div class="header-actions">
@@ -24,7 +24,6 @@
         <button class="user-change-button" id="changeUserButton" type="button">Cambiar usuario</button>
         <span id="syncError" class="sync-error" hidden></span>
         <button class="secondary-button" id="showLoansButton" type="button">Ver prestados</button>
-        <button class="log-button" id="showLogButton" type="button">Histórico</button>
         <button class="secondary-button mobile-jump-button" id="showSummaryButton" type="button">Ver resumen</button>
         <button class="primary-button" id="openNewMaterialButton" type="button">Añadir material</button>
       </div>
