@@ -121,13 +121,20 @@
         <div class="dialog-header">
           <div>
             <p class="eyebrow">Registro de cambios</p>
-            <h2>Escoge una planta</h2>
+            <h2>Escoge usuario</h2>
           </div>
           <button class="icon-button" id="closeUserDialogButton" type="button" aria-label="Cerrar">×</button>
         </div>
         <p class="user-dialog-text">Este nombre quedará marcado en los cambios que hagas desde este dispositivo.</p>
         <div id="plantUserOptions" class="plant-user-options" aria-label="Opciones de usuario"></div>
         <button class="secondary-button reroll-user-button" id="rerollUserOptionsButton" type="button">Nuevas opciones</button>
+        <form id="customUserForm" class="custom-user-form">
+          <label for="customUserInput">
+            O escribe un nombre
+            <input id="customUserInput" type="text" autocomplete="name" placeholder="Nombre propio">
+          </label>
+          <button class="primary-button" type="submit">Usar este nombre</button>
+        </form>
       </div>
     </dialog>
 
