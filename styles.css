@@ -175,21 +175,39 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
-  padding: 8px 11px;
+  display: inline-flex;
+  font-size: 11px;
+  font-weight: 800;
+  margin-left: 6px;
+  padding: 2px 7px;
+  text-transform: none;
+  vertical-align: middle;
   white-space: nowrap;
 }
 
 .user-tag {
-  background: #eef2ff;
-  border: 1px solid #c7d2fe;
-  border-radius: 999px;
-  color: #3730a3;
+  color: var(--accent-dark);
   font-size: 13px;
   font-weight: 800;
-  padding: 8px 11px;
   white-space: nowrap;
+}
+
+.user-change-button {
+  background: transparent;
+  border: 0;
+  color: var(--accent);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 6px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.user-change-button:hover,
+.user-change-button:focus-visible {
+  color: var(--accent-dark);
 }
 
 .sync-status.synced {
@@ -1034,6 +1052,26 @@ textarea {
   .summary-actions {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .header-actions {
+    align-items: center;
+    grid-template-columns: 1fr auto;
+  }
+
+  .header-actions .secondary-button,
+  .header-actions .primary-button {
+    grid-column: 1 / -1;
+  }
+
+  .user-tag {
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-change-button {
+    justify-self: end;
   }
 
   .last-update-notice {

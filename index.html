@@ -16,13 +16,12 @@
 
     <header class="app-header">
       <div>
-        <p class="eyebrow">Almacén <span id="appVersion" class="app-version">v1.0.8</span></p>
+        <p class="eyebrow">Almacén <span id="appVersion" class="app-version">v1.0.8</span> <span id="syncStatus" class="sync-status">Modo local</span></p>
         <h1><button class="title-refresh-button" id="refreshPageButton" type="button">Material de almacén</button></h1>
       </div>
       <div class="header-actions">
         <span id="currentUserTag" class="user-tag">Usuario: Sin identificar</span>
-        <button class="secondary-button compact-button" id="changeUserButton" type="button">Cambiar usuario</button>
-        <span id="syncStatus" class="sync-status">Modo local</span>
+        <button class="user-change-button" id="changeUserButton" type="button">Cambiar usuario</button>
         <span id="syncError" class="sync-error" hidden></span>
         <button class="secondary-button" id="showLoansButton" type="button">Ver prestados</button>
         <button class="secondary-button mobile-jump-button" id="showSummaryButton" type="button">Ver resumen</button>
