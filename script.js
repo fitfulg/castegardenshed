@@ -818,10 +818,30 @@ function openMaterialDialog(material = null) {
   els.nombreInput.focus();
 }
 
+function formatObservationDate(date = new Date()) {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = String(date.getFullYear()).slice(-2);
+  return `${day}/${month}/${year}`;
+}
+
+function hasTrailingDate(text) {
+  return /\b\d{1,2}\/\d{1,2}\/\d{2,4}\s*$/.test(cleanValue(text));
+}
+
+function prepareObservations(value, previousValue = "") {
+  const text = cleanValue(value);
+  if (!text) return "";
+  if (text === cleanValue(previousValue) || hasTrailingDate(text)) return text;
+  const separator = /[.!?]$/.test(text) ? " " : ". ";
+  return `${text}${separator}${formatObservationDate()}`;
+}
+
 async function saveMaterialFromForm(event) {
   event.preventDefault();
 
   const id = els.materialId.value || createId();
+  const previousMaterial = state.materials.find((item) => item.id === id);
   const quantity = normalizeQuantity(els.cantidadInput.value);
   const hasCheckedQuantity = cleanValue(els.cantidadInput.value) !== "";
   const selectedStockState = cleanValue(els.estadoInput.value) || "verde";
@@ -836,9 +856,9 @@ async function saveMaterialFromForm(event) {
     cantidad_comprobada: hasCheckedQuantity,
     unidad: els.unidadInput.value,
     estado_stock: hasCheckedQuantity && quantity === 0 && selectedStockState !== "gris" ? "rojo" : selectedStockState,
-    ubicacion: state.materials.find((item) => item.id === id)?.ubicacion || "",
+    ubicacion: previousMaterial?.ubicacion || "",
     pedido_hecho: els.pedidoInput.checked,
-    observaciones: els.observacionesInput.value,
+    observaciones: prepareObservations(els.observacionesInput.value, previousMaterial?.observaciones),
     ultima_actualizacion: new Date().toISOString().slice(0, 10)
   });
 
