@@ -1048,7 +1048,11 @@ function buildSummaryText(items) {
 function formatSummaryLine(item) {
   const orderState = item.pedido_hecho ? "Material pedido" : "Sin pedir";
   const quantity = item.cantidad_comprobada ? `${formatQuantity(item.cantidad)} ${formatTotalUnit(item.unidad)}`.trim() : "Stock correcto";
-  return `- ${item.codigo || "Sin código"} | ${item.nombre || "Sin nombre"} | ${formatShelf(item.estanteria)} | ${quantity} | ${orderState}`;
+  return [
+    `- ${item.codigo || "Sin código"} - ${item.nombre || "Sin nombre"}`,
+    `  Cantidad: ${quantity}`,
+    `  Estado: ${orderState}`
+  ].join("\n");
 }
 
 async function copySummary() {
