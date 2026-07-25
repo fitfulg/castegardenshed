@@ -814,10 +814,30 @@ textarea {
   margin-top: 12px;
 }
 
+.log-controls {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.log-controls label {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.log-controls select {
+  max-width: 260px;
+}
+
 .change-log-list {
   display: grid;
   gap: 10px;
   margin-top: 12px;
+  max-height: min(62vh, 720px);
+  overflow: auto;
+  padding-right: 4px;
 }
 
 .change-log-card {
@@ -1305,6 +1325,20 @@ textarea {
 
   .loan-card {
     grid-template-columns: 1fr;
+  }
+
+  .log-controls {
+    align-items: stretch;
+    display: grid;
+  }
+
+  .log-controls select {
+    max-width: none;
+    width: 100%;
+  }
+
+  .change-log-list {
+    max-height: 68vh;
   }
 
   .change-log-card {

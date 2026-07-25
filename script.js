@@ -43,6 +43,7 @@ const state = {
   plantUserOptions: [],
   changeLog: [],
   changeLogError: "",
+  changeLogMonthFilter: "todos",
   userLogoutTimer: null
 };
 
@@ -85,6 +86,7 @@ const els = {
   loanEmptyState: document.querySelector("#loanEmptyState"),
   changeLogList: document.querySelector("#changeLogList"),
   changeLogEmptyState: document.querySelector("#changeLogEmptyState"),
+  changeLogMonthFilter: document.querySelector("#changeLogMonthFilter"),
   clearFiltersButton: document.querySelector("#clearFiltersButton"),
   toggleGroupButton: document.querySelector("#toggleGroupButton"),
   showLoansButton: document.querySelector("#showLoansButton"),
@@ -421,7 +423,7 @@ async function loadRemoteChangeLog() {
   if (!remote.enabled) return [];
 
   try {
-    const data = await remoteRequest(`${AUDIT_TABLE}?select=*&order=fecha.desc&limit=100`);
+    const data = await remoteRequest(`${AUDIT_TABLE}?select=*&order=fecha.desc&limit=500`);
     state.changeLogError = "";
     return asArray(data).map(normalizeChangeLogEntry);
   } catch (error) {
@@ -583,7 +585,7 @@ async function recordRemoteChanges(materials, action) {
       body: JSON.stringify(rows)
     });
     state.changeLogError = "";
-    state.changeLog = [...rows.map(normalizeChangeLogEntry), ...state.changeLog].slice(0, 100);
+    state.changeLog = [...rows.map(normalizeChangeLogEntry), ...state.changeLog].slice(0, 500);
     renderChangeLog();
     return true;
   } catch (error) {
@@ -654,6 +656,11 @@ function bindEvents() {
   els.summaryTypeFilter.addEventListener("change", () => {
     state.summaryTypeFilter = els.summaryTypeFilter.value;
     renderSummary();
+  });
+
+  els.changeLogMonthFilter?.addEventListener("change", () => {
+    state.changeLogMonthFilter = els.changeLogMonthFilter.value;
+    renderChangeLog();
   });
 
   els.clearFiltersButton.addEventListener("click", clearFilters);
@@ -872,7 +879,9 @@ function createLoanCard(material, tone) {
 
 function renderChangeLog() {
   els.changeLogList.innerHTML = "";
-  els.changeLogEmptyState.hidden = state.changeLog.length > 0 && !state.changeLogError;
+  renderChangeLogMonthOptions();
+  const entries = getFilteredChangeLog();
+  els.changeLogEmptyState.hidden = entries.length > 0 && !state.changeLogError;
 
   if (!remote.enabled) {
     els.changeLogEmptyState.textContent = "El registro necesita Supabase conectado.";
@@ -888,9 +897,72 @@ function renderChangeLog() {
     return;
   }
 
+  if (!entries.length) {
+    els.changeLogEmptyState.textContent = "No hay cambios registrados en este mes.";
+    return;
+  }
+
   const fragment = document.createDocumentFragment();
-  state.changeLog.forEach((entry) => fragment.append(createChangeLogCard(entry)));
+  entries.forEach((entry) => fragment.append(createChangeLogCard(entry)));
   els.changeLogList.append(fragment);
+}
+
+function renderChangeLogMonthOptions() {
+  if (!els.changeLogMonthFilter) return;
+
+  const months = getChangeLogMonths();
+  if (state.changeLogMonthFilter !== "todos" && !months.some((month) => month.value === state.changeLogMonthFilter)) {
+    state.changeLogMonthFilter = "todos";
+  }
+
+  const options = [
+    ["todos", "Todos los meses"],
+    ...months.map((month) => [month.value, month.label])
+  ];
+  const currentOptions = Array.from(els.changeLogMonthFilter.options).map((option) => `${option.value}:${option.textContent}`).join("|");
+  const nextOptions = options.map(([value, label]) => `${value}:${label}`).join("|");
+  if (currentOptions !== nextOptions) {
+    els.changeLogMonthFilter.replaceChildren(
+      ...options.map(([value, label]) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = label;
+        return option;
+      })
+    );
+  }
+
+  els.changeLogMonthFilter.value = state.changeLogMonthFilter;
+  els.changeLogMonthFilter.disabled = months.length === 0;
+}
+
+function getFilteredChangeLog() {
+  if (state.changeLogMonthFilter === "todos") return state.changeLog;
+  return state.changeLog.filter((entry) => getChangeLogMonthValue(entry.fecha) === state.changeLogMonthFilter);
+}
+
+function getChangeLogMonths() {
+  const months = new Map();
+  state.changeLog.forEach((entry) => {
+    const value = getChangeLogMonthValue(entry.fecha);
+    if (value && !months.has(value)) months.set(value, formatChangeLogMonth(value));
+  });
+
+  return [...months.entries()]
+    .sort(([a], [b]) => b.localeCompare(a))
+    .map(([value, label]) => ({ value, label }));
+}
+
+function getChangeLogMonthValue(dateValue) {
+  const date = new Date(dateValue);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toISOString().slice(0, 7);
+}
+
+function formatChangeLogMonth(value) {
+  const [year, month] = value.split("-");
+  const date = new Date(Number(year), Number(month) - 1, 1);
+  return date.toLocaleDateString("es-ES", { month: "long", year: "numeric" });
 }
 
 function createChangeLogCard(entry) {
