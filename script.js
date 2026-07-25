@@ -1178,7 +1178,7 @@ function splitTrailingObservationDate(value) {
 
 function formatObservationLine(value) {
   const { text, date } = splitTrailingObservationDate(value);
-  const label = date ? `Observaciones ${date}` : "Observaciones";
+  const label = date ? `Anotaciones ${date}` : "Anotaciones";
   return `${label}: ${text}`;
 }
 
