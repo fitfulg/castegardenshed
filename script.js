@@ -929,7 +929,7 @@ function formatChangeAction(action) {
     "faltan": "marcó como faltante",
     "cantidad": "modificó la cantidad de",
     "revisar": "marcó para revisar",
-    "obsoleto": "marcó como obsoleto",
+    "obsoleto": "marcó sin uso",
     "prestar": "prestó",
     "devuelto": "marcó como devuelto"
   };
@@ -953,7 +953,7 @@ function formatStockState(value) {
     verde: "Correcto",
     amarillo: "Revisar",
     rojo: "Faltan",
-    gris: "Obsoleto",
+    gris: "Sin uso",
     pendiente: "Pendiente"
   };
   return labels[value] || value;
@@ -1006,7 +1006,7 @@ function createMaterialCard(material) {
   actions.append(
     createActionButton("Correcto", material.estado_stock === "verde", "ok", () => toggleStockState(material.id, true)),
     createActionButton("Faltan", material.estado_stock === "rojo", "critical", () => toggleStockState(material.id, false)),
-    createActionButton("Obsoleto", material.estado_stock === "gris", "paused", () => markAsNoRestock(material.id)),
+    createActionButton("Sin uso", material.estado_stock === "gris", "paused", () => markAsNoRestock(material.id)),
     createActionButton("Pedido", material.pedido_hecho, "order", () => togglePedidoState(material.id, !material.pedido_hecho))
   );
 
@@ -1321,8 +1321,6 @@ async function markAsNoRestock(id) {
   if (!material) return;
 
   material.estado_stock = "gris";
-  material.cantidad = 0;
-  material.cantidad_comprobada = true;
   material.pedido_hecho = false;
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
   await persistAndRender(material, "obsoleto");
