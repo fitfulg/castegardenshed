@@ -12,6 +12,8 @@ export function normalizeMaterial(raw) {
   const seccion = cleanValue(material.seccion) || inferSection({ ...material, estanteria });
   const hasExplicitCheckedQuantity = material.cantidad_comprobada === true;
   const estado = normalizeText(material.estado_stock || "verde");
+  const isUnusedWithSavedQuantity =
+    estado === "gris" && material.cantidad_comprobada !== false && cantidad !== null;
 
   return {
     id: String(material.id || material.codigo || createId()),
@@ -21,7 +23,7 @@ export function normalizeMaterial(raw) {
     estanteria,
     seccion,
     cantidad,
-    cantidad_comprobada: hasExplicitCheckedQuantity,
+    cantidad_comprobada: hasExplicitCheckedQuantity || isUnusedWithSavedQuantity,
     unidad: cleanValue(material.unidad),
     ubicacion: cleanValue(material.ubicacion),
     estado_stock: ["pendiente", "verde", "amarillo", "rojo", "gris"].includes(estado) ? estado : "verde",

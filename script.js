@@ -1047,7 +1047,7 @@ function createQuantityControl(material) {
     const wrapper = document.createElement("span");
     wrapper.className = "quantity-display";
 
-    const label = element("span", "quantity-status", "Stock correcto");
+    const label = element("span", "quantity-status", material.estado_stock === "gris" ? "Sin uso" : "Stock correcto");
     const addButton = document.createElement("button");
     addButton.className = "quantity-add-button";
     addButton.type = "button";
@@ -1298,7 +1298,7 @@ async function saveInlineQuantity(id, value) {
   material.cantidad_comprobada = true;
   if (quantity === 0) {
     material.estado_stock = material.estado_stock === "gris" ? "gris" : "rojo";
-  } else if (["rojo", "gris"].includes(material.estado_stock)) {
+  } else if (material.estado_stock === "rojo") {
     material.estado_stock = "verde";
   }
   material.ultima_actualizacion = new Date().toISOString().slice(0, 10);
@@ -1435,13 +1435,15 @@ function buildSummaryText(items) {
 }
 
 function formatSummaryLine(item) {
-  const orderState = item.pedido_hecho ? "Material pedido" : "Sin pedir";
   const quantity = item.cantidad_comprobada ? `${formatQuantity(item.cantidad)} ${formatTotalUnit(item.unidad)}`.trim() : "Stock correcto";
   const lines = [
     `- ${item.codigo || "Sin código"} - ${item.nombre || "Sin nombre"}`,
-    `  Cantidad: ${quantity}`,
-    `  ${orderState}`
+    `  Cantidad: ${quantity}`
   ];
+
+  if (item.pedido_hecho) {
+    lines.push("  Material pedido");
+  }
 
   if (item.observaciones) {
     lines.push(`  ${formatObservationLine(item.observaciones)}`);
@@ -1478,12 +1480,12 @@ function exportCsv() {
     ["unidad", (item) => item.unidad],
     ["anotaciones", (item) => item.observaciones],
     ["ultima_actualizacion", (item) => item.ultima_actualizacion],
+    ["pedido_hecho", (item) => item.pedido_hecho],
     ["tipo_material", (item) => item.tipo_material],
     ["estanteria", (item) => item.estanteria],
     ["seccion", (item) => item.seccion],
     ["cantidad_comprobada", (item) => item.cantidad_comprobada],
     ["estado_stock", (item) => item.estado_stock],
-    ["pedido_hecho", (item) => item.pedido_hecho],
     ["prestado_cantidad", (item) => item.prestado_cantidad],
     ["prestado_fijo", (item) => item.prestado_fijo],
     ["prestado_fecha", (item) => item.prestado_fecha],
