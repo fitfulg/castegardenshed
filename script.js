@@ -1442,7 +1442,7 @@ function formatSummaryLine(item) {
   const lines = [
     `- ${item.codigo || "Sin código"} - ${item.nombre || "Sin nombre"}`,
     `  Cantidad: ${quantity}`,
-    `  Estado: ${orderState}`
+    `  ${orderState}`
   ];
 
   if (item.observaciones) {
@@ -1473,10 +1473,27 @@ async function copySummary() {
 
 function exportCsv() {
   const rows = getSummaryItems();
-  const header = ["codigo", "nombre", "tipo_material", "estanteria", "seccion", "cantidad", "cantidad_comprobada", "unidad", "estado_stock", "pedido_hecho", "prestado_cantidad", "prestado_fijo", "prestado_fecha", "ubicacion", "observaciones", "ultima_actualizacion"];
+  const columns = [
+    ["codigo", (item) => item.codigo],
+    ["nombre", (item) => item.nombre],
+    ["cantidad", (item) => item.cantidad],
+    ["unidad", (item) => item.unidad],
+    ["anotaciones", (item) => item.observaciones],
+    ["ultima_actualizacion", (item) => item.ultima_actualizacion],
+    ["tipo_material", (item) => item.tipo_material],
+    ["estanteria", (item) => item.estanteria],
+    ["seccion", (item) => item.seccion],
+    ["cantidad_comprobada", (item) => item.cantidad_comprobada],
+    ["estado_stock", (item) => item.estado_stock],
+    ["pedido_hecho", (item) => item.pedido_hecho],
+    ["prestado_cantidad", (item) => item.prestado_cantidad],
+    ["prestado_fijo", (item) => item.prestado_fijo],
+    ["prestado_fecha", (item) => item.prestado_fecha],
+    ["ubicacion", (item) => item.ubicacion]
+  ];
   const csv = [
-    header.join(","),
-    ...rows.map((item) => header.map((field) => csvCell(item[field])).join(","))
+    columns.map(([label]) => label).join(","),
+    ...rows.map((item) => columns.map(([, getValue]) => csvCell(getValue(item))).join(","))
   ].join("\n");
 
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
