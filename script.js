@@ -1000,7 +1000,7 @@ function formatChangeAction(action) {
     "stock correcto": "marcó como correcto",
     "faltan": "marcó como faltante",
     "cantidad": "modificó la cantidad de",
-    "revisar": "marcó para revisar",
+    "revisar": "marcó con pocas uds.",
     "obsoleto": "marcó sin uso",
     "prestar": "prestó",
     "devuelto": "marcó como devuelto"
@@ -1023,7 +1023,7 @@ function formatChangeDate(value) {
 function formatStockState(value) {
   const labels = {
     verde: "Correcto",
-    amarillo: "Revisar",
+    amarillo: "Pocas uds.",
     rojo: "Faltan",
     gris: "Sin uso",
     pendiente: "Pendiente"
@@ -1082,7 +1082,7 @@ function createMaterialCard(material) {
     createActionButton("Pedido", material.pedido_hecho, "order", () => togglePedidoState(material.id, !material.pedido_hecho))
   );
 
-  actions.append(createActionButton("Revisar", material.estado_stock === "amarillo", "review", () => markAsReview(material.id)));
+  actions.append(createActionButton("Pocas uds.", material.estado_stock === "amarillo", "review", () => markAsReview(material.id)));
   if (hasLoan(material)) {
     actions.append(
       createActionButton("Editar préstamo", true, "loan", () => lendMaterial(material.id)),
@@ -1501,8 +1501,8 @@ function buildSummaryText(items) {
     "MATERIALES QUE FALTAN",
     red.length ? red.map(formatSummaryLine).join("\n") : "- Sin materiales que falten",
     "",
-    "MATERIALES A REVISAR",
-    yellow.length ? yellow.map(formatSummaryLine).join("\n") : "- Sin materiales a revisar"
+    "MATERIALES CON POCAS UDS.",
+    yellow.length ? yellow.map(formatSummaryLine).join("\n") : "- Sin materiales con pocas uds."
   ].join("\n");
 }
 

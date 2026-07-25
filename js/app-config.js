@@ -1,4 +1,4 @@
-export const APP_VERSION = "1.1.1";
+export const APP_VERSION = "1.1.2";
 
 export const STORAGE_KEY = "almacen_materiales_v5";
 export const LEGACY_STORAGE_KEYS = ["almacen_materiales_v4", "almacen_materiales_v3"];
