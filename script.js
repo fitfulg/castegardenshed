@@ -1001,7 +1001,7 @@ function formatChangeAction(action) {
     "faltan": "marcó como faltante",
     "cantidad": "modificó la cantidad de",
     "revisar": "marcó con pocas uds.",
-    "obsoleto": "marcó sin uso",
+    "obsoleto": "marcó como poco/sin uso",
     "prestar": "prestó",
     "devuelto": "marcó como devuelto"
   };
@@ -1025,7 +1025,7 @@ function formatStockState(value) {
     verde: "Correcto",
     amarillo: "Pocas uds.",
     rojo: "Faltan",
-    gris: "Sin uso",
+    gris: "Poco/Sin uso",
     pendiente: "Pendiente"
   };
   return labels[value] || value;
@@ -1078,7 +1078,7 @@ function createMaterialCard(material) {
   actions.append(
     createActionButton("Correcto", material.estado_stock === "verde", "ok", () => toggleStockState(material.id, true)),
     createActionButton("Faltan", material.estado_stock === "rojo", "critical", () => toggleStockState(material.id, false)),
-    createActionButton("Sin uso", material.estado_stock === "gris", "paused", () => markAsNoRestock(material.id)),
+    createActionButton("Poco/Sin uso", material.estado_stock === "gris", "paused", () => markAsNoRestock(material.id)),
     createActionButton("Pedido", material.pedido_hecho, "order", () => togglePedidoState(material.id, !material.pedido_hecho))
   );
 
@@ -1119,7 +1119,7 @@ function createQuantityControl(material) {
     const wrapper = document.createElement("span");
     wrapper.className = "quantity-display";
 
-    const label = element("span", "quantity-status", material.estado_stock === "gris" ? "Sin uso" : "Stock correcto");
+    const label = element("span", "quantity-status", material.estado_stock === "gris" ? "Poco/Sin uso" : "Stock correcto");
     const addButton = document.createElement("button");
     addButton.className = "quantity-add-button";
     addButton.type = "button";
